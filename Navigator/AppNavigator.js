@@ -1,15 +1,11 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import HomeScreen from '../Screens/HomeScreen';
-import Picture1 from '../Screens/Picture1';
-import Picture2 from '../Screens/Picture2';
-import Picture3 from '../Screens/Picture3';
+import Home from '../Screens/Home';
+import Main from '../Screens/Main';
 
 const AppNavigator = createStackNavigator({
-    HomeScreen: { screen: HomeScreen },
-    Picture1: { screen: Picture1 },
-    Picture2: { screen: Picture2 },
-    Picture3: { screen: Picture3 }
+    Home: { screen: Home },
+    Main: { screen: Main }
 });
 
 const App = createAppContainer(AppNavigator);

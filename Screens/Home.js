@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
     return (
     <View style={styles.container}>
       <TouchableOpacity
-          onPress={() =>this.props.navigation.navigate('Picture1')}
+          onPress={() =>this.props.navigation.navigate('Main')}
           style={styles.button}>
         <Text style={styles.start}> Start </Text>
       </TouchableOpacity>
