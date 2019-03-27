@@ -24,7 +24,7 @@ export default class Picture extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source= {{ uri: 'https://innig.net/stories/ari/ari' + this.state.hintNum + '.png' }}
+          source= {{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/box' + this.state.hintNum + '.heic' }}
           style = {{ width: 300, height: 500 }} />
         <TouchableOpacity
             onPress={this.loadNewImage}
