@@ -1,8 +1,5 @@
 {
   "name": "CCbookcase",
-  "hints": {
-    "first": "./photos/case1.jpg",
-    "second": "./photos/case2.jpg",
-    "third:": "./photos/case3.jpg"
-  }
+  "pathName": "case",
+  "hintCount": 3
 }
