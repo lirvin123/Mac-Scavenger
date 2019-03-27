@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button } from 'react-native';
-import AppNavigator from '../Navigator/AppNavigator';
+import AppNavigator from '../navigator/appNavigator';
 import pictures from '../pictures.json'
 
 var hints = 0;
