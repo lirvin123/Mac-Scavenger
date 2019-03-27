@@ -1,11 +1,8 @@
 {
   "name": "CCbookcase",
-  "pathName": "case",
-  "hintCount": 3
+  "hints": {
+    "first": "./photos/case1.jpg",
+    "second": "./photos/case2.jpg",
+    "third:": "./photos/case3.jpg"
+  }
 }
-
-
-/This is what Paul recommends for a helper function to create image paths 
-/* function pathForHintImage(puzzle, step) {
-  assetPath("../photos/" + step.imageName + stepNum)
-} */

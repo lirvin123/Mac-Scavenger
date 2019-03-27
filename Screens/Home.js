@@ -9,7 +9,7 @@ import {
   Alert
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import AppNavigator from '../navigator/appNavigator';
+import AppNavigator from '../Navigator/AppNavigator';
 
 export default class HomeScreen extends React.Component {
 

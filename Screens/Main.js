@@ -1,31 +1,55 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button } from 'react-native';
-import AppNavigator from '../navigator/appNavigator';
-import Pictures from '../pictures.json';
+import AppNavigator from '../Navigator/AppNavigator';
+import pictures from '../pictures.json'
+
+var hints = 0;
 
 export default class Picture extends React.Component {
 
-  constructor() {
+  constructor(){
     super();
     this.state = {
-      hintNum: 1
+      image : require('../photos/case1.jpg')
     }
   }
 
-  loadNewImage = () => {
-    this.setState({
-      hintNum: this.state.hintNum + 1
-    })
+  Load_New_Image=()=>{
+    hints++;
+    if (hints == 1) {
+      this.setState({
+        image : require('../photos/case2.jpg')
+      })
+    }
+    else if (hints == 2) {
+      this.setState({
+        image : require('../photos/case3.jpg')
+      })
+    }
+  }
+
+  Load_Last_Image=()=>{
+    hints--;
+    if (hints == 1) {
+      this.setState({
+        image : require('../photos/case2.jpg')
+      })
+    }
+    else if (hints == 0) {
+      this.setState({
+        image : require('../photos/case1.jpg')
+      })
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Image
-          source={{ uri: 'https://innig.net/stories/ari/ari' + this.state.hintNum + '.png' }}
-          style={{ width: 300, height: 500 }} />
+          source= {this.state.image}
+          style = {{ width: 300, height: 500 }} />
         <TouchableOpacity
-            onPress={this.loadNewImage}
+            onPress={this.Load_New_Image}
             style={styles.button}>
           <Text style={styles.zoom}> Zoom Out </Text>
         </TouchableOpacity>
