@@ -1,35 +1,55 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button } from 'react-native';
 import AppNavigator from '../navigator/appNavigator';
-import pictures from '../pictures.json'
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-var hints = 0;
+export default class Main extends React.Component {
 
-export default class Picture extends React.Component {
-
-  constructor(){
+  constructor() {
     super();
     this.state = {
       hintNum: 1
     }
   }
 
-  loadNewImage = () => {
-    this.setState({
-      hintNum: this.state.hintNum + 1
-    })
+  onSwipeLeft(gestureState) {
+    if (this.state.hintNum == 3) { //Should change to be max eventually
+      return
+    }
+    else {
+      this.setState({
+        hintNum: this.state.hintNum + 1
+      })
+    }
+  }
+
+  onSwipeRight(gestureState) {
+    if (this.state.hintNum == 1) {
+      return
+    }
+    else {
+      this.setState({
+        hintNum: this.state.hintNum - 1
+      })
+    }
   }
 
   render() {
+
     return (
       <View style={styles.container}>
-        <Image
-          source= {{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/box' + this.state.hintNum + '.heic' }}
-          style = {{ width: 300, height: 500 }} />
+        <GestureRecognizer
+          detectSwipeUp={false}
+          detectSwipeDown={false}
+          onSwipeLeft={(state) => this.onSwipeLeft(state)}
+          onSwipeRight={(state) => this.onSwipeRight(state)}>
+          <Image
+            source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/box' + this.state.hintNum + '.heic' }}
+            style={{ width: 300, height: 500}} />
+        </GestureRecognizer>
         <TouchableOpacity
-            onPress={this.loadNewImage}
             style={styles.button}>
-          <Text style={styles.zoom}> Zoom Out </Text>
+          <Text style={styles.found}> Found it! </Text>
         </TouchableOpacity>
       </View>
     );
@@ -41,13 +61,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
    button: {
      backgroundColor: 'red',
      padding: 20
    },
-   zoom: {
+   found: {
      color: '#fff',
      textAlign: 'center',
      fontSize: 50
