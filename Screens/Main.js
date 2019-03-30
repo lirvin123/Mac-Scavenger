@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button, Scro
 import AppNavigator from '../navigator/appNavigator';
 import Swiper from 'react-native-swiper';
 import {BlurView} from 'expo';
+import styles from '../assets/styles';
 
 export default class Main extends React.Component {
 
@@ -51,19 +52,24 @@ export default class Main extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Swiper loop={false} onIndexChanged={(index) => this.onSwipe(index)}>
-          <View style={styles.container}>
+        <Swiper
+            loop={false}
+            onIndexChanged={(index) => this.onSwipe(index)}>
+          <View
+              style={styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 1 + '.heic' }}
               style={{ width: 325, height: 415}} />
           </View>
-          <View style={styles.container}>
+          <View
+              style={styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 2 + '.heic' }}
               style={{ width: 325, height: 415}}
               blurRadius={this.state.hintOneBlur} />
           </View>
-          <View style={styles.container}>
+          <View
+              style={styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 3 + '.heic' }}
               style={{ width: 325, height: 415}}
@@ -71,28 +77,11 @@ export default class Main extends React.Component {
           </View>
         </Swiper>
         <TouchableOpacity
-            style={styles.button}>
-          <Text style={styles.found}> Found it! </Text>
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('Riddle')}>
+          <Text style={styles.buttonText}> Found it! </Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-   button: {
-     backgroundColor: 'red',
-     padding: 20
-   },
-   found: {
-     color: '#fff',
-     textAlign: 'center',
-     fontSize: 50
-   }
-});
