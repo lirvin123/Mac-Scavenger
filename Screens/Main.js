@@ -3,14 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button, Scro
 import AppNavigator from '../navigator/appNavigator';
 import Swiper from 'react-native-swiper';
 import {BlurView} from 'expo';
-import styles from '../assets/styles';
+import Styles from '../assets/styles';
+import Photos from '../photos.json';
 
 export default class Main extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      photo: 'box',
+      photoPath: Photos.pathName,
       hintOneBlur: 100,
       hintTwoBlur: 100,
       hintOneUnlocked: false,
@@ -51,35 +52,38 @@ export default class Main extends React.Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <View style={Styles.container}>
         <Swiper
             loop={false}
-            onIndexChanged={(index) => this.onSwipe(index)}>
+            onIndexChanged={(index) => this.onSwipe(index)}
+            width={325}
+            height={415}
+            removeClippedSubviews={false}>
           <View
-              style={styles.container}>
+              style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 1 + '.heic' }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 1 + '.heic' }}
               style={{ width: 325, height: 415}} />
           </View>
           <View
-              style={styles.container}>
+              style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 2 + '.heic' }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 2 + '.heic' }}
               style={{ width: 325, height: 415}}
               blurRadius={this.state.hintOneBlur} />
           </View>
           <View
-              style={styles.container}>
+              style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1553715269/' + this.state.photo + 3 + '.heic' }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 3 + '.heic' }}
               style={{ width: 325, height: 415}}
-              blurRadius={this.state.hintTwoBlur}/>
+              blurRadius={this.state.hintTwoBlur} />
           </View>
         </Swiper>
         <TouchableOpacity
-            style={styles.button}
+            style={Styles.button}
             onPress={() => this.props.navigation.navigate('Riddle')}>
-          <Text style={styles.buttonText}> Found it! </Text>
+          <Text style={Styles.buttonText}> Found it! </Text>
         </TouchableOpacity>
       </View>
     );
