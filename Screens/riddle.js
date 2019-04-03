@@ -19,13 +19,14 @@ export default class Riddle extends React.Component {
   checkGuess = () => {
     if (this.state.riddleGuess.toLowerCase() == Photos[photoIndex].riddleAnswer) {
       photoIndex = photoIndex + 1
+      //IMPLEMENT WHEN DONE SCREEN IS MADE:
+      // if (photoIndex > Photos.length) {
+      //   this.props.navigation.navigate('Done') //or Whatever screen is called
+      // }
       this.props.navigation.navigate('Main')
       this.setState({
         riddleGuess: ''
       })
-    }
-    else {
-      this.props.navigation.navigate('IncorrectGuess')
     }
   }
 

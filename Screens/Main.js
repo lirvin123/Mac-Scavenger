@@ -11,13 +11,14 @@ import { photoIndex } from './riddle'
 export default class Main extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.toggleTimer = this.toggleTimer.bind(this);
-    this.resetTimer = this.resetTimer.bind(this);
-    this.toggleStopwatch = this.toggleStopwatch.bind(this);
-    this.resetStopwatch = this.resetStopwatch.bind(this);
+    super(props)
+    this.toggleTimer = this.toggleTimer.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
+    this.toggleStopwatch = this.toggleStopwatch.bind(this)
+    this.resetStopwatch = this.resetStopwatch.bind(this)
     this.state = {
       allPhotos: require('../photos.json'),
+      swipeIndex: 0,
       hintOneBlur: 100,
       hintTwoBlur: 100,
       hintOneUnlocked: false,
@@ -29,6 +30,7 @@ export default class Main extends React.Component {
       stopwatchReset: false,
     }
   }
+
   toggleTimer() {
     this.setState({timerStart: !this.state.timerStart, timerReset: false});
   }
@@ -47,7 +49,7 @@ export default class Main extends React.Component {
 
   getFormattedTime(time) {
       this.currentTime = time;
-  };
+  }
 
   onSwipe(index) {
     if (index == 1 || index == 2) {
@@ -59,8 +61,8 @@ export default class Main extends React.Component {
             'Unlock',
             '+5 Minute Penalty',
             [
-              { text: 'Unlock', onPress: () => this.setState({ hintOneBlur: 0, hintOneUnlocked: true }) },
-              { text: 'Go Back' }
+              { text: 'Go Back' },
+              { text: 'Unlock', onPress: () => this.setState({ hintOneBlur: 0, hintOneUnlocked: true }) }
             ],
             { cancelable: false }
           )
@@ -70,8 +72,8 @@ export default class Main extends React.Component {
             'Unlock',
             '+7 Minute Penalty',
             [
-              { text: 'Unlock', onPress: () => this.setState({ hintTwoBlur: 0, hintTwoUnlocked: true }) },
-              { text: 'Go Back' }
+              { text: 'Go Back' },
+              { text: 'Unlock', onPress: () => this.setState({ hintTwoBlur: 0, hintTwoUnlocked: true }) }
             ],
             { cancelable: false }
           )
@@ -79,16 +81,34 @@ export default class Main extends React.Component {
       }
     }
 
+    componentDidMount() { //code from: https://stackoverflow.com/questions/45837208/react-navigation-re-render-previous-page-when-going-back
+      this.props.navigation.addListener(
+        'willFocus',
+        payload => {
+          this.setState({
+            index: 0,
+            hintOneBlur: 100,
+            hintTwoBlur: 100,
+            hintOneUnlocked: false,
+            hintTwoUnlocked: false
+          })
+          this.forceUpdate()
+        }
+      )
+    }
+
   render() {
 
     return (
-      <View style={Styles.container}>
+      <View
+          style={Styles.container}>
         <Swiper
             loop={false}
             onIndexChanged={(index) => this.onSwipe(index)}
             width={325}
             height={415}
-            removeClippedSubviews={false}>
+            removeClippedSubviews={false}
+            index={this.state.swiperIndex}>
           <View
               style={Styles.container}>
             <Image
@@ -115,26 +135,31 @@ export default class Main extends React.Component {
             onPress={ () => this.props.navigation.navigate('Riddle') }>
           <Text style={Styles.buttonText}> Found it! </Text>
         </TouchableOpacity>
-
-
-        <Stopwatch laps msecs start={this.state.stopwatchStart}
+        <Stopwatch
+          laps msecs start={this.state.stopwatchStart}
           reset={this.state.stopwatchReset}
           getTime={this.getFormattedTime} />
-        <TouchableHighlight onPress={this.toggleStopwatch}>
-          <Text style={{fontSize: 30}}>{!this.state.stopwatchStart ? "Start" : "Stop"}</Text>
+        <TouchableHighlight
+            onPress={this.toggleStopwatch}>
+          <Text style={{ fontSize: 30 }}> {!this.state.stopwatchStart ? "Start" : "Stop"} </Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.resetStopwatch}>
-          <Text style={{fontSize: 30}}>Reset</Text>
+        <TouchableHighlight
+            onPress={this.resetStopwatch}>
+          <Text style={{ fontSize: 30 }}> Reset </Text>
         </TouchableHighlight>
-        <Timer totalDuration={this.state.totalDuration} msecs start={this.state.timerStart}
+        <Timer
+          totalDuration={this.state.totalDuration}
+          msecs start={this.state.timerStart}
           reset={this.state.timerReset}
           handleFinish={handleTimerComplete}
           getTime={this.getFormattedTime} />
-        <TouchableHighlight onPress={this.toggleTimer}>
-          <Text style={{fontSize: 30}}>{!this.state.timerStart ? "Start" : "Stop"}</Text>
+        <TouchableHighlight
+            onPress={this.toggleTimer}>
+          <Text style={{ fontSize: 30 }}> {!this.state.timerStart ? "Start" : "Stop"} </Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.resetTimer}>
-          <Text style={{fontSize: 30}}>Reset</Text>
+        <TouchableHighlight
+            onPress={this.resetTimer}>
+          <Text style={{ fontSize: 30 }}> Reset </Text>
         </TouchableHighlight>
       </View>
     )
