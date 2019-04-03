@@ -1,10 +1,16 @@
-{
-  "name": "kaginMural",
-  "pathName": "v1553979151/mural",
-  "hints": 3,
-},
-{
-  "name": "ideaLabDishSign",
-  "pathName": "v1553979978/dishes",
-  "hints": 3,
-}
+[
+  {
+    "name": "kaginMural",
+    "pathName": "v1553979151/mural",
+    "hints": 3,
+    "riddle": "What building is this artwork in?",
+    "riddleAnswer": "kagin"
+  },
+  {
+    "name": "ideaLabDishSign",
+    "pathName": "v1553979978/dishes",
+    "hints": 3,
+    "riddle": "What floor of the building is this sign on?",
+    "riddleAnswer": "second"
+  }
+]

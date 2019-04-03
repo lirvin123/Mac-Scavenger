@@ -1,17 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button, ScrollView, Alert } from 'react-native';
-import AppNavigator from '../navigator/appNavigator';
-import Swiper from 'react-native-swiper';
-import {BlurView} from 'expo';
-import Styles from '../assets/styles';
-import Photos from '../photos.json';
+import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Platform, Button, ScrollView, Alert } from 'react-native'
+import AppNavigator from '../navigator/appNavigator'
+import Swiper from 'react-native-swiper'
+import {BlurView} from 'expo'
+import Styles from '../assets/styles'
+import Photos from '../photos.json'
+import { photoIndex } from './riddle'
 
 export default class Main extends React.Component {
 
   constructor() {
-    super();
+    super()
     this.state = {
-      photoPath: Photos.pathName,
+      allPhotos: require('../photos.json'),
       hintOneBlur: 100,
       hintTwoBlur: 100,
       hintOneUnlocked: false,
@@ -29,8 +30,8 @@ export default class Main extends React.Component {
             'Unlock',
             '+5 Minute Penalty',
             [
-              {text: 'Unlock', onPress: () => this.setState({ hintOneBlur: 0, hintOneUnlocked: true })},
-              {text: 'Go Back'}
+              { text: 'Unlock', onPress: () => this.setState({ hintOneBlur: 0, hintOneUnlocked: true }) },
+              { text: 'Go Back' }
             ],
             { cancelable: false }
           )
@@ -40,8 +41,8 @@ export default class Main extends React.Component {
             'Unlock',
             '+7 Minute Penalty',
             [
-              {text: 'Unlock', onPress: () => this.setState({ hintTwoBlur: 0, hintTwoUnlocked: true })},
-              {text: 'Go Back'}
+              { text: 'Unlock', onPress: () => this.setState({ hintTwoBlur: 0, hintTwoUnlocked: true }) },
+              { text: 'Go Back' }
             ],
             { cancelable: false }
           )
@@ -62,30 +63,30 @@ export default class Main extends React.Component {
           <View
               style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 1 + '.heic' }}
-              style={{ width: 325, height: 415}} />
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 1 }}
+              style={{ width: 325, height: 415 }} />
           </View>
           <View
               style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 2 + '.heic' }}
-              style={{ width: 325, height: 415}}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 2 }}
+              style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur} />
           </View>
           <View
               style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photoPath + 3 + '.heic' }}
-              style={{ width: 325, height: 415}}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 3 }}
+              style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur} />
           </View>
         </Swiper>
         <TouchableOpacity
             style={Styles.button}
-            onPress={() => this.props.navigation.navigate('Riddle')}>
+            onPress={ () => this.props.navigation.navigate('Riddle') }>
           <Text style={Styles.buttonText}> Found it! </Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
