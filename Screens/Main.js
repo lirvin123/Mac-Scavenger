@@ -102,6 +102,7 @@ export default class Main extends React.Component {
     return (
       <View
           style={Styles.container}>
+        <Text style={Styles.round}> {"Round " + photoIndex + 1} </Text>
         <Swiper
             loop={false}
             onIndexChanged={(index) => this.onSwipe(index)}

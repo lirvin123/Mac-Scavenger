@@ -35,7 +35,7 @@ export default class Riddle extends React.Component {
       <View
           style={Styles.container}>
         <Text style={Styles.title}> Solve the Puzzle! </Text>
-        <Text style={Styles.riddle}> Riddle goes here: </Text>
+        <Text style={Styles.riddle}> {Photos[photoIndex].riddle} </Text>
         <TextInput
           placeholder={'Enter answer here'}
           onChangeText={(text) => { this.setState({riddleGuess: text}) }}

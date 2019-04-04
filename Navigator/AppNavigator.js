@@ -6,8 +6,8 @@ import Riddle from '../screens/riddle'
 
 const AppNavigator = createStackNavigator({
     Home: { screen: Home },
-    Main: { screen: Main },
-    Riddle: { screen: Riddle }
+    Riddle: { screen: Riddle },
+    Main: { screen: Main }
   }
 )
 

@@ -24,5 +24,9 @@ export default StyleSheet.create({
    riddle: {
      textAlign: 'center',
      fontSize: 35
+   },
+   round: {
+     textAlign: 'center',
+     fontSize: 35
    }
 })

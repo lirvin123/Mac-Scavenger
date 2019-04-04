@@ -1,16 +1,23 @@
 [
   {
-    "name": "kaginMural",
+    "name": "Kagin Mural",
     "pathName": "v1553979151/mural",
     "hints": 3,
     "riddle": "What building is this artwork in?",
     "riddleAnswer": "kagin"
   },
   {
-    "name": "ideaLabDishSign",
+    "name": "Idea Lab Dish Sign",
     "pathName": "v1553979978/dishes",
     "hints": 3,
     "riddle": "What floor of the building is this sign on?",
     "riddleAnswer": "second"
+  },
+  {
+    "name": "Cafe Mac Lunchbox",
+    "pathName": "v1553715269/box",
+    "hints": 3,
+    "riddle": "What popular eatery is this located in?",
+    "riddleAnswer": "cafe mac"
   }
 ]
