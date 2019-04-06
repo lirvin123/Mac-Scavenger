@@ -28,5 +28,10 @@ export default StyleSheet.create({
    round: {
      textAlign: 'center',
      fontSize: 35
-   }
+   },
+  unlock: {
+    backgroundColor: 'blue',
+    padding: 20
+  }
+
 })

@@ -1,42 +1,32 @@
-import React from 'react';
-import { AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform, Button, ScrollView, Alert } from 'react-native'
+import React from 'react'
+import { AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
-import Swiper from 'react-native-swiper'
-import { Stopwatch, Timer } from 'react-native-stopwatch-timer'
+import { Stopwatch } from 'react-native-stopwatch-timer'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
+import Carousel from 'react-native-looped-carousel'
 
 export default class Main extends React.Component {
 
   constructor(props) {
     super(props)
-    this.toggleTimer = this.toggleTimer.bind(this)
-    this.resetTimer = this.resetTimer.bind(this)
-    this.toggleStopwatch = this.toggleStopwatch.bind(this)
     this.resetStopwatch = this.resetStopwatch.bind(this)
+    this.toggleStopwatch = this.toggleStopwatch.bind(this)
     this.state = {
       allPhotos: require('../photos.json'),
-      swipeIndex: 0,
+      button: Styles.button,
+      buttonText: "Found it!",
+      currIndex: 0,
       hintOneBlur: 100,
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
-      timerStart: false,
-      stopwatchStart: false,
-      totalDuration: 90000,
-      timerReset: false,
       stopwatchReset: false,
+      stopwatchStart: false,
+      totalDuration: 90000
     }
-  }
-
-  toggleTimer() {
-    this.setState({timerStart: !this.state.timerStart, timerReset: false});
-  }
-
-  resetTimer() {
-    this.setState({timerStart: false, timerReset: true});
   }
 
   toggleStopwatch() {
@@ -52,50 +42,82 @@ export default class Main extends React.Component {
   }
 
   onSwipe(index) {
-    if (index == 1 || index == 2) {
-      if ((index == 1 && this.state.hintOneUnlocked == true) || (index == 2 && this.state.hintTwoUnlocked == true)) {
-        return
+    if (index === 1) {
+      this.setState({
+        currIndex: 1
+      })
+      if (this.state.hintOneUnlocked === true) {
+        this.setState({
+          button: Styles.button,
+          buttonText: "Found it!"
+        })
       }
-        if (index == 1) {
-          Alert.alert(
-            'Unlock',
-            '+5 Minute Penalty',
-            [
-              { text: 'Go Back' },
-              { text: 'Unlock', onPress: () => this.setState({ hintOneBlur: 0, hintOneUnlocked: true }) }
-            ],
-            { cancelable: false }
-          )
-        }
-        else {
-          Alert.alert(
-            'Unlock',
-            '+7 Minute Penalty',
-            [
-              { text: 'Go Back' },
-              { text: 'Unlock', onPress: () => this.setState({ hintTwoBlur: 0, hintTwoUnlocked: true }) }
-            ],
-            { cancelable: false }
-          )
-        }
+      else {
+        this.setState({
+          button: Styles.unlock,
+          buttonText: "Unlock (+5 min)"
+        })
       }
     }
+    else if (index === 2) {
+      this.setState({
+        currIndex: 2
+      })
+      if (this.state.hintTwoUnlocked === true) {
+        this.setState({
+          button: Styles.button,
+          buttonText: "Found it!"
+        })
+      }
+      else {
+        this.setState({
+          button: Styles.unlock,
+          buttonText: "Unlock (+7 min)"
+        })
+      }
+    }
+    else {
+      this.setState({
+        currIndex: 0,
+        button: Styles.button,
+        buttonText: "Found it!"
+      })
+    }
+  }
 
-    componentDidMount() { //code from: https://stackoverflow.com/questions/45837208/react-navigation-re-render-previous-page-when-going-back
-      this.props.navigation.addListener(
-        'willFocus',
-        payload => {
-          this.setState({
-            index: 0,
-            hintOneBlur: 100,
-            hintTwoBlur: 100,
-            hintOneUnlocked: false,
-            hintTwoUnlocked: false
-          })
-          this.forceUpdate()
-        }
-      )
+  unlock() {
+    if (this.state.currIndex === 1 && this.state.hintOneUnlocked === false) {
+      this.setState({
+        hintOneBlur: 0,
+        hintOneUnlocked: true
+      })
     }
+    else if (this.state.currIndex === 2 && this.state.hintTwoUnlocked === false) {
+      this.setState({
+        hintTwoBlur: 0,
+        hintTwoUnlocked: true
+      })
+    }
+    else {
+      this.props.navigation.navigate('Riddle')
+    }
+  }
+
+  componentDidMount() {
+    this.props.navigation.addListener(
+      'willFocus',
+      payload => {
+        this.setState({
+          index: 0,
+          hintOneBlur: 100,
+          hintTwoBlur: 100,
+          hintOneUnlocked: false,
+          hintTwoUnlocked: false
+        })
+        this.forceUpdate()
+      }
+    )
+  }
 
   render() {
 
@@ -103,13 +125,14 @@ export default class Main extends React.Component {
       <View
           style={Styles.container}>
         <Text style={Styles.round}> {"Round " + (photoIndex + 1)} </Text>
-        <Swiper
-            loop={false}
-            onIndexChanged={(index) => this.onSwipe(index)}
-            width={325}
-            height={415}
-            removeClippedSubviews={false}
-            index={this.state.swiperIndex}>
+        <Carousel
+            style={{ width: 325, height: 350}}
+            autoplay={false}
+            isLooped={false}
+            onAnimateNextPage={(index) => this.onSwipe(index)}
+            pageInfo={true}
+            pageInfoBackgroundColor={'rgba(255,255,255, 0.5)'}
+            pageInfoTextSeparator={' of '}>
           <View
               style={Styles.container}>
             <Image
@@ -130,11 +153,11 @@ export default class Main extends React.Component {
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur} />
           </View>
-        </Swiper>
+        </Carousel>
         <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Riddle') }>
-          <Text style={Styles.buttonText}> Found it! </Text>
+            style={this.state.button}
+            onPress={this.unlock.bind(this)}>
+          <Text style={Styles.buttonText}> {this.state.buttonText} </Text>
         </TouchableOpacity>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}
@@ -148,23 +171,7 @@ export default class Main extends React.Component {
             onPress={this.resetStopwatch}>
           <Text style={{ fontSize: 30 }}> Reset </Text>
         </TouchableHighlight>
-        <Timer
-          totalDuration={this.state.totalDuration}
-          msecs start={this.state.timerStart}
-          reset={this.state.timerReset}
-          handleFinish={handleTimerComplete}
-          getTime={this.getFormattedTime} />
-        <TouchableHighlight
-            onPress={this.toggleTimer}>
-          <Text style={{ fontSize: 30 }}> {!this.state.timerStart ? "Start" : "Stop"} </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-            onPress={this.resetTimer}>
-          <Text style={{ fontSize: 30 }}> Reset </Text>
-        </TouchableHighlight>
-      </View>
+        </View>
     )
   }
 }
-
-const handleTimerComplete = () => alert("custom completion function");

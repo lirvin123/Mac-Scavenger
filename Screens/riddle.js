@@ -12,21 +12,27 @@ export default class Riddle extends React.Component {
   constructor() {
     super()
     this.state = {
+      riddle: Photos[photoIndex].riddle,
       riddleGuess: '',
+      header: "Solve the Puzzle!",
     }
   }
 
   checkGuess = () => {
     if (this.state.riddleGuess.toLowerCase() == Photos[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 > Photos.length) {
+        this.setState({
+          riddle: ''
+        })
+      }
       photoIndex = photoIndex + 1
-      //IMPLEMENT WHEN DONE SCREEN IS MADE:
-      // if (photoIndex > Photos.length) {
-      //   this.props.navigation.navigate('Done') //or Whatever screen is called
-      // }
-      this.props.navigation.navigate('Main')
+      this.props.navigation.navigate('Correct')
       this.setState({
         riddleGuess: ''
       })
+    }
+    else {
+      this.props.navigation.navigate('Incorrect')
     }
   }
 
@@ -34,8 +40,8 @@ export default class Riddle extends React.Component {
     return (
       <View
           style={Styles.container}>
-        <Text style={Styles.title}> Solve the Puzzle! </Text>
-        <Text style={Styles.riddle}> {Photos[photoIndex].riddle} </Text>
+        <Text style={Styles.title}> Solve the Puzzle: </Text>
+        <Text style={Styles.riddle}> {this.state.riddle} </Text>
         <TextInput
           placeholder={'Enter answer here'}
           onChangeText={(text) => { this.setState({riddleGuess: text}) }}
@@ -48,9 +54,10 @@ export default class Riddle extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
             style={Styles.button}
-            onPress={() => this.props.navigation.navigate('Main') }>
+            onPress={ () => this.props.navigation.navigate('Main') }>
           <Text style={Styles.buttonText}> Back </Text>
         </TouchableOpacity>
+
       </View>
     )
   }
