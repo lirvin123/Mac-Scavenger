@@ -12,6 +12,11 @@ export default StyleSheet.create({
      backgroundColor: 'red',
      padding: 20
    },
+   unlockButton: {
+     backgroundColor: 'magenta',
+     padding: 20,
+     position: 'absolute'
+   },
    buttonText: {
      color: '#fff',
      textAlign: 'center',
