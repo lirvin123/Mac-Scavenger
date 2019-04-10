@@ -34,9 +34,9 @@ export default StyleSheet.create({
      textAlign: 'center',
      fontSize: 35
    },
-  unlock: {
-    backgroundColor: 'blue',
-    padding: 20
+  penalty: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   }
-
 })

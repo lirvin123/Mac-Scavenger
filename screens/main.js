@@ -15,7 +15,7 @@ export default class Main extends React.Component {
     this.resetStopwatch = this.resetStopwatch.bind(this)
     this.toggleStopwatch = this.toggleStopwatch.bind(this)
     this.state = {
-      allPhotos: require('../photos.json'),
+      photos: require('../photos.json'),
       currentIndex: 0,
       hintOneBlur: 100,
       hintTwoBlur: 100,
@@ -49,7 +49,8 @@ export default class Main extends React.Component {
     if (this.state.currentIndex === 1 && this.state.hintOneUnlocked === false) {
       this.setState({
         hintOneBlur: 0,
-        hintOneUnlocked: true
+        hintOneUnlocked: true,
+        hintTwoPenalty: 7
       })
     }
     else if (this.state.currentIndex === 2 && this.state.hintTwoUnlocked === false) {
@@ -57,6 +58,12 @@ export default class Main extends React.Component {
         hintTwoBlur: 0,
         hintTwoUnlocked: true
       })
+      if (this.state.hintOneUnlocked == false) {
+        this.setState({
+          hintOneBlur: 0,
+          hintOneUnlocked: true,
+        })
+      }
     }
     else {
       this.props.navigation.navigate('Riddle')
@@ -79,7 +86,7 @@ export default class Main extends React.Component {
   }
 
   conditionalVisibility(style, visible) {
-    return Object.assign({ display: visible ? 'flex' : 'none'}, style)
+    return Object.assign({ display: visible ? 'flex' : 'none' }, style)
   }
 
   render() {
@@ -96,29 +103,35 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
             <TouchableOpacity
                 style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
                 onPress={this.unlock}>
-              <Text style={Styles.buttonText}> Unlock </Text>
+              <View style={{ flex: 1 }} >
+                <Text style={Styles.buttonText}>Unlock</Text>
+                <Text style={Styles.penalty}>+5 minutes</Text>
+              </View>
             </TouchableOpacity>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
             <TouchableOpacity
                 style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
                 onPress={this.unlock}>
-              <Text style={Styles.buttonText}> Unlock </Text>
+                <View style={{ flex: 1 }} >
+                  <Text style={Styles.buttonText}>Unlock</Text>
+                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "+15 minutes"}</Text>
+                </View>
             </TouchableOpacity>
           </View>
         </Carousel>
