@@ -78,9 +78,10 @@ export default class Main extends React.Component {
     )
   }
 
-  conditionalVisibility(style, visible) {
-    return Object.assign({ display: visible ? 'block' : 'none' }, style)
-  }
+  //Code that hides/shows unlock button (causing bugs on android):
+  // conditionalVisibility(style, visible) {
+  //   return Object.assign({ display: visible ? 'block' : 'none' }, style)
+  // }
 
   render() {
 
@@ -105,7 +106,7 @@ export default class Main extends React.Component {
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur} />
             <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
+                style={Styles.unlockButton}
                 onPress={this.unlock}>
               <Text style={Styles.buttonText}> Unlock </Text>
             </TouchableOpacity>
@@ -116,7 +117,7 @@ export default class Main extends React.Component {
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur} />
             <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
+                style={Styles.unlockButton}
                 onPress={this.unlock}>
               <Text style={Styles.buttonText}> Unlock </Text>
             </TouchableOpacity>
