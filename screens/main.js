@@ -78,10 +78,9 @@ export default class Main extends React.Component {
     )
   }
 
-  //Code that hides/shows unlock button (causing bugs on android):
-  // conditionalVisibility(style, visible) {
-  //   return Object.assign({ display: visible ? 'block' : 'none' }, style)
-  // }
+  conditionalVisibility(style, visible) {
+    return Object.assign({ display: visible ? 'flex' : 'none'}, style)
+  }
 
   render() {
 
@@ -98,15 +97,15 @@ export default class Main extends React.Component {
           <View style={Styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 1 }}
-              style={{ width: 325, height: 415 }} />
+              style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintOneBlur} />
+              blurRadius={this.state.hintOneBlur}/>
             <TouchableOpacity
-                style={Styles.unlockButton}
+                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
                 onPress={this.unlock}>
               <Text style={Styles.buttonText}> Unlock </Text>
             </TouchableOpacity>
@@ -115,9 +114,9 @@ export default class Main extends React.Component {
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintTwoBlur} />
+              blurRadius={this.state.hintTwoBlur}/>
             <TouchableOpacity
-                style={Styles.unlockButton}
+                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
                 onPress={this.unlock}>
               <Text style={Styles.buttonText}> Unlock </Text>
             </TouchableOpacity>
