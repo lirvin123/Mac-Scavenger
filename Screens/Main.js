@@ -68,7 +68,6 @@ export default class Main extends React.Component {
       'willFocus',
       payload => {
         this.setState({
-          index: 0,
           hintOneBlur: 100,
           hintTwoBlur: 100,
           hintOneUnlocked: false,
@@ -94,9 +93,7 @@ export default class Main extends React.Component {
             autoplay={false}
             isLooped={false}
             onAnimateNextPage={(index) => this.changeIndex(index)}
-            pageInfo={true}
-            pageInfoBackgroundColor={'rgba(255,255,255, 0.5)'}
-            pageInfoTextSeparator={' of '}>
+            bullets={true}>
           <View style={Styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 1 }}

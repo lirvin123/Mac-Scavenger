@@ -27,8 +27,7 @@ export default class Correct extends React.Component {
       return(
         <View
           style={Styles.container}>
-          <Text style={Styles.title}> Correct! You found: </Text>
-          <Text style={Styles.riddle}> {Photos[photoIndex - 1].name} </Text>
+          <Text style={Styles.title}> Correct! </Text>
           <TouchableOpacity
               style={Styles.button}
               onPress={ () => this.props.navigation.navigate('Main') }>
