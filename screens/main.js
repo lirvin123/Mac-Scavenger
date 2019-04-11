@@ -130,7 +130,7 @@ export default class Main extends React.Component {
                 onPress={this.unlock}>
                 <View style={{ flex: 1 }} >
                   <Text style={Styles.buttonText}>Unlock</Text>
-                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "+15 minutes"}</Text>
+                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
                 </View>
             </TouchableOpacity>
           </View>
