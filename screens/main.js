@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { Stopwatch } from 'react-native-stopwatch-timer'
 import { BlurView } from 'expo'
@@ -21,6 +21,7 @@ export default class Main extends React.Component {
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
+      photoIndex: photoIndex,
       stopwatchReset: false,
       stopwatchStart: false,
       totalDuration: 90000
@@ -70,18 +71,14 @@ export default class Main extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.navigation.addListener(
-      'willFocus',
-      payload => {
-        this.setState({
-          hintOneBlur: 100,
-          hintTwoBlur: 100,
-          hintOneUnlocked: false,
-          hintTwoUnlocked: false
-        })
-        this.forceUpdate()
-      }
+  giveUp = () => {
+    Alert.alert(
+      'Are you sure?',
+      '+20 Minute Penalty',
+      [
+        { text: 'Go Back' },
+        { text: 'Give Up' }
+      ]
     )
   }
 
@@ -103,12 +100,12 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
             <TouchableOpacity
@@ -122,7 +119,7 @@ export default class Main extends React.Component {
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
             <TouchableOpacity
@@ -137,8 +134,13 @@ export default class Main extends React.Component {
         </Carousel>
         <TouchableOpacity
             style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Riddle')}>
+            onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}> Found it! </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            style={Styles.button}
+            onPress={this.giveUp}>
+          <Text style={Styles.buttonText}> Give Up </Text>
         </TouchableOpacity>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}

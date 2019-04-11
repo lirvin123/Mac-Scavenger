@@ -12,7 +12,6 @@ const AppNavigator = createStackNavigator({
     Main: { screen: Main, navigationOptions: { header: null } },
     Correct: { screen: Correct, navigationOptions: { header: null } },
     Incorrect: { screen: Incorrect, navigationOptions: { header: null } },
-
   }
 )
 
