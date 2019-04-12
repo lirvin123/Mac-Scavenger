@@ -15,13 +15,8 @@ export default class Incorrect extends React.Component {
         <Text style={Styles.title}> Incorrect </Text>
         <TouchableOpacity
             style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Riddle') }>
+            onPress={ () => this.props.navigation.goBack() }>
           <Text style={Styles.buttonText}> Guess Again </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Main') }>
-          <Text style={Styles.buttonText}> Back to Photos </Text>
         </TouchableOpacity>
       </View>
     )

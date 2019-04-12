@@ -89,6 +89,40 @@ export default class Main extends React.Component {
 
   render() {
 
+    var unlockButtonOne;
+    var unlockButtonTwo;
+
+    if (!this.state.hintOneUnlocked) {
+      unlockButtonOne = (
+        <TouchableOpacity
+            style={Styles.unlockButton}
+            onPress={this.unlock}>
+          <View style={{ flex: 1 }} >
+            <Text style={Styles.buttonText}>Unlock</Text>
+            <Text style={Styles.penalty}>+5 minutes</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+    else {
+      unlockButton = (
+        <Text>''</Text>
+      )
+    }
+
+    if (!this.state.hintTwoUnlocked) {
+      unlockButtonTwo = (
+        <TouchableOpacity
+            style={Styles.unlockButton}
+            onPress={this.unlock}>
+            <View style={{ flex: 1 }} >
+              <Text style={Styles.buttonText}>Unlock</Text>
+              <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
+            </View>
+        </TouchableOpacity>
+      )
+    }
+
     return (
       <View
           style={Styles.container}>
@@ -109,28 +143,14 @@ export default class Main extends React.Component {
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
-            <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
-                onPress={this.unlock}>
-              <View style={{ flex: 1 }} >
-                <Text style={Styles.buttonText}>Unlock</Text>
-                <Text style={Styles.penalty}>+5 minutes</Text>
-              </View>
-            </TouchableOpacity>
+            {unlockButtonOne}
           </View>
           <View style={Styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
-            <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
-                onPress={this.unlock}>
-                <View style={{ flex: 1 }} >
-                  <Text style={Styles.buttonText}>Unlock</Text>
-                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
-                </View>
-            </TouchableOpacity>
+            {unlockButtonTwo}
           </View>
         </Carousel>
         <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
