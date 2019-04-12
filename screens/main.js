@@ -9,7 +9,6 @@ import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { StackActions, NavigationActions } from 'react-navigation';
 import {Button} from 'native-base'
-======
 
 
 export default class Main extends React.Component {
@@ -31,14 +30,6 @@ export default class Main extends React.Component {
       totalDuration: 90000
     }
   }
-  // static navigationOptions = {
-  //        headerTitle:'Disable back Options',
-  //        headerTitleStyle: {color:'white'},
-  //        headerStyle: {backgroundColor:'black'},
-  //        headerTintColor: 'red',
-  //        headerForceInset: {vertical: 'never'},
-  //        headerLeft: " "
-  //      }
 
   toggleStopwatch() {
     this.setState({stopwatchStart: !this.state.stopwatchStart, stopwatchReset: false});
