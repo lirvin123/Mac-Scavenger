@@ -1,23 +1,37 @@
 [
   {
-    "name": "Kagin Mural",
-    "pathName": "v1553979151/mural",
+    "name": "Locker",
+    "pathName": "v1554921434/locker",
     "hints": 3,
-    "riddle": "What building is this artwork in?",
-    "riddleAnswer": "kagin"
+    "riddle": "What is the number of the very bottom locker?",
+    "riddleAnswer": "42"
   },
   {
-    "name": "Idea Lab Dish Sign",
-    "pathName": "v1553979978/dishes",
+    "name": "Really Cool Art",
+    "pathName": "v1554926592/coolart",
     "hints": 3,
-    "riddle": "What floor of the building is this sign on?",
-    "riddleAnswer": "second"
+    "riddle": "Turn into the water fountain area. Look at the door at the end of the hall. What's the third word on the plaque?",
+    "riddleAnswer": "resource"
   },
   {
-    "name": "Cafe Mac Lunchbox",
-    "pathName": "v1553715269/box",
+    "name": "AHHHHHHH",
+    "pathName": "v1555097471/scary",
     "hints": 3,
-    "riddle": "What popular eatery is this located in?",
-    "riddleAnswer": "cafe mac"
-  }
+    "riddle": "What's the name of this creature?",
+    "riddleAnswer": "messor cephalotes"
+  },
+  {
+    "name": "Interesting photos...",
+    "pathName": "v1555097522/interesting",
+    "hints": 3,
+    "riddle": "Fill in the blank: Macalester Under the ____",
+    "riddleAnswer": "microscope"
+  },
+  {
+    "name": "Dewey Decimal",
+    "pathName": "v1554925396/z",
+    "hints": 3,
+    "riddle": "Enter the last number on the plaque",
+    "riddleAnswer": "5"
+  },
 ]

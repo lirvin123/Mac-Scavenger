@@ -11,6 +11,7 @@
     "native-base": "^2.12.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-base": "^1.1.0",
     "react-native-looped-carousel": "^0.1.13",
     "react-native-stopwatch-timer": "0.0.20",
     "react-navigation": "^3.3.2"

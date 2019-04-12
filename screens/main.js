@@ -7,6 +7,7 @@ import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
+import { StackActions, NavigationActions } from 'react-navigation';
 import {Button} from 'native-base'
 import TimerMixin from 'react-timer-mixin';
 
@@ -30,6 +31,14 @@ export default class Main extends React.Component {
       timer: 0,
     }
   }
+  // static navigationOptions = {
+  //        headerTitle:'Disable back Options',
+  //        headerTitleStyle: {color:'white'},
+  //        headerStyle: {backgroundColor:'black'},
+  //        headerTintColor: 'red',
+  //        headerForceInset: {vertical: 'never'},
+  //        headerLeft: " "
+  //      }
 
   startTimer() {
     this.interval = TimerMixin.setInterval(
@@ -103,6 +112,40 @@ export default class Main extends React.Component {
 
   render() {
 
+    var unlockButtonOne;
+    var unlockButtonTwo;
+
+    if (!this.state.hintOneUnlocked) {
+      unlockButtonOne = (
+        <TouchableOpacity
+            style={Styles.unlockButton}
+            onPress={this.unlock}>
+          <View style={{ flex: 1 }} >
+            <Text style={Styles.buttonText}>Unlock</Text>
+            <Text style={Styles.penalty}>+5 minutes</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+    else {
+      unlockButton = (
+        <Text>''</Text>
+      )
+    }
+
+    if (!this.state.hintTwoUnlocked) {
+      unlockButtonTwo = (
+        <TouchableOpacity
+            style={Styles.unlockButton}
+            onPress={this.unlock}>
+            <View style={{ flex: 1 }} >
+              <Text style={Styles.buttonText}>Unlock</Text>
+              <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
+            </View>
+        </TouchableOpacity>
+      )
+    }
+
     return (
       <View
           style={Styles.container}>
@@ -123,41 +166,21 @@ export default class Main extends React.Component {
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
-            <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
-                onPress={this.unlock}>
-              <View style={{ flex: 1 }} >
-                <Text style={Styles.buttonText}>Unlock</Text>
-                <Text style={Styles.penalty}>+5 minutes</Text>
-              </View>
-            </TouchableOpacity>
+            {unlockButtonOne}
           </View>
           <View style={Styles.container}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
-            <TouchableOpacity
-                style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
-                onPress={this.unlock}>
-                <View style={{ flex: 1 }} >
-                  <Text style={Styles.buttonText}>Unlock</Text>
-                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
-                </View>
-            </TouchableOpacity>
+            {unlockButtonTwo}
           </View>
         </Carousel>
-        <Button block danger>
-          <TouchableOpacity
-              onPress={ () => this.props.navigation.push('Riddle')}>
-            <Text style={Styles.buttonText}> Found it! </Text>
-          </TouchableOpacity>
+        <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
+          <Text style={Styles.buttonText}> Found it! </Text>
         </Button>
-        <Button block danger>
-          <TouchableOpacity
-              onPress={this.giveUp}>
-            <Text style={Styles.buttonText}> Give Up </Text>
-          </TouchableOpacity>
+        <Button block danger onPress={this.giveUp}>
+          <Text style={Styles.buttonText}> Give Up </Text>
         </Button>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}
@@ -167,8 +190,11 @@ export default class Main extends React.Component {
               onPress={this.startTimer()}>
             <Text style={{ fontSize: 30 }}> {!this.state.stopwatchStart ? "Start" : "Stop"} </Text>
         </TouchableHighlight>
-        
+
         </View>
     )
   }
+  static navigationOptions = { //got rid of the back button
+        headerLeft : null
+    };
 }
