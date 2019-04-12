@@ -1,5 +1,5 @@
 [
-  {
+  /* {
     "name": "Kagin Mural",
     "pathName": "v1553979151/mural",
     "hints": 3,
@@ -19,5 +19,28 @@
     "hints": 3,
     "riddle": "What popular eatery is this located in?",
     "riddleAnswer": "cafe mac"
-  }
+  }, */
+  // The Thirsty Game
+  {
+    "name": "Locker",
+    "pathName": "v1554921434/locker",
+    "hints": 3,
+    "riddle": "What is the number of the very bottom locker?",
+    "riddleAnswer": "42"
+  },
+  {
+    "name": "Dewey Decimal",
+    "pathName": "v1554925396/z",
+    "hints": 3,
+    "riddle": "Enter the last number on the plaque",
+    "riddleAnswer": "5"
+  },
+  {
+    "name": "Really Cool Art",
+    "pathName": "v1554926592/coolart",
+    "hints": 3,
+    "riddle": "Turn into the water fountain area. Look at the door at the end of the hall. What's the third word on the plaque?",
+    "riddleAnswer": "resource"
+  },
+
 ]

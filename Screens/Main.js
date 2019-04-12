@@ -7,6 +7,7 @@ import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class Main extends React.Component {
 
@@ -26,6 +27,14 @@ export default class Main extends React.Component {
       totalDuration: 90000
     }
   }
+  // static navigationOptions = {
+  //        headerTitle:'Disable back Options',
+  //        headerTitleStyle: {color:'white'},
+  //        headerStyle: {backgroundColor:'black'},
+  //        headerTintColor: 'red',
+  //        headerForceInset: {vertical: 'never'},
+  //        headerLeft: " "
+  //      }
 
   toggleStopwatch() {
     this.setState({stopwatchStart: !this.state.stopwatchStart, stopwatchReset: false});
@@ -142,4 +151,7 @@ export default class Main extends React.Component {
         </View>
     )
   }
+  static navigationOptions = { //got rid of the back button
+        headerLeft : null
+    };
 }
