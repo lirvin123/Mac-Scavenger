@@ -8,33 +8,27 @@ import { photoIndex } from './riddle'
 
 export default class Correct extends React.Component {
 
-  render() {
+  checkEnd = () => {
     if (photoIndex == Photos.length) {
-      return (
-        <View
-          style={Styles.container}>
-          <Text style={Styles.title}> Correct! You found: </Text>
-          <Text style={Styles.riddle}> {Photos[photoIndex - 1].name} </Text>
-          <TouchableOpacity
-              style={Styles.button}
-              onPress={ () => this.props.navigation.navigate('Home') }>
-            <Text style={Styles.buttonText}> Finish </Text>
-          </TouchableOpacity>
-        </View>
-      )
+      return this.props.navigation.navigate('Home')
     }
     else {
-      return(
+      return this.props.navigation.push('Main')
+    }
+  }
+
+  render() {
+
+      return (
         <View
           style={Styles.container}>
           <Text style={Styles.title}> Correct! </Text>
           <TouchableOpacity
               style={Styles.button}
-              onPress={ () => this.props.navigation.navigate('Main') }>
-            <Text style={Styles.buttonText}> Next Round </Text>
+              onPress={this.checkEnd}>
+            <Text style={Styles.buttonText}> {(photoIndex == Photos.length) ? "Finish" : "Next Round"} </Text>
           </TouchableOpacity>
         </View>
       )
     }
   }
-}

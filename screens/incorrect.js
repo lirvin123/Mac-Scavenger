@@ -6,8 +6,7 @@ import Main from './main'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 
-
-export default class Correct extends React.Component {
+export default class Incorrect extends React.Component {
 
   render() {
     return(

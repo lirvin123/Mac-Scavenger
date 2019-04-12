@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { Stopwatch } from 'react-native-stopwatch-timer'
 import { BlurView } from 'expo'
@@ -8,6 +8,9 @@ import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { StackActions, NavigationActions } from 'react-navigation';
+import {Button} from 'native-base'
+======
+
 
 export default class Main extends React.Component {
 
@@ -16,12 +19,13 @@ export default class Main extends React.Component {
     this.resetStopwatch = this.resetStopwatch.bind(this)
     this.toggleStopwatch = this.toggleStopwatch.bind(this)
     this.state = {
-      allPhotos: require('../photos.json'),
+      photos: require('../photos.json'),
       currentIndex: 0,
       hintOneBlur: 100,
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
+      photoIndex: photoIndex,
       stopwatchReset: false,
       stopwatchStart: false,
       totalDuration: 90000
@@ -58,7 +62,8 @@ export default class Main extends React.Component {
     if (this.state.currentIndex === 1 && this.state.hintOneUnlocked === false) {
       this.setState({
         hintOneBlur: 0,
-        hintOneUnlocked: true
+        hintOneUnlocked: true,
+        hintTwoPenalty: 7
       })
     }
     else if (this.state.currentIndex === 2 && this.state.hintTwoUnlocked === false) {
@@ -66,29 +71,31 @@ export default class Main extends React.Component {
         hintTwoBlur: 0,
         hintTwoUnlocked: true
       })
+      if (this.state.hintOneUnlocked == false) {
+        this.setState({
+          hintOneBlur: 0,
+          hintOneUnlocked: true,
+        })
+      }
     }
     else {
       this.props.navigation.navigate('Riddle')
     }
   }
 
-  componentDidMount() {
-    this.props.navigation.addListener(
-      'willFocus',
-      payload => {
-        this.setState({
-          hintOneBlur: 100,
-          hintTwoBlur: 100,
-          hintOneUnlocked: false,
-          hintTwoUnlocked: false
-        })
-        this.forceUpdate()
-      }
+  giveUp = () => {
+    Alert.alert(
+      'Are you sure?',
+      '+20 Minute Penalty',
+      [
+        { text: 'Go Back' },
+        { text: 'Give Up' }
+      ]
     )
   }
 
   conditionalVisibility(style, visible) {
-    return Object.assign({ display: visible ? 'block' : 'none' }, style)
+    return Object.assign({ display: visible ? 'flex' : 'none' }, style)
   }
 
   render() {
@@ -105,37 +112,44 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 1 }}
-              style={{ width: 325, height: 415 }} />
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 1 }}
+              style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintOneBlur} />
+              blurRadius={this.state.hintOneBlur}/>
             <TouchableOpacity
                 style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintOneUnlocked)}
                 onPress={this.unlock}>
-              <Text style={Styles.buttonText}> Unlock </Text>
+              <View style={{ flex: 1 }} >
+                <Text style={Styles.buttonText}>Unlock</Text>
+                <Text style={Styles.penalty}>+5 minutes</Text>
+              </View>
             </TouchableOpacity>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.allPhotos[photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintTwoBlur} />
+              blurRadius={this.state.hintTwoBlur}/>
             <TouchableOpacity
                 style={this.conditionalVisibility(Styles.unlockButton, !this.state.hintTwoUnlocked)}
                 onPress={this.unlock}>
-              <Text style={Styles.buttonText}> Unlock </Text>
+                <View style={{ flex: 1 }} >
+                  <Text style={Styles.buttonText}>Unlock</Text>
+                  <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
+                </View>
             </TouchableOpacity>
           </View>
         </Carousel>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Riddle')}>
+        <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}> Found it! </Text>
-        </TouchableOpacity>
+        </Button>
+        <Button block danger onPress={this.giveUp}>
+          <Text style={Styles.buttonText}> Give Up </Text>
+        </Button>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}
           reset={this.state.stopwatchReset}

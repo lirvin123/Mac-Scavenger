@@ -19,20 +19,16 @@ export default class Riddle extends React.Component {
   }
 
   checkGuess = () => {
-    if (this.state.riddleGuess.toLowerCase() == Photos[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 > Photos.length) {
-        this.setState({
-          riddle: ''
-        })
+    if ((this.state.riddleGuess.toLowerCase()).trim() == Photos[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 > Photos.length) { //Causes an error without this line
+        this.setState({ riddle: '' })
       }
       photoIndex = photoIndex + 1
-      this.props.navigation.navigate('Correct')
-      this.setState({
-        riddleGuess: ''
-      })
+      this.props.navigation.push('Correct')
+      this.setState({ riddleGuess: '' })
     }
     else {
-      this.props.navigation.navigate('Incorrect')
+      this.props.navigation.push('Incorrect')
     }
   }
 
@@ -43,9 +39,10 @@ export default class Riddle extends React.Component {
         <Text style={Styles.title}> Solve the Puzzle: </Text>
         <Text style={Styles.riddle}> {this.state.riddle} </Text>
         <TextInput
-          placeholder={'Enter answer here'}
+          placeholder={'Type answer here'}
           onChangeText={(text) => { this.setState({riddleGuess: text}) }}
-          autoCorrect={false}>
+          autoCorrect={false}
+          style={{ textAlign: 'center' }}>
         </TextInput>
         <TouchableOpacity
             style={Styles.button}
