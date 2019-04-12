@@ -8,6 +8,7 @@ import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import {Button} from 'native-base'
+import TimerMixin from 'react-timer-mixin';
 
 export default class Main extends React.Component {
 
@@ -25,8 +26,21 @@ export default class Main extends React.Component {
       photoIndex: photoIndex,
       stopwatchReset: false,
       stopwatchStart: false,
-      totalDuration: 90000
+      totalDuration: 90000,
+      timer: 0,
     }
+  }
+
+  startTimer() {
+    this.interval = TimerMixin.setInterval(
+      () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
+      1000
+    );
+  }
+
+  resetTimer() {
+    TimerMixin.clearInterval(this.interval)
+    this.state.timer = this.state.time0;
   }
 
   toggleStopwatch() {
@@ -150,13 +164,10 @@ export default class Main extends React.Component {
           reset={this.state.stopwatchReset}
           getTime={this.getFormattedTime} />
         <TouchableHighlight
-            onPress={this.toggleStopwatch}>
-          <Text style={{ fontSize: 30 }}> {!this.state.stopwatchStart ? "Start" : "Stop"} </Text>
+              onPress={this.startTimer()}>
+            <Text style={{ fontSize: 30 }}> {!this.state.stopwatchStart ? "Start" : "Stop"} </Text>
         </TouchableHighlight>
-        <TouchableHighlight
-            onPress={this.resetStopwatch}>
-          <Text style={{ fontSize: 30 }}> Reset </Text>
-        </TouchableHighlight>
+        
         </View>
     )
   }
