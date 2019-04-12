@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
    button: {
      backgroundColor: 'red',
@@ -15,12 +15,13 @@ export default StyleSheet.create({
    unlockButton: {
      backgroundColor: 'magenta',
      padding: 20,
-     position: 'absolute'
+     position: 'absolute',
+     top: 100               //not sure if this is a permanent solution
    },
    buttonText: {
      color: '#fff',
      textAlign: 'center',
-     fontSize: 50
+     fontSize: 30
    },
    title: {
      textAlign: 'center',
@@ -34,9 +35,9 @@ export default StyleSheet.create({
      textAlign: 'center',
      fontSize: 35
    },
-  penalty: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 20
+  unlock: {
+    backgroundColor: 'blue',
+    padding: 20
   }
+
 })

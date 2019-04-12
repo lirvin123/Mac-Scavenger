@@ -7,6 +7,7 @@ import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
+import {Button} from 'native-base'
 
 export default class Main extends React.Component {
 
@@ -132,16 +133,18 @@ export default class Main extends React.Component {
             </TouchableOpacity>
           </View>
         </Carousel>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.push('Riddle')}>
-          <Text style={Styles.buttonText}> Found it! </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={this.giveUp}>
-          <Text style={Styles.buttonText}> Give Up </Text>
-        </TouchableOpacity>
+        <Button block danger>
+          <TouchableOpacity
+              onPress={ () => this.props.navigation.push('Riddle')}>
+            <Text style={Styles.buttonText}> Found it! </Text>
+          </TouchableOpacity>
+        </Button>
+        <Button block danger>
+          <TouchableOpacity
+              onPress={this.giveUp}>
+            <Text style={Styles.buttonText}> Give Up </Text>
+          </TouchableOpacity>
+        </Button>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}
           reset={this.state.stopwatchReset}
