@@ -1,2 +1,3 @@
 https://stackoverflow.com/questions/43039719/undefined-is-not-a-object-in-this-state-reactnative (binding function)
 https://stackoverflow.com/questions/45837208/react-navigation-re-render-previous-page-when-going-back (componentDidMount code)
+https://stackoverflow.com/questions/42831685/disable-back-button-in-react-navigation (back button)
