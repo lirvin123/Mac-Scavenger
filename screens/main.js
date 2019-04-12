@@ -23,15 +23,8 @@ export default class Main extends React.Component {
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
       photoIndex: photoIndex,
-      timer: 0,
-      totalDuration: 9000
+      timer: 0
     }
-  }
-
-  startTimer() {
-    this.interval = TimerMixin.setInterval(
-      () => this.setState((prevState) => ({ timer: prevState.timer + 1 })), 1000
-    )
   }
 
   changeIndex(index) {
@@ -115,8 +108,6 @@ export default class Main extends React.Component {
         </TouchableOpacity>
       )
     }
-
-    this.startTimer()
 
     return (
       <View
