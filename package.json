@@ -14,7 +14,8 @@
     "react-native-base": "^1.1.0",
     "react-native-looped-carousel": "^0.1.13",
     "react-native-stopwatch-timer": "0.0.20",
-    "react-navigation": "^3.3.2"
+    "react-navigation": "^3.3.2",
+    "react-timer-mixin": "^0.13.4"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

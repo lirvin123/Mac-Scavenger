@@ -1,7 +1,6 @@
 import React from 'react'
 import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
-import { Stopwatch } from 'react-native-stopwatch-timer'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
@@ -9,14 +8,13 @@ import { photoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { StackActions, NavigationActions } from 'react-navigation';
 import {Button} from 'native-base'
+import TimerMixin from 'react-timer-mixin'
 
 
 export default class Main extends React.Component {
 
   constructor(props) {
     super(props)
-    this.resetStopwatch = this.resetStopwatch.bind(this)
-    this.toggleStopwatch = this.toggleStopwatch.bind(this)
     this.state = {
       photos: require('../photos.json'),
       currentIndex: 0,
@@ -25,22 +23,15 @@ export default class Main extends React.Component {
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
       photoIndex: photoIndex,
-      stopwatchReset: false,
-      stopwatchStart: false,
-      totalDuration: 90000
+      timer: 0,
+      totalDuration: 9000
     }
   }
 
-  toggleStopwatch() {
-    this.setState({stopwatchStart: !this.state.stopwatchStart, stopwatchReset: false});
-  }
-
-  resetStopwatch() {
-    this.setState({stopwatchStart: false, stopwatchReset: true});
-  }
-
-  getFormattedTime(time) {
-      this.currentTime = time;
+  startTimer() {
+    this.interval = TimerMixin.setInterval(
+      () => this.setState((prevState) => ({ timer: prevState.timer + 1 })), 1000
+    )
   }
 
   changeIndex(index) {
@@ -125,10 +116,13 @@ export default class Main extends React.Component {
       )
     }
 
+    this.startTimer()
+
     return (
       <View
           style={Styles.container}>
         <Text style={Styles.round}> {"Round " + (photoIndex + 1)} </Text>
+        <Text style={{ fontSize: 30 }}> {this.state.timer} </Text>
         <Carousel
             style={{ width: 325, height: 350}}
             autoplay={false}
@@ -161,18 +155,6 @@ export default class Main extends React.Component {
         <Button block danger onPress={this.giveUp}>
           <Text style={Styles.buttonText}> Give Up </Text>
         </Button>
-        <Stopwatch
-          laps msecs start={this.state.stopwatchStart}
-          reset={this.state.stopwatchReset}
-          getTime={this.getFormattedTime} />
-        <TouchableHighlight
-            onPress={this.toggleStopwatch}>
-          <Text style={{ fontSize: 30 }}> {!this.state.stopwatchStart ? "Start" : "Stop"} </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-            onPress={this.resetStopwatch}>
-          <Text style={{ fontSize: 30 }}> Reset </Text>
-        </TouchableHighlight>
         </View>
     )
   }
