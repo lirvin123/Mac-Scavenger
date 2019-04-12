@@ -8,6 +8,7 @@ import { photoIndex, incrementPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import {Button} from 'native-base'
 import TimerMixin from 'react-timer-mixin'
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class Main extends React.Component {
 
@@ -76,26 +77,24 @@ export default class Main extends React.Component {
     )
   }
 
-  conditionalVisibility(style, visible) {
-    return Object.assign({ display: visible ? 'flex' : 'none' }, style)
-  }
-
   render() {
 
     var unlockButtonOne;
     var unlockButtonTwo;
+    var unlockTextOne;
+    var unlockTextTwo;
 
     if (!this.state.hintOneUnlocked) {
       unlockButtonOne = (
-        <TouchableOpacity
-            style={Styles.unlockButton}
-            onPress={this.unlock}>
+        <Button block primary style={Styles.unlockButton} onPress={this.unlock}>
           <View style={{ flex: 1 }} >
             <Text style={Styles.buttonText}>Unlock</Text>
-            <Text style={Styles.penalty}>+5 minutes</Text>
           </View>
-        </TouchableOpacity>
-      );
+        </Button>
+      )
+      unlockTextOne = (
+        <Text style={Styles.penalty}>+5 minute penalty</Text>
+      )
     }
     else {
       unlockButton = (
@@ -105,21 +104,20 @@ export default class Main extends React.Component {
 
     if (!this.state.hintTwoUnlocked) {
       unlockButtonTwo = (
-        <TouchableOpacity
-            style={Styles.unlockButton}
-            onPress={this.unlock}>
+        <Button block primary style={Styles.unlockButton} onPress={this.unlock}>
             <View style={{ flex: 1 }} >
               <Text style={Styles.buttonText}>Unlock</Text>
-              <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
             </View>
-        </TouchableOpacity>
+        </Button>
+      )
+      unlockTextTwo = (
+        <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minute penalty" : "Both for +15 minute penalty"}</Text>
       )
     }
 
     return (
       <View
           style={Styles.container}>
-        <Text style={Styles.round}> {"Round " + (photoIndex + 1)} </Text>
         <Text style={{ fontSize: 30 }}> {this.state.timer} </Text>
         <Carousel
             style={{ width: 325, height: 350}}
@@ -129,25 +127,27 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
             {unlockButtonOne}
+            {unlockTextOne}
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
             {unlockButtonTwo}
+            {unlockTextTwo}
           </View>
         </Carousel>
-        <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
+        <Button block success onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}> Found it! </Text>
         </Button>
         <Button block danger onPress={this.giveUp}>
@@ -155,5 +155,9 @@ export default class Main extends React.Component {
         </Button>
         </View>
     )
+  }
+  static navigationOptions = {
+    headerLeft: null,
+    title: "Round " + (photoIndex + 1),
   }
 }

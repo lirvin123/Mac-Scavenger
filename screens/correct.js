@@ -5,6 +5,7 @@ import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
+import {Button} from 'native-base'
 
 export default class Correct extends React.Component {
 
@@ -23,11 +24,9 @@ export default class Correct extends React.Component {
         <View
           style={Styles.container}>
           <Text style={Styles.title}> Correct! </Text>
-          <TouchableOpacity
-              style={Styles.button}
-              onPress={this.checkEnd}>
+          <Button block success onPress={this.checkEnd}>
             <Text style={Styles.buttonText}> {(photoIndex == Photos.length) ? "Finish" : "Next Round"} </Text>
-          </TouchableOpacity>
+          </Button>
         </View>
       )
     }

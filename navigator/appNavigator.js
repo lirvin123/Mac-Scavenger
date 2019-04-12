@@ -9,9 +9,9 @@ import Incorrect from '../screens/incorrect'
 const AppNavigator = createStackNavigator({
     Home: { screen: Home, navigationOptions: { header: null } },
     Riddle: { screen: Riddle, navigationOptions: { header: null } },
-    Main: { screen: Main, navigationOptions: { header: null } },
+    Main: { screen: Main },
     Correct: { screen: Correct, navigationOptions: { header: null } },
-    Incorrect: { screen: Incorrect, navigationOptions: { header: null } },
+    Incorrect: { screen: Incorrect, navigationOptions: { header: null } }
   }
 )
 

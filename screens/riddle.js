@@ -4,6 +4,7 @@ import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
+import {Button} from 'native-base'
 
 export var photoIndex = 0
 
@@ -27,10 +28,10 @@ export default class Riddle extends React.Component {
       }
       incrementPhotoIndex()
       this.props.navigation.push('Correct')
-      this.setState({ riddleGuess: '' })
     }
     else {
       this.props.navigation.push('Incorrect')
+
     }
   }
 
@@ -46,16 +47,12 @@ export default class Riddle extends React.Component {
           autoCorrect={false}
           style={{ textAlign: 'center' }}>
         </TextInput>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={this.checkGuess}>
+        <Button block success onPress={this.checkGuess}>
           <Text style={Styles.buttonText}> Guess </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.goBack() }>
+        </Button>
+        <Button block danger onPress={ () => this.props.navigation.goBack() }>
           <Text style={Styles.buttonText}> Back </Text>
-        </TouchableOpacity>
+        </Button>
 
       </View>
     )

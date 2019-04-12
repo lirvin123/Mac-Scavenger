@@ -13,10 +13,10 @@ export default StyleSheet.create({
      padding: 20
    },
    unlockButton: {
-     backgroundColor: 'magenta',
-     padding: 20,
+     padding: 30,
      position: 'absolute',
-     top: 100   //not sure if this is a permanent solution
+     top: 100,
+     left: 90   //not sure if this is a permanent solution
    },
    buttonText: {
      color: '#fff',
@@ -35,13 +35,11 @@ export default StyleSheet.create({
      textAlign: 'center',
      fontSize: 35
    },
-  unlock: {
-    backgroundColor: 'blue',
-    padding: 20
-  },
   penalty: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 20,
+    position: 'absolute',
+    top: 200
   }
 })
