@@ -1,15 +1,13 @@
 import React from 'react'
-import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
-import { photoIndex } from './riddle'
+import { photoIndex, incrementPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
-import { StackActions, NavigationActions } from 'react-navigation';
 import {Button} from 'native-base'
 import TimerMixin from 'react-timer-mixin'
-
 
 export default class Main extends React.Component {
 
@@ -64,7 +62,16 @@ export default class Main extends React.Component {
       '+20 Minute Penalty',
       [
         { text: 'Go Back' },
-        { text: 'Give Up' }
+        { text: 'Give Up', onPress: () => {
+            if (photoIndex + 1 == Photos.length) {
+              this.props.navigation.navigate('Home')
+            }
+            else {
+              incrementPhotoIndex()
+              this.props.navigation.push('Main')
+            }
+          }
+        }
       ]
     )
   }
@@ -149,7 +156,4 @@ export default class Main extends React.Component {
         </View>
     )
   }
-  static navigationOptions = { //got rid of the back button
-        headerLeft : null
-    };
 }

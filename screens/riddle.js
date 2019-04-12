@@ -7,6 +7,8 @@ import Photos from '../photos.json'
 
 export var photoIndex = 0
 
+export var incrementPhotoIndex = () => {photoIndex = photoIndex + 1}
+
 export default class Riddle extends React.Component {
 
   constructor() {
@@ -23,7 +25,7 @@ export default class Riddle extends React.Component {
       if (photoIndex + 1 > Photos.length) { //Causes an error without this line
         this.setState({ riddle: '' })
       }
-      photoIndex = photoIndex + 1
+      incrementPhotoIndex()
       this.props.navigation.push('Correct')
       this.setState({ riddleGuess: '' })
     }
