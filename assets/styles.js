@@ -38,6 +38,10 @@ export default StyleSheet.create({
   unlock: {
     backgroundColor: 'blue',
     padding: 20
+  },
+  penalty: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   }
-
 })

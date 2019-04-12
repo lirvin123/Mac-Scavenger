@@ -133,17 +133,11 @@ export default class Main extends React.Component {
             </TouchableOpacity>
           </View>
         </Carousel>
-        <Button block danger>
-          <TouchableOpacity
-              onPress={ () => this.props.navigation.push('Riddle')}>
-            <Text style={Styles.buttonText}> Found it! </Text>
-          </TouchableOpacity>
+        <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
+          <Text style={Styles.buttonText}> Found it! </Text>
         </Button>
-        <Button block danger>
-          <TouchableOpacity
-              onPress={this.giveUp}>
-            <Text style={Styles.buttonText}> Give Up </Text>
-          </TouchableOpacity>
+        <Button block danger onPress={this.giveUp}>
+          <Text style={Styles.buttonText}> Give Up </Text>
         </Button>
         <Stopwatch
           laps msecs start={this.state.stopwatchStart}
