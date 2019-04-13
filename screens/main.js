@@ -4,11 +4,12 @@ import AppNavigator from '../navigator/appNavigator'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
-import { photoIndex, incrementPhotoIndex } from './riddle'
+import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
-import {Button} from 'native-base'
+import { Button } from 'native-base'
 import TimerMixin from 'react-timer-mixin'
-import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation'
+import { huntIndex } from './hunt'
 
 export default class Main extends React.Component {
 
@@ -21,7 +22,6 @@ export default class Main extends React.Component {
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
-      photoIndex: photoIndex,
       timer: 0
     }
   }
@@ -58,23 +58,14 @@ export default class Main extends React.Component {
   }
 
   giveUp = () => {
-    Alert.alert(
-      'Are you sure?',
-      '+20 Minute Penalty',
-      [
-        { text: 'Go Back' },
-        { text: 'Give Up', onPress: () => {
-            if (photoIndex + 1 == Photos.length) {
-              this.props.navigation.navigate('Home')
-            }
-            else {
-              incrementPhotoIndex()
-              this.props.navigation.push('Main')
-            }
-          }
-        }
-      ]
-    )
+    if (photoIndex + 1 == this.state.photos[huntIndex].hints.length) {
+      setPhotoIndex(0)
+      this.props.navigation.navigate('Done')
+    }
+    else {
+      setPhotoIndex(photoIndex + 1)
+      this.props.navigation.push('Main')
+    }
   }
 
   render() {
@@ -86,7 +77,7 @@ export default class Main extends React.Component {
 
     if (!this.state.hintOneUnlocked) {
       unlockButtonOne = (
-        <Button block primary style={Styles.unlockButton} onPress={this.unlock}>
+        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
           <View style={{ flex: 1 }} >
             <Text style={Styles.buttonText}>Unlock</Text>
           </View>
@@ -104,7 +95,7 @@ export default class Main extends React.Component {
 
     if (!this.state.hintTwoUnlocked) {
       unlockButtonTwo = (
-        <Button block primary style={Styles.unlockButton} onPress={this.unlock}>
+        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
             <View style={{ flex: 1 }} >
               <Text style={Styles.buttonText}>Unlock</Text>
             </View>
@@ -127,12 +118,12 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
             {unlockButtonOne}
@@ -140,18 +131,21 @@ export default class Main extends React.Component {
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
             {unlockButtonTwo}
             {unlockTextTwo}
           </View>
+          <View style={Styles.giveUp}>
+            <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
+              <Text style={Styles.buttonText}> Give Up </Text>
+            </Button>
+            <Text style={Styles.penalty}>+20 minute penalty</Text>
+          </View>
         </Carousel>
         <Button block success onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}> Found it! </Text>
-        </Button>
-        <Button block danger onPress={this.giveUp}>
-          <Text style={Styles.buttonText}> Give Up </Text>
         </Button>
         </View>
     )

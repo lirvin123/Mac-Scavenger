@@ -2,6 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  home_Hunt: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -9,8 +15,9 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
   },
    button: {
-     backgroundColor: 'red',
-     padding: 20
+     padding: 20,
+     alignSelf: 'center',
+     margin: 10
    },
    unlockButton: {
      padding: 30,
@@ -41,5 +48,19 @@ export default StyleSheet.create({
     fontSize: 20,
     position: 'absolute',
     top: 200
+  },
+  done: {
+    textAlign: 'center',
+    fontSize: 50
+  },
+  endTime: {
+    textAlign: 'center',
+    fontSize: 20
+  },
+  giveUp: {
+    flex: 1,
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'space-around'
   }
 })
