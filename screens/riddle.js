@@ -4,56 +4,55 @@ import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
+import {Button} from 'native-base'
+import { huntIndex } from './hunt'
 
 export var photoIndex = 0
+
+export var setPhotoIndex = (index) => {photoIndex = index}
 
 export default class Riddle extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      riddle: Photos[photoIndex].riddle,
+      photos: require('../photos.json'),
       riddleGuess: '',
       header: "Solve the Puzzle!",
     }
   }
 
   checkGuess = () => {
-    if ((this.state.riddleGuess.toLowerCase()).trim() == Photos[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 > Photos.length) { //Causes an error without this line
+    if ((this.state.riddleGuess.toLowerCase()).trim() == this.state.photos[huntIndex].hints[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 > this.state.photos[huntIndex].hints.length) { //Causes an error without this line
         this.setState({ riddle: '' })
       }
-      photoIndex = photoIndex + 1
+      setPhotoIndex(photoIndex + 1)
       this.props.navigation.push('Correct')
-      this.setState({ riddleGuess: '' })
     }
     else {
       this.props.navigation.push('Incorrect')
+
     }
   }
 
   render() {
     return (
-      <View
-          style={Styles.container}>
+      <View style={Styles.container}>
         <Text style={Styles.title}> Solve the Puzzle: </Text>
-        <Text style={Styles.riddle}> {this.state.riddle} </Text>
+        <Text style={Styles.riddle}> {this.state.photos[huntIndex].hints[photoIndex].riddle} </Text>
         <TextInput
           placeholder={'Type answer here'}
           onChangeText={(text) => { this.setState({riddleGuess: text}) }}
           autoCorrect={false}
           style={{ textAlign: 'center' }}>
         </TextInput>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={this.checkGuess}>
+        <Button block success onPress={this.checkGuess}>
           <Text style={Styles.buttonText}> Guess </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.goBack() }>
+        </Button>
+        <Button block danger onPress={ () => this.props.navigation.goBack() }>
           <Text style={Styles.buttonText}> Back </Text>
-        </TouchableOpacity>
+        </Button>
 
       </View>
     )
