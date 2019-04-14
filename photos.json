@@ -1,10 +1,17 @@
 [
   {
-    "name": "Locker",
+    "name": "Don't Break the Rules",
     "pathName": "v1554921434/locker",
     "hints": 3,
     "riddle": "What is the number of the very bottom locker?",
     "riddleAnswer": "42"
+  },
+  {
+    "name": "Where in the Mac",
+    "pathName": "v1555260491/30Mac",
+    "hints": 3,
+    "riddle": "What is the number behind the water fountain?",
+    "riddleAnswer": "142"
   },
   {
     "name": "Really Cool Art",
@@ -22,10 +29,31 @@
   },
   {
     "name": "Interesting photos...",
-    "pathName": "v1555097522/interesting",
+    "pathName": "v1555262173/reallyinteresting",
     "hints": 3,
     "riddle": "Fill in the blank: Macalester Under the ____",
     "riddleAnswer": "microscope"
+  },
+  {
+    "name": "Are you Alive?",
+    "pathName": "v1555260538/Skelly",
+    "hints": 3,
+    "riddle": "Glass Ceilings & how many Hour Couples?",
+    "riddleAnswer": "100"
+  },
+  {
+    "name": "Words Words Words",
+    "pathName": "v1555260699/AnnSneed",
+    "hints": 3,
+    "riddle": "What is the word in the most bottom-right corner?",
+    "riddleAnswer": "ploeg"
+  },
+  {
+    "name": "Run Run Run",
+    "pathName": "v1555260733/LC",
+    "hints": 3,
+    "riddle": "What is the word in the most bottom-right corner?",
+    "riddleAnswer": "ploeg"
   },
   {
     "name": "Dewey Decimal",

@@ -51,7 +51,7 @@ export default class Riddle extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
             style={Styles.button}
-            onPress={ () => this.props.navigation.navigate('Main') }>
+            onPress={ () => this.props.navigation.goBack() }>
           <Text style={Styles.buttonText}> Back </Text>
         </TouchableOpacity>
 
