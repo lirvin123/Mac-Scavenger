@@ -119,6 +119,7 @@ export default class Main extends React.Component {
       )
     }
 
+    this.startTimer()
     return (
       <View
           style={Styles.container}>
