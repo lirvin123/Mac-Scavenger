@@ -24,14 +24,19 @@ export default class Main extends React.Component {
       hintTwoUnlocked: false,
       photoIndex: photoIndex,
       timer: 0,
-      totalDuration: 9000
+      totalDuration: 9000,
+      timerOn: false
     }
   }
 
   startTimer() {
-    this.interval = TimerMixin.setInterval(
-      () => this.setState((prevState) => ({ timer: prevState.timer + 1 })), 1000
-    )
+    if(!this.state.timerOn) {
+      this.interval = TimerMixin.setInterval(
+        () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
+        1000
+      );
+      this.state.timerOn = true;
+    }
   }
 
   changeIndex(index) {
