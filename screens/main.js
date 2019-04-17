@@ -22,6 +22,7 @@ export default class Main extends React.Component {
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
+      gaveUp: false,
       photoIndex: photoIndex,
       timer: 0,
       totalDuration: 9000,
@@ -73,6 +74,9 @@ export default class Main extends React.Component {
   giveUp = () => {
     if (photoIndex + 1 == this.state.photos[huntIndex].hints.length) {
       setPhotoIndex(0)
+      this.setState({
+        gaveUp: true,
+      })
       this.props.navigation.navigate('Done')
     }
     else {
@@ -87,6 +91,45 @@ export default class Main extends React.Component {
     var unlockButtonTwo;
     var unlockTextOne;
     var unlockTextTwo;
+    var seconds = this.state.timer;
+    var newVar;
+    var timeWithColons;
+    sec = parseInt(seconds)%60;
+    min = parseInt(parseInt(seconds)/60)%60;
+    hr = parseInt(parseInt(seconds)/3600);
+
+    if (this.state.hintOneUnlocked) {
+      min += 5
+    }
+    if (this.state.hintTwoUnlocked) {
+      min += 7
+    }
+    if (this.state.gaveUp) {
+      min += 20
+    }
+
+    minString = min.toString();
+    secString = sec.toString();
+    hrString = hr.toString();
+    if (sec < 10) {
+      secString = '0' + sec.toString()
+    }
+    if (min < 10) {
+      minString = '0' + min.toString()
+    }
+    if (hr < 10) {
+      hrString = '0' + hr.toString()
+    }
+
+
+
+    timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
+    this.startTimer()
+
+
+
+
+
 
     if (!this.state.hintOneUnlocked) {
       unlockButtonOne = (
@@ -119,11 +162,19 @@ export default class Main extends React.Component {
       )
     }
 
-    this.startTimer()
+
     return (
       <View
           style={Styles.container}>
-        <Text style={{ fontSize: 30 }}> {this.state.timer} </Text>
+
+
+
+
+
+
+
+        {timeWithColons}
+
         <Carousel
             style={{ width: 325, height: 350}}
             autoplay={false}
