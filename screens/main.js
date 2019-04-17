@@ -22,7 +22,20 @@ export default class Main extends React.Component {
       hintTwoBlur: 100,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
-      timer: 0
+      photoIndex: photoIndex,
+      timer: 0,
+      totalDuration: 9000,
+      timerOn: false
+    }
+  }
+
+  startTimer() {
+    if(!this.state.timerOn) {
+      this.interval = TimerMixin.setInterval(
+        () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
+        1000
+      );
+      this.state.timerOn = true;
     }
   }
 
