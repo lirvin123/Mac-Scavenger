@@ -5,6 +5,7 @@ import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
 import { photoIndex } from './riddle'
+import {Button} from 'native-base'
 
 export default class Incorrect extends React.Component {
 
@@ -13,11 +14,9 @@ export default class Incorrect extends React.Component {
       <View
         style={Styles.container}>
         <Text style={Styles.title}> Incorrect </Text>
-        <TouchableOpacity
-            style={Styles.button}
-            onPress={ () => this.props.navigation.goBack() }>
+        <Button block danger onPress={ () => this.props.navigation.goBack() }>
           <Text style={Styles.buttonText}> Guess Again </Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     )
   }

@@ -1,37 +1,70 @@
 [
   {
-    "name": "Locker",
-    "pathName": "v1554921434/locker",
-    "hints": 3,
-    "riddle": "What is the number of the very bottom locker?",
-    "riddleAnswer": "42"
-  },
-  {
-    "name": "Really Cool Art",
-    "pathName": "v1554926592/coolart",
-    "hints": 3,
-    "riddle": "Turn into the water fountain area. Look at the door at the end of the hall. What's the third word on the plaque?",
-    "riddleAnswer": "resource"
-  },
-  {
-    "name": "AHHHHHHH",
-    "pathName": "v1555097471/scary",
-    "hints": 3,
-    "riddle": "What's the name of this creature?",
-    "riddleAnswer": "messor cephalotes"
-  },
-  {
-    "name": "Interesting photos...",
-    "pathName": "v1555097522/interesting",
-    "hints": 3,
-    "riddle": "Fill in the blank: Macalester Under the ____",
-    "riddleAnswer": "microscope"
-  },
-  {
-    "name": "Dewey Decimal",
-    "pathName": "v1554925396/z",
-    "hints": 3,
-    "riddle": "Enter the last number on the plaque",
-    "riddleAnswer": "5"
-  },
+    "huntName": "Feeling Thirsty?",
+    "description": "hello",
+    "hints": [
+    {
+      "name": "Don't Break the Rules",
+      "pathName": "v1554921434/locker",
+      "hints": 3,
+      "riddle": "What is the number of the very bottom locker?",
+      "riddleAnswer": "42"
+    },
+    {
+      "name": "Where in the Mac",
+      "pathName": "v1555260491/30Mac",
+      "hints": 3,
+      "riddle": "What is the number behind the water fountain?",
+      "riddleAnswer": "142"
+    },
+    {
+      "name": "Really Cool Art",
+      "pathName": "v1554926592/coolart",
+      "hints": 3,
+      "riddle": "Turn into the water fountain area. Look at the door at the end of the hall. What's the third word on the plaque?",
+      "riddleAnswer": "resource"
+    },
+    {
+      "name": "AHHHHHHH",
+      "pathName": "v1555097471/scary",
+      "hints": 3,
+      "riddle": "What's the name of this creature?",
+      "riddleAnswer": "messor cephalotes"
+    },
+    {
+      "name": "Interesting photos...",
+      "pathName": "v1555262173/reallyinteresting",
+      "hints": 3,
+      "riddle": "Fill in the blank: Macalester Under the ____",
+      "riddleAnswer": "microscope"
+    },
+    {
+      "name": "Are you Alive?",
+      "pathName": "v1555260538/Skelly",
+      "hints": 3,
+      "riddle": "Glass Ceilings & how many Hour Couples?",
+      "riddleAnswer": "100"
+    },
+    {
+      "name": "Words Words Words",
+      "pathName": "v1555260699/AnnSneed",
+      "hints": 3,
+      "riddle": "What is the word in the most bottom-right corner?",
+      "riddleAnswer": "ploeg"
+    },
+    {
+      "name": "Run Run Run",
+      "pathName": "v1555260733/LC",
+      "hints": 3,
+      "riddle": "What Year is this Time Capsule from?",
+      "riddleAnswer": "1924"
+    },
+    {
+      "name": "Dewey Decimal",
+      "pathName": "v1554925396/z",
+      "hints": 3,
+      "riddle": "Enter the last number on the plaque",
+      "riddleAnswer": "5"
+    }]
+  }
 ]

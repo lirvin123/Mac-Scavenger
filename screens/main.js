@@ -1,15 +1,15 @@
 import React from 'react'
-import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
-import { photoIndex } from './riddle'
+import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
-import { StackActions, NavigationActions } from 'react-navigation';
-import {Button} from 'native-base'
+import { Button } from 'native-base'
 import TimerMixin from 'react-timer-mixin'
-
+import { StackActions, NavigationActions } from 'react-navigation'
+import { huntIndex } from './hunt'
 
 export default class Main extends React.Component {
 
@@ -71,36 +71,34 @@ export default class Main extends React.Component {
   }
 
   giveUp = () => {
-    Alert.alert(
-      'Are you sure?',
-      '+20 Minute Penalty',
-      [
-        { text: 'Go Back' },
-        { text: 'Give Up' }
-      ]
-    )
-  }
-
-  conditionalVisibility(style, visible) {
-    return Object.assign({ display: visible ? 'flex' : 'none' }, style)
+    if (photoIndex + 1 == this.state.photos[huntIndex].hints.length) {
+      setPhotoIndex(0)
+      this.props.navigation.navigate('Done')
+    }
+    else {
+      setPhotoIndex(photoIndex + 1)
+      this.props.navigation.push('Main')
+    }
   }
 
   render() {
 
     var unlockButtonOne;
     var unlockButtonTwo;
+    var unlockTextOne;
+    var unlockTextTwo;
 
     if (!this.state.hintOneUnlocked) {
       unlockButtonOne = (
-        <TouchableOpacity
-            style={Styles.unlockButton}
-            onPress={this.unlock}>
+        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
           <View style={{ flex: 1 }} >
             <Text style={Styles.buttonText}>Unlock</Text>
-            <Text style={Styles.penalty}>+5 minutes</Text>
           </View>
-        </TouchableOpacity>
-      );
+        </Button>
+      )
+      unlockTextOne = (
+        <Text style={Styles.penalty}>+5 minute penalty</Text>
+      )
     }
     else {
       unlockButton = (
@@ -110,23 +108,20 @@ export default class Main extends React.Component {
 
     if (!this.state.hintTwoUnlocked) {
       unlockButtonTwo = (
-        <TouchableOpacity
-            style={Styles.unlockButton}
-            onPress={this.unlock}>
+        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
             <View style={{ flex: 1 }} >
               <Text style={Styles.buttonText}>Unlock</Text>
-              <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minutes" : "Both for +15 minutes"}</Text>
             </View>
-        </TouchableOpacity>
+        </Button>
+      )
+      unlockTextTwo = (
+        <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minute penalty" : "Both for +15 minute penalty"}</Text>
       )
     }
-
-    this.startTimer()
 
     return (
       <View
           style={Styles.container}>
-        <Text style={Styles.round}> {"Round " + (photoIndex + 1)} </Text>
         <Text style={{ fontSize: 30 }}> {this.state.timer} </Text>
         <Carousel
             style={{ width: 325, height: 350}}
@@ -136,34 +131,40 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneBlur}/>
             {unlockButtonOne}
+            {unlockTextOne}
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[this.state.photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoBlur}/>
             {unlockButtonTwo}
+            {unlockTextTwo}
+          </View>
+          <View style={Styles.giveUp}>
+            <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
+              <Text style={Styles.buttonText}> Give Up </Text>
+            </Button>
+            <Text style={Styles.penalty}>+20 minute penalty</Text>
           </View>
         </Carousel>
-        <Button block danger onPress={ () => this.props.navigation.push('Riddle')}>
+        <Button block success onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}> Found it! </Text>
-        </Button>
-        <Button block danger onPress={this.giveUp}>
-          <Text style={Styles.buttonText}> Give Up </Text>
         </Button>
         </View>
     )
   }
-  static navigationOptions = { //got rid of the back button
-        headerLeft : null
-    };
+  static navigationOptions = {
+    headerLeft: null,
+    title: "Round " + (photoIndex + 1),
+  }
 }
