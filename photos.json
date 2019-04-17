@@ -66,5 +66,18 @@
       "riddle": "Enter the last number on the plaque",
       "riddleAnswer": "5"
     }]
+  },
+  {
+    "huntName": "Other Hunt",
+    "description": "Just for testing!",
+    "hints": [
+      {
+        "name": "Mural",
+        "pathName": "v1553979151/mural",
+        "hints": 3,
+        "riddle": "What building is this artwork in?",
+        "riddleAnswer": "5"
+      }
+    ]
   }
 ]
