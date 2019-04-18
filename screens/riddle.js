@@ -19,19 +19,33 @@ export default class Riddle extends React.Component {
       photos: require('../photos.json'),
       riddleGuess: '',
       header: "Solve the Puzzle!",
+      message: "Guess",
+      nextround: false,
+      result: ''
     }
   }
 
-  checkGuess = () => {
-    if ((this.state.riddleGuess.toLowerCase()).trim() == this.state.photos[huntIndex].hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 > this.state.photos[huntIndex].hints.length) { //Causes an error without this line
-        this.setState({ riddle: '' })
-      }
+  press = () => {
+    if (this.state.nextRound == true) {
       setPhotoIndex(photoIndex + 1)
-      this.props.navigation.push('Correct')
+      this.props.navigation.push("Main")
     }
     else {
-      this.props.navigation.push('Incorrect')
+      this.checkGuess()
+    }
+  }
+
+  checkGuess() {
+    if ((this.state.riddleGuess.toLowerCase()).trim() == this.state.photos[huntIndex].hints[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 > this.state.photos[huntIndex].hints.length) { //Causes an error without this line
+        this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true })
+      }
+      else {
+        this.setState({ result: 'Correct!', message: "Next Round", nextRound: true })
+      }
+    }
+    else {
+      this.setState({ message: "Try Again", result: 'Incorrect' })
 
     }
   }
@@ -47,13 +61,10 @@ export default class Riddle extends React.Component {
           autoCorrect={false}
           style={{ textAlign: 'center' }}>
         </TextInput>
-        <Button block success onPress={this.checkGuess}>
-          <Text style={Styles.buttonText}> Guess </Text>
+        <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
+        <Button block success onPress={this.press}>
+          <Text style={Styles.buttonText}> {this.state.message} </Text>
         </Button>
-        <Button block danger onPress={ () => this.props.navigation.goBack() }>
-          <Text style={Styles.buttonText}> Back </Text>
-        </Button>
-
       </View>
     )
   }

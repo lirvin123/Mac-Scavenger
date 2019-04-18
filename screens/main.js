@@ -121,15 +121,8 @@ export default class Main extends React.Component {
       hrString = '0' + hr.toString()
     }
 
-
-
     timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
     this.startTimer()
-
-
-
-
-
 
     if (!this.state.hintOneUnlocked) {
       unlockButtonOne = (
@@ -166,15 +159,7 @@ export default class Main extends React.Component {
     return (
       <View
           style={Styles.container}>
-
-
-
-
-
-
-
         {timeWithColons}
-
         <Carousel
             style={{ width: 325, height: 350}}
             autoplay={false}

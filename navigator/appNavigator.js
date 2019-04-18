@@ -9,12 +9,9 @@ import Hunt from '../screens/hunt'
 import Done from '../screens/done'
 
 const AppNavigator = createStackNavigator({
-    Home: { screen: Home, navigationOptions: { header: null } },
-    Riddle: { screen: Riddle, navigationOptions: { header: null } },
-    Main: { screen: Main },
-    Correct: { screen: Correct, navigationOptions: { header: null } },
-    Incorrect: { screen: Incorrect, navigationOptions: { header: null } },
     Hunt: { screen: Hunt },
+    Main: { screen: Main },
+    Riddle: { screen: Riddle, navigationOptions: { header: null } },
     Done: { screen: Done, navigationOptions: { header: null }}
   }
 )
