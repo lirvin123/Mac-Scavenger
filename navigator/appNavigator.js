@@ -1,10 +1,7 @@
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import Home from '../screens/home'
 import Main from '../screens/main'
 import Riddle from '../screens/riddle'
-import Correct from '../screens/correct'
-import Incorrect from '../screens/incorrect'
 import Hunt from '../screens/hunt'
 import Done from '../screens/done'
 
