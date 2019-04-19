@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, Text, View, Image } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { BlurView } from 'expo'
 import Styles from '../assets/styles'
@@ -8,7 +8,6 @@ import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { Button } from 'native-base'
 import TimerMixin from 'react-timer-mixin'
-import { StackActions, NavigationActions } from 'react-navigation'
 import { huntIndex } from './hunt'
 
 export default class Main extends React.Component {
@@ -16,18 +15,23 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      photos: require('../photos.json'),
       currentIndex: 0,
-      hintOneBlur: 100,
-      hintTwoBlur: 100,
+      gaveUp: false,
       hintOneUnlocked: false,
       hintTwoUnlocked: false,
-      gaveUp: false,
-      photoIndex: photoIndex,
+      photos: require('../photos.json'),
       timer: 0,
+      timerOn: false,
       totalDuration: 9000,
-      timerOn: false
     }
+  }
+
+  changeIndex(index) {
+    this.setState({ currentIndex: index })
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1) })
   }
 
   startTimer() {
@@ -40,43 +44,10 @@ export default class Main extends React.Component {
     }
   }
 
-  changeIndex(index) {
-    this.setState({
-      currentIndex: index
-    })
-  }
-
-  unlock = () => {
-    if (this.state.currentIndex === 1 && this.state.hintOneUnlocked === false) {
-      this.setState({
-        hintOneBlur: 0,
-        hintOneUnlocked: true,
-        hintTwoPenalty: 7
-      })
-    }
-    else if (this.state.currentIndex === 2 && this.state.hintTwoUnlocked === false) {
-      this.setState({
-        hintTwoBlur: 0,
-        hintTwoUnlocked: true
-      })
-      if (this.state.hintOneUnlocked == false) {
-        this.setState({
-          hintOneBlur: 0,
-          hintOneUnlocked: true,
-        })
-      }
-    }
-    else {
-      this.props.navigation.navigate('Riddle')
-    }
-  }
-
   giveUp = () => {
     if (photoIndex + 1 == this.state.photos[huntIndex].hints.length) {
       setPhotoIndex(0)
-      this.setState({
-        gaveUp: true,
-      })
+      this.setState({ gaveUp: true })
       this.props.navigation.navigate('Done')
     }
     else {
@@ -85,18 +56,26 @@ export default class Main extends React.Component {
     }
   }
 
+  unlock = () => {
+    if (this.state.currentIndex == 1 && this.state.hintOneUnlocked == false) {
+      this.setState({ hintOneUnlocked: true })
+    }
+    else if (this.state.currentIndex == 2 && this.state.hintTwoUnlocked == false) {
+      this.setState({ hintTwoUnlocked: true })
+    }
+  }
+
   render() {
 
-    var unlockButtonOne;
-    var unlockButtonTwo;
-    var unlockTextOne;
-    var unlockTextTwo;
-    var seconds = this.state.timer;
-    var newVar;
-    var timeWithColons;
-    sec = parseInt(seconds)%60;
-    min = parseInt(parseInt(seconds)/60)%60;
-    hr = parseInt(parseInt(seconds)/3600);
+    var unlockButtonOne
+    var unlockButtonTwo
+    var unlockTextOne
+    var unlockTextTwo
+    var seconds = this.state.timer
+    var timeWithColons
+    var sec = parseInt(seconds)%60
+    var min = parseInt(parseInt(seconds)/60)%60
+    var hr = parseInt(parseInt(seconds)/3600)
 
     if (this.state.hintOneUnlocked) {
       min += 5
@@ -108,9 +87,10 @@ export default class Main extends React.Component {
       min += 20
     }
 
-    minString = min.toString();
-    secString = sec.toString();
-    hrString = hr.toString();
+    minString = min.toString()
+    secString = sec.toString()
+    hrString = hr.toString()
+
     if (sec < 10) {
       secString = '0' + sec.toString()
     }
@@ -124,37 +104,29 @@ export default class Main extends React.Component {
     timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
     this.startTimer()
 
-    if (!this.state.hintOneUnlocked) {
+    if (!this.state.hintOneUnlocked && !this.state.hintTwoUnlocked) {
       unlockButtonOne = (
         <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
-          <View style={{ flex: 1 }} >
             <Text style={Styles.buttonText}>Unlock</Text>
-          </View>
         </Button>
       )
       unlockTextOne = (
         <Text style={Styles.penalty}>+5 minute penalty</Text>
       )
-    }
-    else {
-      unlockButton = (
-        <Text>''</Text>
+      unlockTextTwo = (
+        <Text style={Styles.penalty}>Unlock previous to access!</Text>
       )
     }
-
-    if (!this.state.hintTwoUnlocked) {
+    else if (this.state.hintOneUnlocked && !this.state.hintTwoUnlocked) {
       unlockButtonTwo = (
         <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
-            <View style={{ flex: 1 }} >
               <Text style={Styles.buttonText}>Unlock</Text>
-            </View>
         </Button>
       )
       unlockTextTwo = (
-        <Text style={Styles.penalty}>{this.state.hintOneUnlocked ? "+7 minute penalty" : "Both for +15 minute penalty"}</Text>
+        <Text style={Styles.penalty}>+7 minute penalty</Text>
       )
     }
-
 
     return (
       <View
@@ -175,7 +147,7 @@ export default class Main extends React.Component {
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintOneBlur}/>
+              blurRadius={this.state.hintOneUnlocked? 0 : 100}/>
             {unlockButtonOne}
             {unlockTextOne}
           </View>
@@ -183,25 +155,24 @@ export default class Main extends React.Component {
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintTwoBlur}/>
+              blurRadius={this.state.hintTwoUnlocked? 0 : 100}/>
             {unlockButtonTwo}
             {unlockTextTwo}
           </View>
           <View style={Styles.giveUp}>
             <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
-              <Text style={Styles.buttonText}> Give Up </Text>
+              <Text style={Styles.buttonText}>Give Up</Text>
             </Button>
             <Text style={Styles.penalty}>+20 minute penalty</Text>
           </View>
         </Carousel>
         <Button block success onPress={ () => this.props.navigation.push('Riddle')}>
-          <Text style={Styles.buttonText}> Found it! </Text>
+          <Text style={Styles.buttonText}>Found it!</Text>
         </Button>
         </View>
     )
   }
-  static navigationOptions = {
-    headerLeft: null,
-    title: "Round " + (photoIndex + 1),
-  }
+  static navigationOptions = ({ navigation }) => ({
+     title: typeof(navigation.state.params)==='undefined' || typeof(navigation.state.params.title) === 'undefined' ? '': navigation.state.params.title
+  })
 }

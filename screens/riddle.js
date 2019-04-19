@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
-import {Button} from 'native-base'
+import { Button } from 'native-base'
 import { huntIndex } from './hunt'
 
 export var photoIndex = 0
@@ -18,7 +18,6 @@ export default class Riddle extends React.Component {
     this.state = {
       photos: require('../photos.json'),
       riddleGuess: '',
-      header: "Solve the Puzzle!",
       message: "Guess",
       nextround: false,
       result: ''
@@ -53,7 +52,6 @@ export default class Riddle extends React.Component {
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.title}> Solve the Puzzle: </Text>
         <Text style={Styles.riddle}> {this.state.photos[huntIndex].hints[photoIndex].riddle} </Text>
         <TextInput
           placeholder={'Type answer here'}
