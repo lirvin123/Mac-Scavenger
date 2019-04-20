@@ -5,7 +5,7 @@ import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
-import { huntIndex } from './hunt'
+import { hunt } from './hunt'
 
 export var photoIndex = 0
 
@@ -26,8 +26,14 @@ export default class Riddle extends React.Component {
 
   press = () => {
     if (this.state.nextRound == true) {
-      setPhotoIndex(photoIndex + 1)
-      this.props.navigation.push("Main")
+      if (photoIndex + 1 == hunt.hints.length){
+        setPhotoIndex(0)
+        return this.props.navigation.navigate('Done')
+      }
+      else {
+        setPhotoIndex(photoIndex + 1)
+        return this.props.navigation.push("Main")
+      }
     }
     else {
       this.checkGuess()
@@ -35,8 +41,8 @@ export default class Riddle extends React.Component {
   }
 
   checkGuess() {
-    if ((this.state.riddleGuess.toLowerCase()).trim() == this.state.photos[huntIndex].hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 > this.state.photos[huntIndex].hints.length) { //Causes an error without this line
+    if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 == hunt.hints.length) { //Causes an error without this line
         this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true })
       }
       else {
@@ -44,20 +50,24 @@ export default class Riddle extends React.Component {
       }
     }
     else {
+      this.textInput.clear()
       this.setState({ message: "Try Again", result: 'Incorrect' })
-
     }
   }
 
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.riddle}> {this.state.photos[huntIndex].hints[photoIndex].riddle} </Text>
+        <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
         <TextInput
-          placeholder={'Type answer here'}
-          onChangeText={(text) => { this.setState({riddleGuess: text}) }}
           autoCorrect={false}
-          style={{ textAlign: 'center' }}>
+          maxLength={50}
+          multiline={true}
+          onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
+          onSelectionChange={ () => this.setState({ result: '' }) }
+          placeholder={'Type answer here'}
+          ref={input => { this.textInput = input }}
+          style={Styles.textInput}>
         </TextInput>
         <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
         <Button block success onPress={this.press}>

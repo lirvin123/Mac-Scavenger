@@ -5,7 +5,7 @@ import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
 
-export var huntIndex
+export var hunt
 
 export default class Hunt extends React.Component {
 
@@ -16,8 +16,8 @@ export default class Hunt extends React.Component {
 
   huntDescription(huntChoice) {
     Alert.alert(
-      this.state.photos[huntChoice].huntName,
-      this.state.photos[huntChoice].description,
+      huntChoice.huntName,
+      huntChoice.description,
       [
         { text: 'Back' },
         { text: 'Play', onPress: () => {this.setHunt(huntChoice)} }
@@ -26,19 +26,22 @@ export default class Hunt extends React.Component {
   }
 
   setHunt(huntChoice) {
-    huntIndex = huntChoice
+    hunt = huntChoice
     this.props.navigation.navigate('Main')
   }
 
   render() {
+
+    var hunts = this.state.photos.map(hunt => (
+      <Button danger block style={Styles.button} onPress={() => this.huntDescription(hunt)} key={hunt.huntName}>
+        <Text style={Styles.buttonText}> {hunt.huntName} </Text>
+      </Button>
+      )
+    )
+
     return (
       <View style={Styles.hunt}>
-        <Button danger block style={Styles.button} onPress={() => this.huntDescription(0)}>
-          <Text style={Styles.buttonText}> {this.state.photos[0].huntName} </Text>
-        </Button>
-        <Button danger block style={Styles.button} onPress={() => this.huntDescription(1)}>
-          <Text style={Styles.buttonText}> {this.state.photos[1].huntName} </Text>
-        </Button>
+        {hunts}
       </View>
     )
   }

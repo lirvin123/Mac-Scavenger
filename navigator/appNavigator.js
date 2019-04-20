@@ -5,11 +5,12 @@ import Riddle from '../screens/riddle'
 import { photoIndex } from '../screens/riddle'
 import Hunt from '../screens/hunt'
 import Done from '../screens/done'
+import { Icon } from 'react-native-elements'
 
 const MainStack = createStackNavigator({
     Main: { screen: Main, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
-    Riddle: { screen: Riddle, navigationOptions: { title: "Solve the Puzzle:" }},
-    Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false }}
+    Riddle: { screen: Riddle, navigationOptions: { title: "Solve the Puzzle:", headerRight: <Icon name="home"/> }},
+    Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false, headerRight: <Icon name="home"/> }}
   }
 )
 

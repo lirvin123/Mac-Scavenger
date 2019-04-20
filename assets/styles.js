@@ -49,6 +49,10 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 40
   },
+  textInput: {
+    textAlign: 'center',
+    fontSize: 30
+  },
    unlockButton: {
      padding: 30,
      position: 'absolute',

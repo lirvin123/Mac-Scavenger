@@ -12,7 +12,7 @@ export default class Done extends React.Component {
     <View style={Styles.hunt}>
       <Text style={Styles.done}> Done! </Text>
       <Text style={Styles.endTime}> End Time: </Text>
-      <Button danger block large onPress={() => this.props.navigation.navigate('Home')} style={Styles.button}>
+      <Button danger block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
         <Text style={Styles.buttonText}> Back to Home </Text>
       </Button>
     </View>

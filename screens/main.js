@@ -8,7 +8,8 @@ import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { Button } from 'native-base'
 import TimerMixin from 'react-timer-mixin'
-import { huntIndex } from './hunt'
+import { hunt } from './hunt'
+import { Icon } from 'react-native-elements'
 
 export default class Main extends React.Component {
 
@@ -22,7 +23,7 @@ export default class Main extends React.Component {
       photos: require('../photos.json'),
       timer: 0,
       timerOn: false,
-      totalDuration: 9000,
+      totalDuration: 9000
     }
   }
 
@@ -39,13 +40,13 @@ export default class Main extends React.Component {
       this.interval = TimerMixin.setInterval(
         () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
         1000
-      );
-      this.state.timerOn = true;
+      )
+      this.state.timerOn = true
     }
   }
 
   giveUp = () => {
-    if (photoIndex + 1 == this.state.photos[huntIndex].hints.length) {
+    if (photoIndex + 1 == hunt.hints.length) {
       setPhotoIndex(0)
       this.setState({ gaveUp: true })
       this.props.navigation.navigate('Done')
@@ -140,12 +141,12 @@ export default class Main extends React.Component {
             bullets={true}>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 1 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 1 }}
               style={{ width: 325, height: 415 }}/>
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 2 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 2 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintOneUnlocked? 0 : 100}/>
             {unlockButtonOne}
@@ -153,7 +154,7 @@ export default class Main extends React.Component {
           </View>
           <View style={Styles.container}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + this.state.photos[huntIndex].hints[photoIndex].pathName + 3 }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 3 }}
               style={{ width: 325, height: 415 }}
               blurRadius={this.state.hintTwoUnlocked? 0 : 100}/>
             {unlockButtonTwo}
@@ -173,6 +174,7 @@ export default class Main extends React.Component {
     )
   }
   static navigationOptions = ({ navigation }) => ({
-     title: typeof(navigation.state.params)==='undefined' || typeof(navigation.state.params.title) === 'undefined' ? '': navigation.state.params.title
-  })
+     title: typeof(navigation.state.params)==='undefined' || typeof(navigation.state.params.title) === 'undefined' ? '': navigation.state.params.title,
+     headerRight: <Icon name="home"/>
+   })
 }
