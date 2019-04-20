@@ -18,8 +18,23 @@ export default class Main extends React.Component {
     this.state = {
       currentIndex: 0,
       gaveUp: false,
-      hintOneUnlocked: false,
-      hintTwoUnlocked: false,
+      hints: [
+        {
+          number: 1,
+          unlocked: true,
+          penalty: 0
+        },
+        {
+          number: 2,
+          unlocked: false,
+          penalty: 5
+        },
+        {
+          number: 3,
+          unlocked: false,
+          penalty: 7
+        }
+      ],
       photos: require('../photos.json'),
       timer: 0,
       timerOn: false,
@@ -58,30 +73,23 @@ export default class Main extends React.Component {
   }
 
   unlock = () => {
-    if (this.state.currentIndex == 1 && this.state.hintOneUnlocked == false) {
-      this.setState({ hintOneUnlocked: true })
-    }
-    else if (this.state.currentIndex == 2 && this.state.hintTwoUnlocked == false) {
-      this.setState({ hintTwoUnlocked: true })
-    }
+    let hints = this.state.hints
+    hints[this.state.currentIndex].unlocked = true
+    this.setState({ hints })
   }
 
   render() {
 
-    var unlockButtonOne
-    var unlockButtonTwo
-    var unlockTextOne
-    var unlockTextTwo
     var seconds = this.state.timer
     var timeWithColons
     var sec = parseInt(seconds)%60
     var min = parseInt(parseInt(seconds)/60)%60
     var hr = parseInt(parseInt(seconds)/3600)
 
-    if (this.state.hintOneUnlocked) {
+    if (this.state.hints[1].unlocked) {
       min += 5
     }
-    if (this.state.hintTwoUnlocked) {
+    if (this.state.hints[2].unlocked) {
       min += 7
     }
     if (this.state.gaveUp) {
@@ -105,33 +113,37 @@ export default class Main extends React.Component {
     timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
     this.startTimer()
 
-    if (!this.state.hintOneUnlocked && !this.state.hintTwoUnlocked) {
-      unlockButtonOne = (
-        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
-            <Text style={Styles.buttonText}>Unlock</Text>
-        </Button>
-      )
-      unlockTextOne = (
-        <Text style={Styles.penalty}>+5 minute penalty</Text>
-      )
-      unlockTextTwo = (
-        <Text style={Styles.penalty}>Unlock previous to access!</Text>
-      )
-    }
-    else if (this.state.hintOneUnlocked && !this.state.hintTwoUnlocked) {
-      unlockButtonTwo = (
-        <Button block warning style={Styles.unlockButton} onPress={this.unlock}>
-              <Text style={Styles.buttonText}>Unlock</Text>
-        </Button>
-      )
-      unlockTextTwo = (
-        <Text style={Styles.penalty}>+7 minute penalty</Text>
-      )
-    }
+    var hints = this.state.hints.map(hint => {
+      if (hint.unlocked == false) {
+        return (
+          <View style={Styles.container} key={"Locked View " + hint.number}>
+            <Image
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+              style={{ width: 325, height: 415 }}
+              blurRadius={100}
+              key={"Locked Image " + hint.number}/>
+            <Button block warning style={Styles.unlockButton} onPress={this.unlock} key={"Unlock Button " + hint.number}>
+              <Text style={Styles.buttonText} key={hint.number}>Unlock</Text>
+            </Button>
+            <Text style={Styles.penalty} key={"Penalty " + hint.number}>{'+ ' + hint.penalty + ' minute penalty'}</Text>
+          </View>
+        )
+      }
+      else {
+        return (
+          <View style={Styles.container} key={"Unlocked View " + hint.number}>
+            <Image
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+              style={{ width: 325, height: 415 }}
+              blurRadius={0}
+              key={"Unlocked Image " + hint.number}/>
+          </View>
+        )
+      }
+    })
 
     return (
-      <View
-          style={Styles.container}>
+      <View style={Styles.container}>
         {timeWithColons}
         <Carousel
             style={{ width: 325, height: 350}}
@@ -139,27 +151,7 @@ export default class Main extends React.Component {
             isLooped={false}
             onAnimateNextPage={(index) => this.changeIndex(index)}
             bullets={true}>
-          <View style={Styles.container}>
-            <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 1 }}
-              style={{ width: 325, height: 415 }}/>
-          </View>
-          <View style={Styles.container}>
-            <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 2 }}
-              style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintOneUnlocked? 0 : 100}/>
-            {unlockButtonOne}
-            {unlockTextOne}
-          </View>
-          <View style={Styles.container}>
-            <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + 3 }}
-              style={{ width: 325, height: 415 }}
-              blurRadius={this.state.hintTwoUnlocked? 0 : 100}/>
-            {unlockButtonTwo}
-            {unlockTextTwo}
-          </View>
+          {hints}
           <View style={Styles.giveUp}>
             <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
               <Text style={Styles.buttonText}>Give Up</Text>
