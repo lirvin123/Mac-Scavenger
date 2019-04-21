@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
-import {Button} from 'native-base'
-import { huntIndex } from './hunt'
+import { Button } from 'native-base'
+import { hunt } from './hunt'
 
 export var photoIndex = 0
 
@@ -18,42 +18,61 @@ export default class Riddle extends React.Component {
     this.state = {
       photos: require('../photos.json'),
       riddleGuess: '',
-      header: "Solve the Puzzle!",
+      message: "Guess",
+      nextround: false,
+      result: ''
     }
   }
 
-  checkGuess = () => {
-    if ((this.state.riddleGuess.toLowerCase()).trim() == this.state.photos[huntIndex].hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 > this.state.photos[huntIndex].hints.length) { //Causes an error without this line
-        this.setState({ riddle: '' })
+  press = () => {
+    if (this.state.nextRound == true) {
+      if (photoIndex + 1 == hunt.hints.length){
+        setPhotoIndex(0)
+        return this.props.navigation.navigate('Done')
       }
-      setPhotoIndex(photoIndex + 1)
-      this.props.navigation.push('Correct')
+      else {
+        setPhotoIndex(photoIndex + 1)
+        return this.props.navigation.push("Main")
+      }
     }
     else {
-      this.props.navigation.push('Incorrect')
+      this.checkGuess()
+    }
+  }
 
+  checkGuess() {
+    if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
+      if (photoIndex + 1 == hunt.hints.length) { //Causes an error without this line
+        this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true })
+      }
+      else {
+        this.setState({ result: 'Correct!', message: "Next Round", nextRound: true })
+      }
+    }
+    else {
+      this.textInput.clear()
+      this.setState({ message: "Try Again", result: 'Incorrect' })
     }
   }
 
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.title}> Solve the Puzzle: </Text>
-        <Text style={Styles.riddle}> {this.state.photos[huntIndex].hints[photoIndex].riddle} </Text>
+        <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
         <TextInput
-          placeholder={'Type answer here'}
-          onChangeText={(text) => { this.setState({riddleGuess: text}) }}
           autoCorrect={false}
-          style={{ textAlign: 'center' }}>
+          maxLength={50}
+          multiline={true}
+          onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
+          onSelectionChange={ () => this.setState({ result: '' }) }
+          placeholder={'Type answer here'}
+          ref={input => { this.textInput = input }}
+          style={Styles.textInput}>
         </TextInput>
-        <Button block success onPress={this.checkGuess}>
-          <Text style={Styles.buttonText}> Guess </Text>
+        <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
+        <Button block success onPress={this.press}>
+          <Text style={Styles.buttonText}> {this.state.message} </Text>
         </Button>
-        <Button block danger onPress={ () => this.props.navigation.goBack() }>
-          <Text style={Styles.buttonText}> Back </Text>
-        </Button>
-
       </View>
     )
   }

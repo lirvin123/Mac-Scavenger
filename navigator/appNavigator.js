@@ -1,21 +1,31 @@
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import Home from '../screens/home'
 import Main from '../screens/main'
 import Riddle from '../screens/riddle'
-import Correct from '../screens/correct'
-import Incorrect from '../screens/incorrect'
+import { photoIndex } from '../screens/riddle'
 import Hunt from '../screens/hunt'
 import Done from '../screens/done'
+import { Icon } from 'react-native-elements'
 
-const AppNavigator = createStackNavigator({
-    Home: { screen: Home, navigationOptions: { header: null } },
-    Riddle: { screen: Riddle, navigationOptions: { header: null } },
-    Main: { screen: Main },
-    Correct: { screen: Correct, navigationOptions: { header: null } },
-    Incorrect: { screen: Incorrect, navigationOptions: { header: null } },
-    Hunt: { screen: Hunt },
-    Done: { screen: Done, navigationOptions: { header: null }}
+const MainStack = createStackNavigator({
+    Main: { screen: Main, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
+    Riddle: { screen: Riddle, navigationOptions: { title: "Solve the Puzzle:", headerRight: <Icon name="home"/> }},
+    Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false, headerRight: <Icon name="home"/> }}
+  }
+)
+
+const Home = createStackNavigator({
+    Hunt: { screen: Hunt, navigationOptions: { title: "Select a Hunt:" }}
+})
+
+const AppNavigator = createStackNavigator(
+  {
+    Hunt: { screen: Home },
+    Main: { screen: MainStack }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
   }
 )
 

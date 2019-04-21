@@ -1,25 +1,23 @@
 import React from 'react'
-import { Alert, AppRegistry, ScrollView, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, Image, Platform } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
-import {Button} from 'native-base'
+import { Button } from 'native-base'
 
-export var huntIndex
+export var hunt
 
 export default class Hunt extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      photos: require('../photos.json'),
-    }
+    this.state = { photos: require('../photos.json') }
   }
 
   huntDescription(huntChoice) {
     Alert.alert(
-      this.state.photos[huntChoice].huntName,
-      this.state.photos[huntChoice].description,
+      huntChoice.huntName,
+      huntChoice.description,
       [
         { text: 'Back' },
         { text: 'Play', onPress: () => {this.setHunt(huntChoice)} }
@@ -28,24 +26,28 @@ export default class Hunt extends React.Component {
   }
 
   setHunt(huntChoice) {
+<<<<<<< HEAD
     huntIndex = huntChoice
     this.props.navigation.navigate('Instructions')
+=======
+    hunt = huntChoice
+    this.props.navigation.navigate('Main')
+>>>>>>> c65b202c3a31bfa8e114772bd2e595ec2891dd61
   }
 
   render() {
+
+    var hunts = this.state.photos.map(hunt => (
+      <Button danger block style={Styles.button} onPress={() => this.huntDescription(hunt)} key={hunt.huntName}>
+        <Text style={Styles.buttonText}> {hunt.huntName} </Text>
+      </Button>
+      )
+    )
+
     return (
-      <View style={Styles.home_Hunt}>
-        <Button danger block style={Styles.button} onPress={() => this.huntDescription(0)}>
-          <Text style={Styles.buttonText}> {this.state.photos[0].huntName} </Text>
-        </Button>
-        <Button danger block style={Styles.button} onPress={() => this.huntDescription(1)}>
-          <Text style={Styles.buttonText}> {this.state.photos[1].huntName} </Text>
-        </Button>
+      <View style={Styles.hunt}>
+        {hunts}
       </View>
     )
-  }
-  static navigationOptions = {
-    headerLeft: null,
-    title: "Select a Hunt:"
   }
 }
