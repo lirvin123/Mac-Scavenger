@@ -29,7 +29,7 @@ export default class Hunt extends React.Component {
 
   setHunt(huntChoice) {
     huntIndex = huntChoice
-    this.props.navigation.navigate('Main')
+    this.props.navigation.navigate('Instructions')
   }
 
   render() {
