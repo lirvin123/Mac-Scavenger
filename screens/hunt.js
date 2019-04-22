@@ -14,31 +14,15 @@ export default class Hunt extends React.Component {
     this.state = { photos: require('../photos.json') }
   }
 
-  huntDescription(huntChoice) {
-    Alert.alert(
-      huntChoice.huntName,
-      huntChoice.description,
-      [
-        { text: 'Back' },
-        { text: 'Play', onPress: () => {this.setHunt(huntChoice)} }
-      ]
-    )
-  }
-
   setHunt(huntChoice) {
-// <<<<<<< HEAD
     hunt = huntChoice
     this.props.navigation.navigate('Instructions')
-// =======
-    // hunt = huntChoice
-    // this.props.navigation.navigate('Main')
-// >>>>>>> c65b202c3a31bfa8e114772bd2e595ec2891dd61
   }
 
   render() {
 
     var hunts = this.state.photos.map(hunt => (
-      <Button danger block style={Styles.button} onPress={() => this.huntDescription(hunt)} key={hunt.huntName}>
+      <Button danger block style={Styles.button} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
         <Text style={Styles.buttonText}> {hunt.huntName} </Text>
       </Button>
       )

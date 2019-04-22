@@ -9,7 +9,6 @@ import Instructions from '../screens/instructions'
 import { Icon } from 'react-native-elements'
 
 const MainStack = createStackNavigator({
-    Instructions : {screen: Instructions, navigationOptions:{header: null, gesturesEnabled: false}},
     Main: { screen: Main, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
     Riddle: { screen: Riddle, navigationOptions: { title: "Solve the Puzzle:", headerRight: <Icon name="home"/> }},
     Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false, headerRight: <Icon name="home"/> }}
@@ -17,7 +16,8 @@ const MainStack = createStackNavigator({
 )
 
 const Home = createStackNavigator({
-    Hunt: { screen: Hunt, navigationOptions: { title: "Select a Hunt:" }}
+    Hunt: { screen: Hunt, navigationOptions: { title: "Select a Hunt:", headerBackTitle: "Back" }},
+    Instructions : { screen: Instructions, navigationOptions: { headerBackTitle: "Back"} }
 })
 
 const AppNavigator = createStackNavigator(
