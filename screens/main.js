@@ -115,7 +115,20 @@ export default class Main extends React.Component {
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
-        return (
+        if (hint.number == 3 && this.state.hints[1].unlocked == false){
+          return (
+            <View style={Styles.container} key={"Locked View " + hint.number}>
+              <Image
+                source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+                style={{ width: 325, height: 415 }}
+                blurRadius={100}
+                key={"Locked Image " + hint.number}/>
+              <Text style={Styles.penalty} key={"Hint 3 Message"}>Unlock Previous to Access!</Text>
+            </View>
+          )
+        }
+        else {
+          return (
           <View style={Styles.container} key={"Locked View " + hint.number}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
@@ -127,7 +140,8 @@ export default class Main extends React.Component {
             </Button>
             <Text style={Styles.penalty} key={"Penalty " + hint.number}>{'+ ' + hint.penalty + ' minute penalty'}</Text>
           </View>
-        )
+          )
+        }
       }
       else {
         return (
