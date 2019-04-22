@@ -4,6 +4,7 @@ import { WebBrowser } from 'expo'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import {Button} from 'native-base'
+import {Photos} from '../photos.json'
 
 export default class Instructions extends React.Component {
 

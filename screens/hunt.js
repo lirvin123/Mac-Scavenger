@@ -26,13 +26,13 @@ export default class Hunt extends React.Component {
   }
 
   setHunt(huntChoice) {
-<<<<<<< HEAD
-    huntIndex = huntChoice
-    this.props.navigation.navigate('Instructions')
-=======
+// <<<<<<< HEAD
     hunt = huntChoice
-    this.props.navigation.navigate('Main')
->>>>>>> c65b202c3a31bfa8e114772bd2e595ec2891dd61
+    this.props.navigation.navigate('Instructions')
+// =======
+    // hunt = huntChoice
+    // this.props.navigation.navigate('Main')
+// >>>>>>> c65b202c3a31bfa8e114772bd2e595ec2891dd61
   }
 
   render() {
