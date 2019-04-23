@@ -1,7 +1,8 @@
 [
   {
     "huntName": "Feeling Thirsty?",
-    "description": "hello",
+    "description": "I hope you’re thirsty, cause you can find a drink of water at every location.",
+    "geographicrange": "entire campus",
     "hints": [
       {
         "name": "Don't Break the Rules",
@@ -14,12 +15,12 @@
         "name": "Where in the Mac",
         "pathName": "v1555260491/30Mac",
         "hints": 3,
-        "riddle": "What is the number behind the water fountain?",
+        "riddle": "Face the water fountain. Turn around. What number do you see?",
         "riddleAnswer": "142"
       },
       {
         "name": "Really Cool Art",
-        "pathName": "/v1554926592/coolart", 
+        "pathName": "/v1554926592/coolart",
         "hints": 3,
         "riddle": "Turn into the water fountain area. Look at the door at the end of the hall. What's the third word on the plaque?",
         "riddleAnswer": "resource"
