@@ -1,3 +1,4 @@
 https://stackoverflow.com/questions/43039719/undefined-is-not-a-object-in-this-state-reactnative (binding function)
 https://stackoverflow.com/questions/45837208/react-navigation-re-render-previous-page-when-going-back (componentDidMount code)
 https://stackoverflow.com/questions/42831685/disable-back-button-in-react-navigation (back button)
+https://stackoverflow.com/questions/49284669/how-do-you-disable-swipe-down-to-close-on-the-modal-component-in-react-native (Fixing modal swipe gestures)

@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { Alert, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
 import { hunt } from './hunt'
+import { Icon } from 'react-native-elements'
 
 export var photoIndex = 0
 
@@ -22,6 +23,17 @@ export default class Riddle extends React.Component {
       nextround: false,
       result: ''
     }
+  }
+
+  backToHome = () => {
+    Alert.alert(
+      "Are you Sure?",
+      "Your game will be lost",
+      [
+        { text: 'Cancel' },
+        { text: 'Home', onPress: () => {this.props.navigation.navigate('Hunt')} }
+      ]
+    )
   }
 
   press = () => {
@@ -55,6 +67,12 @@ export default class Riddle extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({ backToHome: this.backToHome })
+  }
+
+
+
   render() {
     return (
       <View style={Styles.container}>
@@ -74,5 +92,11 @@ export default class Riddle extends React.Component {
         </Button>
       </View>
     )
+  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: "Solve the Puzzle:",
+      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>)
+    }
   }
 }

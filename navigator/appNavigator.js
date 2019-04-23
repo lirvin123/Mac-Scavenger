@@ -10,8 +10,13 @@ import { Icon } from 'react-native-elements'
 
 const MainStack = createStackNavigator({
     Main: { screen: Main, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
-    Riddle: { screen: Riddle, navigationOptions: { title: "Solve the Puzzle:", headerRight: <Icon name="home"/> }},
+    Riddle: { screen: Riddle},
     Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false, headerRight: <Icon name="home"/> }}
+  },
+  {
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   }
 )
 

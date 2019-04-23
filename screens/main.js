@@ -47,7 +47,12 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1) })
+    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
+  }
+
+  componentWillUnmount() {
+    setPhotoIndex(0)
+    clearInterval(this.interval)
   }
 
   startTimer() {
@@ -58,6 +63,17 @@ export default class Main extends React.Component {
       )
       this.state.timerOn = true
     }
+  }
+
+  backToHome = () => {
+    Alert.alert(
+      "Are you Sure?",
+      "Your game will be lost",
+      [
+        { text: 'Cancel' },
+        { text: 'Home', onPress: () => {this.props.navigation.navigate('Hunt')} }
+      ]
+    )
   }
 
   giveUp = () => {
@@ -179,8 +195,10 @@ export default class Main extends React.Component {
         </View>
     )
   }
-  static navigationOptions = ({ navigation }) => ({
-     title: typeof(navigation.state.params)==='undefined' || typeof(navigation.state.params.title) === 'undefined' ? '': navigation.state.params.title,
-     headerRight: <Icon name="home"/>
-   })
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: navigation.getParam('title'),
+      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>)
+    }
+  }
 }
