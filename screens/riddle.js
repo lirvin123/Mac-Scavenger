@@ -61,8 +61,7 @@ export default class Riddle extends React.Component {
         <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
         <TextInput
           autoCorrect={false}
-          maxLength={50}
-          multiline={true}
+          maxLength={25}
           onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
           onSelectionChange={ () => this.setState({ result: '' }) }
           placeholder={'Type answer here'}
