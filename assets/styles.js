@@ -67,8 +67,8 @@ export default StyleSheet.create({
      justifyContent: 'center',
      alignItems: 'center',
      position: 'absolute',
-     top: 100,
-     left: 90   //not sure if this is a permanent solution
+     alignSelf: 'center',
+     bottom: '60%'
    },
    huntButton: {
      textAlign: 'center',
