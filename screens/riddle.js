@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Text, TextInput, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
@@ -54,7 +54,7 @@ export default class Riddle extends React.Component {
 
   checkGuess() {
     if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 == hunt.hints.length) { //Causes an error without this line
+      if (photoIndex + 1 == hunt.hints.length) {
         this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true })
       }
       else {
@@ -71,25 +71,35 @@ export default class Riddle extends React.Component {
     this.props.navigation.setParams({ backToHome: this.backToHome })
   }
 
-
-
   render() {
-    return (
-      <View style={Styles.container}>
-        <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
-        <TextInput
-          autoCorrect={false}
-          maxLength={25}
-          onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
-          onSelectionChange={ () => this.setState({ result: '' }) }
-          placeholder={'Type answer here'}
-          ref={input => { this.textInput = input }}
-          style={Styles.textInput}>
-        </TextInput>
-        <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
+
+    var button
+
+    if (this.state.nextRound == true) {
+      button = (
         <Button block success onPress={this.press}>
           <Text style={Styles.buttonText}> {this.state.message} </Text>
         </Button>
+      )
+    }
+
+    return (
+      <View style={Styles.container}>
+        <KeyboardAvoidingView style={Styles.container} behavior="padding" enabled>
+          <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
+          <TextInput
+            autoCorrect={false}
+            maxLength={25}
+            onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
+            onSelectionChange={ () => this.setState({ result: '' }) }
+            placeholder={'Type answer here'}
+            ref={input => { this.textInput = input }}
+            style={Styles.textInput}
+            onSubmitEditing={this.press}>
+          </TextInput>
+        </KeyboardAvoidingView>
+        <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
+        {button}
       </View>
     )
   }

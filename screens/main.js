@@ -132,7 +132,7 @@ export default class Main extends React.Component {
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
-        if (hint.number == 3 && this.state.hints[1].unlocked == false){
+        if (hint.number == 3 && this.state.hints[1].unlocked == false) {
           return (
             <View style={Styles.container} key={"Locked View " + hint.number}>
               <Image

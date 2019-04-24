@@ -6,14 +6,14 @@
     "hints": [
       {
         "name": "Don't Break the Rules",
-        "pathName": "v1554921434/locker",
+        "pathName": "c_scale,q_auto:eco,w_354/v1554921434/locker",
         "hints": 3,
         "riddle": "What is the number of the very bottom locker?",
         "riddleAnswer": "42"
       },
       {
         "name": "Where in the Mac",
-        "pathName": "v1555260491/30Mac",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555260491/30Mac",
         "hints": 3,
         "riddle": "Face the water fountain. Turn around. What number do you see?",
         "riddleAnswer": "142"
@@ -27,42 +27,42 @@
       },
       {
         "name": "AHHHHHHH",
-        "pathName": "v1555097471/scary",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555097471/scary",
         "hints": 3,
         "riddle": "What's the name of this creature?",
         "riddleAnswer": "messor cephalotes"
       },
       {
         "name": "Interesting photos...",
-        "pathName": "v1555262173/reallyinteresting",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555262173/reallyinteresting",
         "hints": 3,
         "riddle": "Fill in the blank: Macalester Under the ____",
         "riddleAnswer": "microscope"
       },
       {
         "name": "Are you Alive?",
-        "pathName": "v1555260538/Skelly",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555260538/Skelly",
         "hints": 3,
         "riddle": "Glass Ceilings & how many Hour Couples?",
         "riddleAnswer": "100"
       },
       {
         "name": "Words Words Words",
-        "pathName": "v1555260699/AnnSneed",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555260699/AnnSneed",
         "hints": 3,
         "riddle": "What is the word in the most bottom-right corner?",
         "riddleAnswer": "ploeg"
       },
       {
         "name": "Run Run Run",
-        "pathName": "v1555260733/LC",
+        "pathName": "c_scale,q_auto:eco,w_354/v1555260733/LC",
         "hints": 3,
         "riddle": "What Year is this Time Capsule from?",
         "riddleAnswer": "1924"
       },
       {
         "name": "Dewey Decimal",
-        "pathName": "v1554925396/z",
+        "pathName": "c_scale,q_auto:eco,w_354/v1554925396/z",
         "hints": 3,
         "riddle": "Enter the last number on the plaque",
         "riddleAnswer": "5"
@@ -74,7 +74,7 @@
     "hints": [
       {
         "name": "Mural",
-        "pathName": "v1553979151/mural",
+        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
         "hints": 3,
         "riddle": "What building is this artwork in?",
         "riddleAnswer": "kagin"
