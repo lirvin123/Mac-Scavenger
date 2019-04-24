@@ -6,11 +6,37 @@ import Styles from '../assets/styles'
 import {Button} from 'native-base'
 import { hunt } from './hunt'
 import Photos from '../photos.json'
+import TimerMixin from 'react-timer-mixin'
+
+export var seconds
 
 export default class Instructions extends React.Component {
 
-  render() {
+  constructor(props) {
+    super(props)
+    this.state = {
+      timer: 0,
+      timerOn: false
+    }
+  }
 
+  startTimer() {
+    if(!this.state.timerOn) {
+      this.interval = TimerMixin.setInterval(
+        () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
+        1000
+      )
+      this.state.timerOn = true
+    }
+  }
+
+  startHunt(){
+   this.startTimer();
+   this.props.navigation.navigate('Main');
+  }
+
+  render() {
+    seconds = 8
     return (
     <View style={Styles.hunt}>
       <Text style={Styles.riddle}> {"Welcome to " + '\"' + hunt.huntName + '\"' } </Text>
@@ -20,7 +46,7 @@ export default class Instructions extends React.Component {
       <Text style={{fontSize: 15, textAlign: "center"}}>  Unlocking the second photo will add 5 minutes to your timer,
                                                           and unlocking the third photo will add 10 minutes to your timer
                                                           Giving up will add twenty minutes to your timer.</Text>
-      <Button danger block large onPress={() => this.props.navigation.navigate('Main')} style={Styles.button}>
+      <Button danger block large onPress={this.startHunt.bind(this)} style={Styles.button}>
         <Text style={Styles.buttonText}> Start: timer will start immediately </Text>
       </Button>
     </View>

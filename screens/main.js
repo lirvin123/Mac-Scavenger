@@ -10,6 +10,7 @@ import { Button } from 'native-base'
 import TimerMixin from 'react-timer-mixin'
 import { hunt } from './hunt'
 import { Icon } from 'react-native-elements'
+import { seconds } from './instructions'
 
 export default class Main extends React.Component {
 
@@ -96,7 +97,7 @@ export default class Main extends React.Component {
 
   render() {
 
-    var seconds = this.state.timer
+    //var seconds = this.state.timer
     var timeWithColons
     var sec = parseInt(seconds)%60
     var min = parseInt(parseInt(seconds)/60)%60
@@ -127,7 +128,7 @@ export default class Main extends React.Component {
     }
 
     timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
-    this.startTimer()
+    //this.startTimer()
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
