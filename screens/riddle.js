@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Keyboard, KeyboardAvoidingView, ScrollView, Text, TextInput, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, ScrollView, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Main from './main'
@@ -85,7 +85,7 @@ export default class Riddle extends React.Component {
 
     return (
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <KeyboardAvoidingView style={Styles.container} behavior="padding" enabled>
+        <KeyboardAvoidingView style={Styles.container} behavior="height" enabled>
           <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
           <TextInput
             autoCorrect={false}

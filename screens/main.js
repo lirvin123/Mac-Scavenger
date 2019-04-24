@@ -85,6 +85,7 @@ export default class Main extends React.Component {
     }
     else {
       setPhotoIndex(photoIndex + 1)
+      this.setState({ gaveUp: true })
       this.props.navigation.push('Main')
     }
   }
@@ -142,7 +143,7 @@ export default class Main extends React.Component {
                 style={{ width: 325, height: 415 }}
                 blurRadius={100}
                 key={"Locked Image " + hint.number}/>
-              <Text style={Styles.penalty} key={"Hint 3 Message"}>Unlock Previous to Access!</Text>
+              <Text style={Styles.message} key={"Hint 3 Message"}>Unlock Previous to Access!</Text>
             </View>
           )
         }

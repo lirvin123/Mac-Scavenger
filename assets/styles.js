@@ -30,7 +30,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'gray',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   hunt: {
     flex: 1,
@@ -43,7 +43,16 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     position: 'absolute',
-    top: 200
+    top: "60%"
+  },
+  message: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '50%'
   },
   riddle: {
     textAlign: 'center',
@@ -55,8 +64,10 @@ export default StyleSheet.create({
   },
    unlockButton: {
      padding: 30,
+     justifyContent: 'center',
+     alignItems: 'center',
      position: 'absolute',
-     top: 100,
-     left: 90   //not sure if this is a permanent solution
-   }
+     alignSelf: 'center',
+     bottom: '60%'
+  }
 })

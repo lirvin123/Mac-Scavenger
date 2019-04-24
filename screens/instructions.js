@@ -31,8 +31,8 @@ export default class Instructions extends React.Component {
   }
 
   startHunt(){
-   this.startTimer();
-   this.props.navigation.navigate('Main');
+   this.startTimer()
+   this.props.navigation.navigate('Main')
   }
 
   render() {
