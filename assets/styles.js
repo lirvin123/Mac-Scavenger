@@ -5,7 +5,7 @@ export default StyleSheet.create({
   button: {
     padding: 20,
     alignSelf: 'center',
-    margin: 10
+    margin: 10,
   },
   buttonText: {
     color: '#fff',
@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#66ccff',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -58,5 +58,20 @@ export default StyleSheet.create({
      position: 'absolute',
      top: 100,
      left: 90   //not sure if this is a permanent solution
+   },
+   huntButton: {
+     textAlign: 'center',
+     fontSize: 30,
+     flex: 6,
+     margin: 10
+   },
+   starTimer: {
+     textAlign: 'center',
+     fontSize: 20
+   },
+   instructions: {
+     flex: 1,
+     backgroundColor: '#66ff66',
+     justifyContent: 'space-around',
    }
 })
