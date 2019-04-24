@@ -22,14 +22,14 @@ export default class Hunt extends React.Component {
   render() {
 
     var hunts = this.state.photos.map(hunt => (
-      <Button danger block style={Styles.button} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
+      <Button danger block style={Styles.huntButton} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
         <Text style={Styles.buttonText}> {hunt.huntName} </Text>
       </Button>
       )
     )
 
     return (
-      <View style={Styles.hunt}>
+      <View style={Styles.instructions}>
         {hunts}
       </View>
     )

@@ -1,7 +1,7 @@
 [
   {
     "huntName": "Feeling Thirsty?",
-    "description": "I hope you’re thirsty, cause you can find a drink of water at every location.",
+    "description": "I hope you’re thirsty, 'cause you can find a drink of water at every location!",
     "geographicrange": "entire campus",
     "hints": [
       {
@@ -69,7 +69,31 @@
       }]
   },
   {
-    "huntName": "Other Hunt",
+    "huntName": "Lily's Hunt",
+    "description": "Just for testing!",
+    "hints": [
+      {
+        "name": "Mural",
+        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "hints": 3,
+        "riddle": "What building is this artwork in?",
+        "riddleAnswer": "kagin"
+      }]
+  },
+  {
+    "huntName": "Ryan's Hunt",
+    "description": "Just for testing!",
+    "hints": [
+      {
+        "name": "Mural",
+        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "hints": 3,
+        "riddle": "What building is this artwork in?",
+        "riddleAnswer": "kagin"
+      }]
+  },
+  {
+    "huntName": "Maddie's Hunt",
     "description": "Just for testing!",
     "hints": [
       {
