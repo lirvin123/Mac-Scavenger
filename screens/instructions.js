@@ -8,7 +8,7 @@ import { hunt } from './hunt'
 import Photos from '../photos.json'
 import TimerMixin from 'react-timer-mixin'
 
-export var seconds
+export var count
 
 export default class Instructions extends React.Component {
 
@@ -36,7 +36,7 @@ export default class Instructions extends React.Component {
   }
 
   render() {
-    seconds = 8
+    count = this.state.timer
     return (
     <View style={Styles.hunt}>
       <Text style={Styles.riddle}> {"Welcome to " + '\"' + hunt.huntName + '\"' } </Text>
