@@ -20,6 +20,14 @@ export default class Instructions extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({ title: hunt.huntName })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
   startTimer() {
     if(!this.state.timerOn) {
       this.interval = TimerMixin.setInterval(
@@ -39,17 +47,22 @@ export default class Instructions extends React.Component {
     count = this.state.timer
     return (
     <View style={Styles.instructions}>
-      <Text style={Styles.riddle}> {"Welcome to " + '\"' + hunt.huntName + '\"' } </Text>
-      <Text style={{fontSize: 30, margin: 10, textAlign: "left"}}> {hunt.description}  </Text>
-      <Text style={{fontSize: 25, textAlign: "center"}}> {"Rounds:" + hunt.hints.length} </Text>
-      <Text style={{fontSize: 25, textAlign: "center"}}> {"Geographic Range:" + hunt.geographicrange}  </Text>
-      <Text style={{fontSize: 20, margin: 10, textAlign: "left"}}> Unlocking the second photo will add 5 minutes to your timer. </Text>
-      <Text style={{fontSize: 20, margin: 10, textAlign: "left"}}> Unlocking the third photo will add 10 minutes to your timer. </Text>
-      <Text style={{fontSize: 20, margin: 10, textAlign: "left"}}> Giving up will add twenty minutes to your timer. </Text>
-      <Button danger block large onPress={this.startHunt.bind(this)} style={Styles.button}>
-        <Text style={Styles.starTimer}> Start: timer will immediately begin </Text>
+      <Text style={{fontSize: 30, margin: 20, textAlign: "center", color: 'green'}}> {hunt.description}  </Text>
+      <Text style={{fontSize: 25, textAlign: "center", color: 'green'}}> {"Rounds: " + hunt.hints.length} </Text>
+      <Text style={{fontSize: 25, textAlign: "center", color: 'green'}}> {"Geographic Range: " + hunt.geographicrange}  </Text>
+      <Text style={{fontSize: 20, margin: 20, textAlign: "left", color: 'green'}}> Unlocking the second photo will add 5 minutes to your timer. </Text>
+      <Text style={{fontSize: 20, margin: 20, textAlign: "left", color: 'green'}}> Unlocking the third photo will add 10 minutes to your timer. </Text>
+      <Text style={{fontSize: 20, margin: 20, textAlign: "left", color: 'green'}}> Giving up will add twenty minutes to your timer. </Text>
+      <Text style={{fontSize: 20, margin: 20, textAlign: "center", color: 'green'}}>Timer will begin once you hit start!</Text>
+      <Button success block large onPress={this.startHunt.bind(this)} style={{margin: 20}}>
+        <Text style={Styles.startTimer}>Start</Text>
       </Button>
     </View>
      )
+   }
+   static navigationOptions = ({ navigation }) => {
+     return {
+       headerTitle: navigation.getParam('title'),
+     }
    }
  }

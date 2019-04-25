@@ -71,18 +71,17 @@ export default StyleSheet.create({
      bottom: '60%'
    },
    huntButton: {
-     textAlign: 'center',
-     fontSize: 30,
-     flex: 6,
-     margin: 10
+     flex: 1,
+     margin: 20,
    },
-   starTimer: {
+   startTimer: {
      textAlign: 'center',
-     fontSize: 20
+     fontSize: 40,
+     color: '#fff'
    },
    instructions: {
-     flex: 1,
-     backgroundColor: '#66ff66',
+     flex: 1.75,
+     backgroundColor: '#fff',
      justifyContent: 'space-around',
    }
 })
