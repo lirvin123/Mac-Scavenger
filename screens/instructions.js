@@ -85,7 +85,7 @@ export default class Instructions extends React.Component {
               <Text style={{fontSize: 25, fontWeight: 'normal'}}> your overall time!</Text>
             </Text>
           }/>
-      <Text style={{fontSize: 20, marginVertical: 10, marginHorizontal: 20, textAlign: "center"}}>Your time begin once you click start!</Text>
+      <Text style={{fontSize: 20, marginVertical: 10, marginHorizontal: 20, textAlign: "center"}}>Your time begins once you click start!</Text>
       <Button success block large onPress={this.startHunt.bind(this)} style={{margin: 20}}>
         <Text style={Styles.startTimer}>Start</Text>
       </Button>
