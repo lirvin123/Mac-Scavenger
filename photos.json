@@ -3,7 +3,7 @@
     "huntName": "Feeling Thirsty?",
     "description": "I hope you’re thirsty, 'cause you can find a drink of water at every location!",
     "geographicrange": "Entire campus",
-    "color": "lightskyblue",
+    "color": "#239090",
     "hints": [
       {
         "name": "Don't Break the Rules",
