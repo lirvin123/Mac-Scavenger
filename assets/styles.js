@@ -81,12 +81,12 @@ export default StyleSheet.create({
    },
    instructions: {
      flex: 1,
-     backgroundColor: '#fff',
+     backgroundColor: '#B5E1E2',
      justifyContent: 'space-around',
    },
    huntScreen: {
      flex: 1.75,
-     backgroundColor: '#fff',
+     backgroundColor: '#B5E1E2',
      justifyContent: 'space-around',
    }
 })
