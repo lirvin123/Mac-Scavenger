@@ -54,6 +54,7 @@ export default class Instructions extends React.Component {
       <Text style={{fontSize: 20, marginVertical: 10, marginHorizontal: 20, textAlign: 'center'}}>{hunt.description}</Text>
       <ListItem
         leftIcon={{name: "image"}}
+        containerStyle={{backgroundColor: "#B5E1E2"}}
         pad={16}
         marginHorizontal={30}
         marginBottom={-5}
@@ -64,6 +65,7 @@ export default class Instructions extends React.Component {
         }/>
       <ListItem
         leftIcon={{name: "room"}}
+        containerStyle={{backgroundColor: "#B5E1E2"}}
         pad={16}
         marginHorizontal={30}
         marginBottom={-5}
@@ -74,6 +76,7 @@ export default class Instructions extends React.Component {
         }/>
         <ListItem
           leftIcon={{name: "schedule"}}
+          containerStyle={{backgroundColor: "#B5E1E2"}}
           pad={16}
           marginHorizontal={30}
           marginBottom={-5}

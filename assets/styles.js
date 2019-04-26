@@ -88,5 +88,6 @@ export default StyleSheet.create({
      flex: 1.75,
      backgroundColor: '#B5E1E2',
      justifyContent: 'space-around',
+     marginVertical: 20
    }
 })
