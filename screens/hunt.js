@@ -35,7 +35,7 @@ export default class Hunt extends React.Component {
             {hunts}
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: 350, height:200}} source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/c_scale,q_auto:eco,w_472/v1556203715/school-building-icon-outline-style-vector-9798104.jpg'}}></Image>
+          <Image style={{position: 'absolute', bottom: '0%', width: 425, height:250}} source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}></Image>
         </View>
       </View>
     )
