@@ -30,12 +30,12 @@ export default class Hunt extends React.Component {
     )
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
         <View style={Styles.huntScreen}>
             {hunts}
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: 425, height:250}} source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}></Image>
+          <Image style={{position: 'absolute', bottom: '0%', width: 425, height:250, marginTop: 10}} source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}></Image>
         </View>
       </View>
     )
