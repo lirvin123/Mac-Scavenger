@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#66ccff',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -80,6 +80,11 @@ export default StyleSheet.create({
      color: '#fff'
    },
    instructions: {
+     flex: 1,
+     backgroundColor: '#fff',
+     justifyContent: 'space-around',
+   },
+   huntScreen: {
      flex: 1.75,
      backgroundColor: '#fff',
      justifyContent: 'space-around',

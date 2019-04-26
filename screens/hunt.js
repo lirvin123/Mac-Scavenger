@@ -31,7 +31,7 @@ export default class Hunt extends React.Component {
 
     return (
       <View style={{flex: 1}}>
-        <View style={Styles.instructions}>
+        <View style={Styles.huntScreen}>
             {hunts}
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>

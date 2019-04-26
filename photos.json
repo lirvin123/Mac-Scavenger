@@ -3,6 +3,7 @@
     "huntName": "Feeling Thirsty?",
     "description": "I hope you’re thirsty, 'cause you can find a drink of water at every location!",
     "geographicrange": "entire campus",
+    "color": "lightskyblue",
     "hints": [
       {
         "name": "Don't Break the Rules",
@@ -71,6 +72,8 @@
   {
     "huntName": "Lily's Hunt",
     "description": "Just for testing!",
+    "geographicrange": "Builidings open 24-hours",
+    "color": "darkblue",
     "hints": [
       {
         "name": "Mural",
@@ -83,6 +86,7 @@
   {
     "huntName": "Ryan's Hunt",
     "description": "Just for testing!",
+    "color": "hotpink",
     "hints": [
       {
         "name": "Mural",
@@ -95,6 +99,7 @@
   {
     "huntName": "Maddie's Hunt",
     "description": "Just for testing!",
+    "color": "mediumseagreen",
     "hints": [
       {
         "name": "Mural",

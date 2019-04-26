@@ -84,7 +84,7 @@ export default class Riddle extends React.Component {
     }
 
     return (
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={Styles.container}>
         <KeyboardAvoidingView style={Styles.container} behavior="height" enabled>
           <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
           <TextInput
