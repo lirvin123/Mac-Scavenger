@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#B5E1E2',
     alignItems: 'center',
     justifyContent: 'space-around',
   },

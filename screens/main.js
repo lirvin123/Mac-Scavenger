@@ -143,7 +143,9 @@ export default class Main extends React.Component {
                 style={{ width: 325, height: 415 }}
                 blurRadius={100}
                 key={"Locked Image " + hint.number}/>
-              <Text style={Styles.message} key={"Hint 3 Message"}>Unlock Previous to Access!</Text>
+              <Text style={Styles.message} key={"Hint 3 Message"}>
+                  Unlock Previous to Access!
+              </Text>
             </View>
           )
         }
@@ -155,10 +157,13 @@ export default class Main extends React.Component {
               style={{ width: 325, height: 415 }}
               blurRadius={100}
               key={"Locked Image " + hint.number}/>
-            <Button block warning style={Styles.unlockButton} onPress={this.unlock} key={"Unlock Button " + hint.number}>
+            <Button block warning style={Styles.unlockButton}
+                    onPress={this.unlock} key={"Unlock Button " + hint.number}>
               <Text style={Styles.buttonText} key={hint.number}>Unlock</Text>
             </Button>
-            <Text style={Styles.penalty} key={"Penalty " + hint.number}>{'+ ' + hint.penalty + ' minute penalty'}</Text>
+            <Text style={Styles.penalty} key={"Penalty " + hint.number}>
+                  {'+ ' + hint.penalty + ' minute penalty'}
+            </Text>
           </View>
           )
         }
@@ -180,20 +185,26 @@ export default class Main extends React.Component {
       <View style={Styles.container}>
         {timeWithColons}
         <Carousel
-            style={{ width: 325, height: 350}}
+            style={{ width: 325, height: 415}}
             autoplay={false}
             isLooped={false}
             onAnimateNextPage={(index) => this.changeIndex(index)}
             bullets={true}>
           {hints}
-          <View style={Styles.giveUp}>
-            <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
+          <View style={Styles.container}>
+          <Image
+            source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}
+            style={{ width: 325, height: 415 }}
+            blurRadius={100}/>
+            <Button block danger style={Styles.unlockButton}
+                    onPress={this.giveUp}>
               <Text style={Styles.buttonText}>Give Up</Text>
             </Button>
             <Text style={Styles.penalty}>+20 minute penalty</Text>
           </View>
         </Carousel>
-        <Button block success onPress={ () => this.props.navigation.push('Riddle')}>
+        <Button block large success style={{margin:20}}
+                onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}>Found it!</Text>
         </Button>
         </View>

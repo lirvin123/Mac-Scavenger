@@ -77,8 +77,14 @@ export default class Riddle extends React.Component {
 
     if (this.state.nextRound == true) {
       button = (
-        <Button block success onPress={this.press}>
+        <Button block large success style={{margin:20}} onPress={this.press}>
           <Text style={Styles.buttonText}> {this.state.message} </Text>
+        </Button>
+      )
+    }else{
+      button = (
+        <Button block large success style={{margin:20, marginVertical:60}} onPress={this.press}>
+          <Text style={Styles.buttonText}> Guess </Text>
         </Button>
       )
     }
