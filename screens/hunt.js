@@ -4,7 +4,7 @@ import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export var hunt
 
@@ -24,7 +24,7 @@ export default class Hunt extends React.Component {
 
     var hunts = this.state.photos.map(hunt => (
       <Button block success style={Styles.huntButton} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
-        <Text style={{color: '#fff', fontSize: 30}}> {hunt.huntName} </Text>
+        <Text style={Styles.buttonText}> {hunt.huntName} </Text>
       </Button>
       )
     )
@@ -35,11 +35,16 @@ export default class Hunt extends React.Component {
             {hunts}
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: '100%', height:'110%'}}
+          <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}>
           </Image>
         </View>
       </View>
     )
+  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: { backgroundColor: '#B5E1E2' }
+    }
   }
 }

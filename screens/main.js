@@ -7,10 +7,10 @@ import Photos from '../photos.json'
 import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { Button } from 'native-base'
-import TimerMixin from 'react-timer-mixin'
 import { hunt } from './hunt'
 import { Icon } from 'react-native-elements'
-import { count } from './instructions'
+import { start, setStart } from './instructions'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default class Main extends React.Component {
 
@@ -36,10 +36,9 @@ export default class Main extends React.Component {
           penalty: 7
         }
       ],
+      seconds: (new Date().getTime() - start) / 1000,
       photos: require('../photos.json'),
-      timer: 0,
-      timerOn: false,
-      totalDuration: 9000
+      timerOn: false
     }
   }
 
@@ -49,6 +48,7 @@ export default class Main extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
+    this.startTimer()
   }
 
   componentWillUnmount() {
@@ -58,8 +58,8 @@ export default class Main extends React.Component {
 
   startTimer() {
     if(!this.state.timerOn) {
-      this.interval = TimerMixin.setInterval(
-        () => this.setState((prevState)=> ({ timer: prevState.timer + 1 })),
+      this.interval = setInterval(
+        () => this.setState(() => ({ seconds: (new Date().getTime() - start) / 1000 })),
         1000
       )
       this.state.timerOn = true
@@ -72,7 +72,7 @@ export default class Main extends React.Component {
       "Your game will be lost",
       [
         { text: 'Cancel' },
-        { text: 'Home', onPress: () => {this.props.navigation.navigate('Hunt')} }
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
       ]
     )
   }
@@ -81,11 +81,13 @@ export default class Main extends React.Component {
     if (photoIndex + 1 == hunt.hints.length) {
       setPhotoIndex(0)
       this.setState({ gaveUp: true })
+      setStart(start - 1200000)
       this.props.navigation.navigate('Done')
     }
     else {
       setPhotoIndex(photoIndex + 1)
       this.setState({ gaveUp: true })
+      setStart(start - 1200000)
       this.props.navigation.push('Main')
     }
   }
@@ -94,27 +96,15 @@ export default class Main extends React.Component {
     let hints = this.state.hints
     hints[this.state.currentIndex].unlocked = true
     this.setState({ hints })
+    setStart(start - (hints[this.state.currentIndex].penalty * 60000))
   }
 
   render() {
 
-    //var seconds = this.state.timer
-    seconds = count //+ this.state.timer/2
-    //seconds += this.state.timer
     var timeWithColons
-    var sec = parseInt(seconds)%60
-    var min = parseInt(parseInt(seconds)/60)%60
-    var hr = parseInt(parseInt(seconds)/3600)
-
-    if (this.state.hints[1].unlocked) {
-      min += 5
-    }
-    if (this.state.hints[2].unlocked) {
-      min += 7
-    }
-    if (this.state.gaveUp) {
-      min += 20
-    }
+    var sec = parseInt(this.state.seconds)%60
+    var min = parseInt(parseInt(this.state.seconds)/60)%60
+    var hr = parseInt(parseInt(this.state.seconds)/3600)
 
     minString = min.toString()
     secString = sec.toString()
@@ -130,31 +120,28 @@ export default class Main extends React.Component {
       hrString = '0' + hr.toString()
     }
 
-    timeWithColons = <Text style={{ fontSize: 30 }}> {hrString} : {minString} : {secString} </Text>
-    this.startTimer()
+    timeWithColons = <Text style={Styles.timer}> {hrString} : {minString} : {secString} </Text>
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
         if (hint.number == 3 && this.state.hints[1].unlocked == false) {
           return (
-            <View style={Styles.container} key={"Locked View " + hint.number}>
+            <View style={Styles.main} key={"Locked View " + hint.number}>
               <Image
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
-                style={{ width: 325, height: 415 }}
+                style={Styles.photo}
                 blurRadius={100}
                 key={"Locked Image " + hint.number}/>
-              <Text style={Styles.message} key={"Hint 3 Message"}>
-                  Unlock Previous to Access!
-              </Text>
+              <Text style={Styles.message} key={"Hint 3 Message"}>Unlock Previous to Access!</Text>
             </View>
           )
         }
         else {
           return (
-          <View style={Styles.container} key={"Locked View " + hint.number}>
+          <View style={Styles.main} key={"Locked View " + hint.number}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
-              style={{ width: 325, height: 415 }}
+              style={Styles.photo}
               blurRadius={100}
               key={"Locked Image " + hint.number}/>
             <Button block warning style={Styles.unlockButton}
@@ -170,10 +157,10 @@ export default class Main extends React.Component {
       }
       else {
         return (
-          <View style={Styles.container} key={"Unlocked View " + hint.number}>
+          <View style={Styles.main} key={"Unlocked View " + hint.number}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
-              style={{ width: 325, height: 415 }}
+              style={Styles.photo}
               blurRadius={0}
               key={"Unlocked Image " + hint.number}/>
           </View>
@@ -182,19 +169,19 @@ export default class Main extends React.Component {
     })
 
     return (
-      <View style={Styles.container}>
+      <View style={Styles.main}>
         {timeWithColons}
         <Carousel
-            style={{ width: 325, height: 415}}
+            style={Styles.photo}
             autoplay={false}
             isLooped={false}
             onAnimateNextPage={(index) => this.changeIndex(index)}
             bullets={true}>
           {hints}
-          <View style={Styles.container}>
+          <View style={Styles.main}>
           <Image
             source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}
-            style={{ width: 325, height: 415 }}
+            style={Styles.photo}
             blurRadius={100}/>
             <Button block danger style={Styles.unlockButton}
                     onPress={this.giveUp}>
@@ -203,7 +190,7 @@ export default class Main extends React.Component {
             <Text style={Styles.penalty}>+20 minute penalty</Text>
           </View>
         </Carousel>
-        <Button block large success style={{margin:20}}
+        <Button block large success style={Styles.foundIt}
                 onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}>Found it!</Text>
         </Button>
@@ -213,7 +200,8 @@ export default class Main extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('title'),
-      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>)
+      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>),
+      headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }
 }

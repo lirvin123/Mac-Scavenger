@@ -21,7 +21,8 @@ export default class Riddle extends React.Component {
       riddleGuess: '',
       message: "Guess",
       nextround: false,
-      result: ''
+      result: '',
+      icon: 'help'
     }
   }
 
@@ -55,15 +56,15 @@ export default class Riddle extends React.Component {
   checkGuess() {
     if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
       if (photoIndex + 1 == hunt.hints.length) {
-        this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true })
+        this.setState({ riddle: '', result: 'Correct!', message: "Finish", nextRound: true, icon: 'check' })
       }
       else {
-        this.setState({ result: 'Correct!', message: "Next Round", nextRound: true })
+        this.setState({ result: 'Correct!', message: "Next Round", nextRound: true, icon: 'check' })
       }
     }
     else {
       this.textInput.clear()
-      this.setState({ message: "Try Again", result: 'Incorrect' })
+      this.setState({ message: "Try Again", result: 'Incorrect', icon: "clear" })
     }
   }
 
@@ -77,42 +78,45 @@ export default class Riddle extends React.Component {
 
     if (this.state.nextRound == true) {
       button = (
-        <Button block large success style={{margin:20}} onPress={this.press}>
+        <Button block large success style={Styles.foundIt} onPress={this.press}>
           <Text style={Styles.buttonText}> {this.state.message} </Text>
         </Button>
       )
     }else{
       button = (
-        <Button block large success style={{margin:20, marginVertical:60}} onPress={this.press}>
+        <Button block large success style={Styles.foundIt} onPress={this.press}>
           <Text style={Styles.buttonText}> Guess </Text>
         </Button>
       )
     }
 
     return (
-      <ScrollView contentContainerStyle={Styles.container}>
-        <KeyboardAvoidingView style={Styles.container} behavior="height" enabled>
-          <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
+      <View style={Styles.riddleScreen}>
+        <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center'}} >
           <TextInput
             autoCorrect={false}
+            autoFocus={true}
             maxLength={25}
             onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
             onSelectionChange={ () => this.setState({ result: '' }) }
             placeholder={'Type answer here'}
             ref={input => { this.textInput = input }}
-            style={Styles.textInput}
-            onSubmitEditing={this.press}>
+            style={Styles.textInput}>
           </TextInput>
-        </KeyboardAvoidingView>
-        <Text style={{ fontSize: 35, color: this.state.nextRound ? "green" : "red" }}>{this.state.result}</Text>
-        {button}
-      </ScrollView>
+          <Icon name={this.state.icon}></Icon>
+        </View>
+        <View style={{flex: 1, justifyContent: 'flex-start'}}>
+          {button}
+        </View>
+      </View>
     )
   }
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Solve the Puzzle:",
-      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>)
+      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>),
+      headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }
 }
