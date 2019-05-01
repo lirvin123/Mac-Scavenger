@@ -82,13 +82,11 @@ export default class Main extends React.Component {
   giveUp = () => {
     if (photoIndex + 1 == hunt.hints.length) {
       setPhotoIndex(0)
-      this.setState({ gaveUp: true })
       setStart(start - 1200000)
       this.props.navigation.navigate('Done')
     }
     else {
       setPhotoIndex(photoIndex + 1)
-      this.setState({ gaveUp: true })
       setStart(start - 1200000)
       this.props.navigation.push('Main')
     }

@@ -4,6 +4,7 @@ import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
+import { Icon } from 'react-native-elements'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export var hunt
@@ -15,9 +16,28 @@ export default class Hunt extends React.Component {
     this.state = { photos: require('../photos.json') }
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({ toScores: this.toScores })
+  }
+
   setHunt(huntChoice) {
     hunt = huntChoice
     this.props.navigation.navigate('Instructions')
+  }
+
+  backToHome = () => {
+    Alert.alert(
+      "Are you Sure?",
+      "Your game will be lost",
+      [
+        { text: 'Cancel' },
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
+      ]
+    )
+  }
+
+  toScores = () => {
+    this.props.navigation.navigate('HighScores')
   }
 
   render() {
@@ -44,7 +64,8 @@ export default class Hunt extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      headerStyle: { backgroundColor: '#B5E1E2' }
+      headerStyle: { backgroundColor: '#B5E1E2' },
+      headerRight: (<Icon name="home" onPress={navigation.getParam('toScores')}/>),
+      }
     }
   }
-}

@@ -1,12 +1,29 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { AsyncStorage, Text, View } from 'react-native'
 import { WebBrowser } from 'expo'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
 import { elapsedTime } from './main'
+import { hunt } from './hunt'
 
 export default class Done extends React.Component {
+
+  componentDidMount() {
+    this.storeItem(hunt.huntName, elapsedTime)
+  }
+
+  async storeItem(key, item) {
+    try {
+      const score = await async.AsyncStorage.getItem(key)
+      if (score == null) {
+        var storedItem = await async.AsyncStorage.setItem(key, item.toString())
+      }
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
 
   render() {
     return (

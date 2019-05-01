@@ -6,6 +6,7 @@ import { photoIndex } from '../screens/riddle'
 import Hunt from '../screens/hunt'
 import Done from '../screens/done'
 import Instructions from '../screens/instructions'
+import HighScores from '../screens/highScores'
 import { Icon } from 'react-native-elements'
 
 const MainStack = createStackNavigator({
@@ -25,9 +26,14 @@ const Home = createStackNavigator({
     Instructions : { screen: Instructions, navigationOptions: { headerBackTitle: "Back"} }
 })
 
+const Scores = createStackNavigator({
+    HighScores: { screen: HighScores }
+})
+
 const AppNavigator = createStackNavigator(
   {
     Hunt: { screen: Home },
+    HighScores: { screen: Scores },
     Main: { screen: MainStack }
   },
   {
