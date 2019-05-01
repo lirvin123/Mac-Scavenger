@@ -4,6 +4,7 @@ import { WebBrowser } from 'expo'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
+import { elapsedTime } from './main'
 
 export default class Done extends React.Component {
 
@@ -11,7 +12,7 @@ export default class Done extends React.Component {
     return (
     <View style={Styles.hunt}>
       <Text style={Styles.done}> Done! </Text>
-      <Text style={Styles.endTime}> End Time: </Text>
+      <Text style={Styles.endTime}> {'End Time: ' + elapsedTime} </Text>
       <Button danger block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
         <Text style={Styles.buttonText}> Back to Home </Text>
       </Button>

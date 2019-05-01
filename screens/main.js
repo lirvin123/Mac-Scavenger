@@ -12,6 +12,8 @@ import { Icon } from 'react-native-elements'
 import { start, setStart } from './instructions'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
+export var elapsedTime
+
 export default class Main extends React.Component {
 
   constructor(props) {
@@ -102,6 +104,7 @@ export default class Main extends React.Component {
   render() {
 
     var timeWithColons
+
     var sec = parseInt(this.state.seconds)%60
     var min = parseInt(parseInt(this.state.seconds)/60)%60
     var hr = parseInt(parseInt(this.state.seconds)/3600)
@@ -121,6 +124,7 @@ export default class Main extends React.Component {
     }
 
     timeWithColons = <Text style={Styles.timer}> {hrString} : {minString} : {secString} </Text>
+    elapsedTime = hrString + ':' + minString + ':' + secString
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {

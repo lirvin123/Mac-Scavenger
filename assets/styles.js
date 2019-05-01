@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import RF from "react-native-responsive-fontsize"
 
 export default StyleSheet.create({
   areaView: {
@@ -15,7 +16,7 @@ export default StyleSheet.create({
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: hp('5%'),
+    fontSize: RF(4.25),
     alignSelf: 'center'
   },
   done: {
@@ -37,6 +38,12 @@ export default StyleSheet.create({
     backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'space-around',
+  },
+  guess: {
+    width: wp('90%'),
+    height: hp('8%'),
+    alignSelf: 'center',
+    paddingHorizontal: hp('3.5%')
   },
   hunt: {
     flex: 1,
@@ -95,13 +102,17 @@ export default StyleSheet.create({
   },
   riddle: {
     textAlign: 'center',
-    fontSize: 40
+    fontSize: RF(4.25),
+    alignSelf: 'center',
+    maxHeight: hp('20%'),
+    paddingHorizontal: hp('3%')
   },
   riddleScreen: {
-    flex: 1,
+    flex: .55,
     backgroundColor: '#B5E1E2',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    paddingHorizontal: wp('5%')
   },
   rules: {
     textAlign: 'left',
@@ -130,8 +141,10 @@ export default StyleSheet.create({
     marginHorizontal: wp('5%')
   },
   textInput: {
+    flex: 1,
     textAlign: 'center',
-    fontSize: 30
+    fontSize: RF(4.25),
+    alignSelf: 'flex-start'
   },
   timer: {
     fontSize: hp('4%'),
