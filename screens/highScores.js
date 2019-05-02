@@ -24,7 +24,7 @@ export default class HighScores extends React.Component {
     try {
       const retrievedItem = await AsyncStorage.getItem(key)
       if (retrievedItem == null) {
-        return "Not Yet Complete"
+        return "--"
       }
       const item = retrievedItem.toString()
       return item
@@ -57,8 +57,8 @@ export default class HighScores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Scores",
-      headerRight: (<Icon name="home" onPress={navigation.getParam('Hunt')}/>),
+      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }
-  }
+}

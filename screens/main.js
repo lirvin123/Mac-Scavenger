@@ -58,6 +58,15 @@ export default class Main extends React.Component {
     clearInterval(this.interval)
   }
 
+  formatTime(time) {
+    var timeInt = parseInt(time)%60
+    var timeStr = timeInt.toString()
+    if (timeInt < 10) {
+      timeInt = '0' + timeInt.toString()
+    }
+    return timeInt
+  }
+
   startTimer() {
     if(!this.state.timerOn) {
       this.interval = setInterval(
@@ -82,8 +91,8 @@ export default class Main extends React.Component {
   giveUp = () => {
     if (photoIndex + 1 == hunt.hints.length) {
       setPhotoIndex(0)
-      setStart(start - 1200000)
       this.props.navigation.navigate('Done')
+      elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime((this.state.seconds + 1200) / 60) + ':' + this.formatTime(this.state.seconds)
     }
     else {
       setPhotoIndex(photoIndex + 1)
@@ -104,25 +113,11 @@ export default class Main extends React.Component {
     var timeWithColons
 
     var sec = parseInt(this.state.seconds)%60
-    var min = parseInt(parseInt(this.state.seconds)/60)%60
-    var hr = parseInt(parseInt(this.state.seconds)/3600)
+    var min = parseInt((this.state.seconds)/60)%60
+    var hr = parseInt((this.state.seconds)/3600)%60
 
-    minString = min.toString()
-    secString = sec.toString()
-    hrString = hr.toString()
-
-    if (sec < 10) {
-      secString = '0' + sec.toString()
-    }
-    if (min < 10) {
-      minString = '0' + min.toString()
-    }
-    if (hr < 10) {
-      hrString = '0' + hr.toString()
-    }
-
-    timeWithColons = <Text style={Styles.timer}> {hrString} : {minString} : {secString} </Text>
-    elapsedTime = hrString + ':' + minString + ':' + secString
+    timeWithColons = <Text style={Styles.timer}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
+    elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime(this.state.seconds / 60) + ':' + this.formatTime(this.state.seconds)
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
@@ -202,7 +197,7 @@ export default class Main extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('title'),
-      headerRight: (<Icon name="home" onPress={navigation.getParam('backToHome')}/>),
+      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }

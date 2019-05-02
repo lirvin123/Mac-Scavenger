@@ -65,7 +65,7 @@ export default class Hunt extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: { backgroundColor: '#B5E1E2' },
-      headerRight: (<Icon name="home" onPress={navigation.getParam('toScores')}/>),
+      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
       }
     }
   }

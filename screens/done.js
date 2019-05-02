@@ -15,9 +15,9 @@ export default class Done extends React.Component {
 
   async storeItem(key, item) {
     try {
-      const score = await async.AsyncStorage.getItem(key)
+      const score = await AsyncStorage.getItem(key)
       if (score == null) {
-        var storedItem = await async.AsyncStorage.setItem(key, item.toString())
+        var storedItem = await AsyncStorage.setItem(key, item.toString())
       }
     }
     catch (error) {
