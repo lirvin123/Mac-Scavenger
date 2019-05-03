@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Image, Text, View } from 'react-native'
+import { Alert, AsyncStorage, Image, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
@@ -13,7 +13,10 @@ export default class Hunt extends React.Component {
 
   constructor() {
     super()
-    this.state = { photos: require('../photos.json') }
+    this.state = {
+      photos: require('../photos.json'),
+      icons: 'check-box'
+    }
   }
 
   componentDidMount() {
@@ -44,6 +47,7 @@ export default class Hunt extends React.Component {
 
     var hunts = this.state.photos.map(hunt => (
       <Button block success style={Styles.huntButton} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
+        <Icon name={this.state.icons} color='white' iconStyle={{ marginLeft: 20, marginRight: 10}}/>
         <Text style={Styles.buttonText}> {hunt.huntName} </Text>
       </Button>
       )
@@ -65,7 +69,7 @@ export default class Hunt extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: { backgroundColor: '#B5E1E2' },
-      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
+      headerRight: (<Icon name="list" underlayColor='#B5E1E2' iconStyle={{paddingHorizontal: 5}} onPress={navigation.getParam('toScores')}/>),
       }
     }
   }

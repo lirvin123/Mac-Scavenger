@@ -1,8 +1,7 @@
 import React from 'react'
-import { Alert, Dimensions, KeyboardAvoidingView, ScrollView, Text, TextInput, View } from 'react-native'
+import { Alert, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
-import Main from './main'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
 import { hunt } from './hunt'
@@ -18,14 +17,13 @@ export default class Riddle extends React.Component {
   constructor() {
     super()
     this.state = {
+      answered: false,
       photos: require('../photos.json'),
       riddleGuess: '',
       message: "Guess",
-      nextround: false,
-      result: '',
-      icon: 'help'
+      nextRound: false,
+      icon: ''
     }
-    this.width = Dimensions.get('window').width
   }
 
   backToHome = () => {
@@ -34,12 +32,13 @@ export default class Riddle extends React.Component {
       "Your game will be lost",
       [
         { text: 'Cancel' },
-        { text: 'Home', onPress: () => {this.props.navigation.navigate('Hunt')} }
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
       ]
     )
   }
 
   press = () => {
+    this.setState({ answered: true })
     if (this.state.nextRound == true) {
       if (photoIndex + 1 == hunt.hints.length){
         setPhotoIndex(0)
@@ -66,7 +65,7 @@ export default class Riddle extends React.Component {
     }
     else {
       this.textInput.clear()
-      this.setState({ icon: "clear" })
+      this.setState({ icon: "clear", riddleGuess: '' })
     }
   }
 
@@ -84,14 +83,15 @@ export default class Riddle extends React.Component {
             <TextInput
               autoCorrect={false}
               autoFocus={true}
+              editable={this.state.nextRound ? false : true}
               maxLength={30}
               onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
-              onSelectionChange={ () => this.setState({ result: '' }) }
+              onSelectionChange={() => this.setState({ answered: false })}
               placeholder={'Type answer here'}
               ref={input => { this.textInput = input }}
               style={Styles.textInput}>
             </TextInput>
-            <Icon name={this.state.icon} style={{ alignSelf: 'center'}}></Icon>
+            {this.state.answered ? (<Icon name={this.state.icon} iconStyle={{ alignSelf: 'center'}}></Icon>) : null}
           </View>
           <Button block large success style={Styles.guess} onPress={this.press}>
             <Text style={Styles.buttonText}> {this.state.message} </Text>
@@ -103,7 +103,7 @@ export default class Riddle extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Solve the Puzzle:",
-      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerRight: (<Icon name="home" iconStyle={{paddingHorizontal: 5}} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }

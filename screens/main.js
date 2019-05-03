@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert, Text, View, Image } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
-import { BlurView } from 'expo'
+import { BlurView, Font } from 'expo'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { photoIndex, setPhotoIndex } from './riddle'
@@ -20,6 +20,7 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       currentIndex: 0,
+      fontLoaded: false,
       gaveUp: false,
       hints: [
         {
@@ -48,9 +49,14 @@ export default class Main extends React.Component {
     this.setState({ currentIndex: index })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
     this.startTimer()
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({ 'RobotoMono-Light': require('../assets/RobotoMono-Light.ttf'), })
+    this.setState({ fontLoaded: true })
   }
 
   componentWillUnmount() {
@@ -116,7 +122,7 @@ export default class Main extends React.Component {
     var min = parseInt((this.state.seconds)/60)%60
     var hr = parseInt((this.state.seconds)/3600)%60
 
-    timeWithColons = <Text style={Styles.timer}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
+    timeWithColons = <Text style={{ fontSize: hp('3.5%'), fontFamily: 'RobotoMono-Light' }}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
     elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime(this.state.seconds / 60) + ':' + this.formatTime(this.state.seconds)
 
     var hints = this.state.hints.map(hint => {
@@ -167,7 +173,7 @@ export default class Main extends React.Component {
 
     return (
       <View style={Styles.main}>
-        {timeWithColons}
+        {this.state.fontLoaded ? (timeWithColons) : null}
         <Carousel
             style={Styles.photo}
             autoplay={false}
@@ -197,7 +203,7 @@ export default class Main extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('title'),
-      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerRight: (<Icon name="home" iconStyle={{paddingHorizontal: 5}} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }

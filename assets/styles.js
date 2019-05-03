@@ -55,7 +55,8 @@ export default StyleSheet.create({
     flex: 1,
     margin: wp('5%'),
     width: wp('90%'),
-    alignSelf: 'center'
+    alignSelf: 'center',
+    justifyContent: 'flex-start'
   },
   huntDescription: {
     fontSize: hp('2.75%'),
@@ -145,10 +146,6 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: RF(4.25),
     alignSelf: 'flex-start'
-  },
-  timer: {
-    fontSize: hp('4%'),
-    fontWeight: '200'
   },
   title: {
     fontSize: hp('5%'),

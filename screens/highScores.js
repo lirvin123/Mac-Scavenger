@@ -30,7 +30,7 @@ export default class HighScores extends React.Component {
       return item
     }
     catch (error) {
-      console.log(error)
+      return "??"
     }
   }
 
@@ -57,7 +57,7 @@ export default class HighScores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Scores",
-      headerRight: (<Icon name="home" underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
+      headerRight: (<Icon name="home" underlayColor='#B5E1E2' iconStyle={{paddingHorizontal: 5}} onPress={navigation.getParam('Hunt')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
   }
