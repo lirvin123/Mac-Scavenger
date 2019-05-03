@@ -9,13 +9,47 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 export var hunt
 
+export var setHunt = (choice) => {hunt = choice}
+
 export default class Hunt extends React.Component {
 
   constructor() {
     super()
+    let photos = require('../photos.json')
+    let icons = photos.map((hunt) => {
+      this.getIcon(hunt.huntName).then((completed) => {
+        this.updateIcon(hunt.huntName, completed)
+      })
+      return { huntName: hunt.huntName, completed: '' }
+    })
     this.state = {
-      photos: require('../photos.json'),
-      icons: 'check-box'
+      photos,
+      icons
+    }
+  }
+
+  updateIcon(huntName, completed) {
+    let icons = this.state.icons
+    for (var hunt of icons) {
+      if (hunt.huntName === huntName) {
+        hunt.completed = completed
+      }
+    }
+    this.setState({ icons })
+  }
+
+  async getIcon(key) {
+    try {
+      let value = await AsyncStorage.getItem(key)
+      if (value != null) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    catch (error) {
+      return '??'
     }
   }
 
@@ -23,8 +57,12 @@ export default class Hunt extends React.Component {
     this.props.navigation.setParams({ toScores: this.toScores })
   }
 
-  setHunt(huntChoice) {
-    hunt = huntChoice
+  setHunt(name) {
+    for (var hunt of this.state.photos) {
+      if (hunt.huntName === name) {
+        setHunt(hunt)
+      }
+    }
     this.props.navigation.navigate('Instructions')
   }
 
@@ -45,9 +83,9 @@ export default class Hunt extends React.Component {
 
   render() {
 
-    var hunts = this.state.photos.map(hunt => (
-      <Button block success style={Styles.huntButton} onPress={() => this.setHunt(hunt)} key={hunt.huntName}>
-        <Icon name={this.state.icons} color='white' iconStyle={{ marginLeft: 20, marginRight: 10}}/>
+    let hunts = this.state.icons.map(hunt => (
+      <Button block success style={Styles.huntButton} onPress={() => this.setHunt(hunt.huntName)} key={hunt.huntName}>
+        <Icon name={hunt.completed ? 'check-box' : 'check-box-outline-blank'} color='white' iconStyle={{ marginLeft: 20, marginRight: 10}}/>
         <Text style={Styles.buttonText}> {hunt.huntName} </Text>
       </Button>
       )

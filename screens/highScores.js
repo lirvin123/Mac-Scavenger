@@ -40,7 +40,7 @@ export default class HighScores extends React.Component {
     try {
       const retrievedItem = await AsyncStorage.getItem(key)
       if (retrievedItem == null) {
-        return "—"
+        return "—" 
       }
       const item = retrievedItem.toString()
       return item
