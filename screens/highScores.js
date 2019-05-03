@@ -11,20 +11,36 @@ export default class HighScores extends React.Component {
 
   constructor() {
     super()
+
+    let photos = require('../photos.json')
+    let times = photos.map((hunt) => {
+      this.retrieveItem(hunt.huntName).then((value) => {
+        this.updateTime(hunt.huntName, value)
+      })
+      return { huntName: hunt.huntName, time: '' }
+    });
+
     this.state = {
-      photos: require('../photos.json'),
+      photos,
+      times
     }
-    this.retrieveItem('Feeling Thirsty?').then((value) => {this.setState({ baoScore: value })})
-    this.retrieveItem("Lily's Hunt").then((value) => {this.setState({ lilyScore: value })})
-    this.retrieveItem("Ryan's Hunt").then((value) => {this.setState({ ryanScore: value })})
-    this.retrieveItem("Maddie's Hunt").then((value) => {this.setState({ maddieScore: value })})
+  }
+
+  updateTime(huntName, time) {
+    let newTimes = this.state.times
+    for (var existingTime of newTimes) {
+      if (existingTime.huntName === huntName) {
+        existingTime.time = time
+      }
+    }
+    this.setState({ times: newTimes })
   }
 
   async retrieveItem(key) {
     try {
       const retrievedItem = await AsyncStorage.getItem(key)
       if (retrievedItem == null) {
-        return "--"
+        return "—"
       }
       const item = retrievedItem.toString()
       return item
@@ -44,19 +60,20 @@ export default class HighScores extends React.Component {
 
   render() {
 
+    let times = this.state.times.map((hunt, index) =>
+      <Text key={hunt.huntName}>{index + 1}. {hunt.huntName}: {hunt.time}</Text>
+    )
+
     return (
     <View style={{ flex: 1, backgroundColor: "#B5E1E2" }}>
-      <Text>{'1. Feeling Thirsty?: ' + this.state.baoScore}</Text>
-      <Text>{'2. Lily\'s Hunt: ' + this.state.lilyScore}</Text>
-      <Text>{'3. Ryan\'s Hunt: ' + this.state.ryanScore}</Text>
-      <Text>{'4. Maddie\'s Hunt: ' + this.state.maddieScore}</Text>
-      <Text>Note: Only first score will be recorded</Text>
+      {times}
+      <Text>Note: Only first Time will be recorded</Text>
     </View>
      )
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: "Scores",
+      headerTitle: "Times",
       headerRight: (<Icon name="home" underlayColor='#B5E1E2' iconStyle={{paddingHorizontal: 5}} onPress={navigation.getParam('Hunt')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' }
     }
