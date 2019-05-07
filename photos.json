@@ -84,17 +84,82 @@
       }]
   },
   {
-    "huntName": "Ryan's Hunt",
-    "description": "Just for testing!",
+    "huntName": "Ol' Ridiculous Fun",
+    "description": "Get ready to prove your STEM-cred in this hunt!",
+    "geographicrange": "Olin Rice",
     "color": "hotpink",
     "hints": [
       {
-        "name": "Mural",
-        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "name": "Brick Staircase",
+        "pathName": "q_auto:eco/v1557260371/BrickStaircase",
         "hints": 3,
-        "riddle": "What building is this artwork in?",
-        "riddleAnswer": "kagin"
-      }]
+        "riddle": "What is the company on the sticker on the gray thing to your left?",
+        "riddleAnswer": "thunder group"
+      },
+      {
+        "name": "Custodial",
+        "pathName": "q_auto:eco/v1557261190/Custodial",
+        "hints": 3,
+        "riddle": "What is the code on the lock?",
+        "riddleAnswer": "xxa21"
+      },
+      {
+        "name": "Roof",
+        "pathName": "q_auto:eco/v1557261539/Roof",
+        "hints": 3,
+        "riddle": "What should you not stand/walk on?",
+        "riddleAnswer": "ductwork"
+      },
+      {
+        "name": "Math Bear",
+        "pathName": "q_auto:eco/v1557262232/MathBear",
+        "hints": 3,
+        "riddle": "Who won the James Flack Norris Award?",
+        "riddleAnswer": "a truman schwartz"
+      },
+      {
+        "name": "Physics Award",
+        "pathName": "q_auto:eco/v1557262845/PhysicsAward",
+        "hints": 3,
+        "riddle": "Who was the winner of the 1998 Russel B. Hastings Award?",
+        "riddleAnswer": "dmitri jajich"
+      },
+      {
+        "name": "River Delta",
+        "pathName": "q_auto:eco/v1557263274/RiverDelta",
+        "hints": 3,
+        "riddle": "What river delta is this?",
+        "riddleAnswer": "colorado"
+      },
+      {
+        "name": "Orca",
+        "pathName": "q_auto:eco/v1557263579/Orca",
+        "hints": 3,
+        "riddle": "What is the scientific name for this?",
+        "riddleAnswer": "orcinus orca"
+      },
+      {
+        "name": "The Great Outdoors",
+        "pathName": "q_auto:eco/v1557264356/GreatOutdoors",
+        "hints": 3,
+        "riddle:": "1/2 ______ year old diorite",
+        "riddleAnswer": "billion"
+      },
+      {
+        "name": "Security",
+        "pathName": "q_auto:eco/v1557264904/SecuritySystem",
+        "hints": 3,
+        "riddle": "What company made this?",
+        "riddleAnswer": "simplex"
+      },
+      {
+        "name": "Cycles",
+        "pathName": "q_auto:eco/v1557265209/Cycles",
+        "hints": 3,
+        "riddle": "What is the name of this piece art?",
+        "riddleAnswer": "cycles"
+      }
+    ]
   },
   {
     "huntName": "Maddie's Hunt",

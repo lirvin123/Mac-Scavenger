@@ -3,7 +3,7 @@
 To run the project:
 
 1.) Clone the git repo
-2.) Download Expo CLI (npm install expo-cli --global in terminal/command line)
+2.) Download Expo CLI npm install expo-cli --global in terminal/command line
       a.) At this point it may make you get an account, but if it doesn't
           you should make one anyway and make sure that you are logged in
 3.) Download Expo Client on your phone, or get a iOS or android device
@@ -11,7 +11,6 @@ To run the project:
       a.) You should also log into your account on your phone
 4.) In the terminal, navigate to the folder where the project exists
 5.) install (npm install) the following libraries:
-        react-timer-mixin
         native-base
         react-native elements
         react-native-responsive-screens
