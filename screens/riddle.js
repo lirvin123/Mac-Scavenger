@@ -103,7 +103,7 @@ export default class Riddle extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Solve the Puzzle:",
-      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 15 }}underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 5 }}underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' },
       headerTitleStyle: {textAlign: 'center', width: '90%'}
     }

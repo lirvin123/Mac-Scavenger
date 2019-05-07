@@ -1,5 +1,6 @@
 import React from 'react'
 import { Alert, AsyncStorage, Image, Text, View } from 'react-native'
+import { NavigationEvents } from 'react-navigation'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import Photos from '../photos.json'
@@ -15,46 +16,40 @@ export default class Hunt extends React.Component {
 
   constructor() {
     super()
-    let photos = require('../photos.json')
-    let icons = photos.map((hunt) => {
-      this.getIcon(hunt.huntName).then((completed) => {
+    this.state = {
+      photos: require('../photos.json'),
+      huntList: []
+    }
+  }
+
+  loadHunts() {
+    let huntList = this.state.photos.map((hunt) => {
+      this.getCompletedState(hunt.huntName).then((completed) => {
         this.updateIcon(hunt.huntName, completed)
       })
       return { huntName: hunt.huntName, completed: '' }
     })
-    this.state = {
-      photos,
-      icons
-    }
+    this.setState({ huntList })
   }
 
   updateIcon(huntName, completed) {
-    let icons = this.state.icons
-    for (var hunt of icons) {
+    let huntList = this.state.huntList
+    for (var hunt of huntList) {
       if (hunt.huntName === huntName) {
         hunt.completed = completed
       }
     }
-    this.setState({ icons })
+    this.setState({ huntList })
   }
 
-  async getIcon(key) {
+  async getCompletedState(key) {
     try {
       let value = await AsyncStorage.getItem(key)
-      if (value != null) {
-        return true
-      }
-      else {
-        return false
-      }
+      return (value != null)
     }
     catch (error) {
       return '??'
     }
-  }
-
-  componentWillMount() {
-    this.forceUpdate()
   }
 
   componentDidMount() {
@@ -70,24 +65,13 @@ export default class Hunt extends React.Component {
     this.props.navigation.navigate('Instructions')
   }
 
-  backToHome = () => {
-    Alert.alert(
-      "Are you Sure?",
-      "Your game will be lost",
-      [
-        { text: 'Cancel' },
-        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
-      ]
-    )
-  }
-
   toScores = () => {
     this.props.navigation.navigate('HighScores')
   }
 
   render() {
 
-    let hunts = this.state.icons.map(hunt => (
+    let hunts = this.state.huntList.map(hunt => (
       <Button block success style={Styles.huntButton} onPress={() => this.setHunt(hunt.huntName)} key={hunt.huntName}>
         <Icon name={hunt.completed ? 'check-box' : 'check-box-outline-blank'} color='white' iconStyle={{ marginLeft: 20, marginRight: 10}}/>
         <Text style={Styles.buttonText}> {hunt.huntName} </Text>
@@ -97,6 +81,7 @@ export default class Hunt extends React.Component {
 
     return (
       <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
+        <NavigationEvents onWillFocus={ payload => this.loadHunts() } />
         <View style={Styles.huntScreen}>
             {hunts}
         </View>
@@ -111,7 +96,7 @@ export default class Hunt extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: { backgroundColor: '#B5E1E2' },
-      headerRight: (<Icon name="list" iconStyle={{ paddingHorizontal: 15 }} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
+      headerRight: (<Icon name="list" iconStyle={{ paddingHorizontal: 5 }} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' },
       headerTitleStyle: {textAlign: 'center', width: '105%'}
       }
