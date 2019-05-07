@@ -1,11 +1,12 @@
 import React from 'react'
-import { AsyncStorage, Text, View } from 'react-native'
+import { AsyncStorage, Text, View, SafeAreaView, Image } from 'react-native'
 import { WebBrowser } from 'expo'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
 import { Icon } from 'react-native-elements'
 import Photos from '../photos.json'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default class HighScores extends React.Component {
 
@@ -17,7 +18,7 @@ export default class HighScores extends React.Component {
       this.retrieveItem(hunt.huntName).then((value) => {
         this.updateTime(hunt.huntName, value)
       })
-      return { huntName: hunt.huntName, time: '' }
+      return { huntName: hunt.huntName, time: '', color: hunt.color }
     });
 
     this.state = {
@@ -40,7 +41,7 @@ export default class HighScores extends React.Component {
     try {
       const retrievedItem = await AsyncStorage.getItem(key)
       if (retrievedItem == null) {
-        return "—" 
+        return "PLAY TO FIND OUT!"
       }
       const item = retrievedItem.toString()
       return item
@@ -61,21 +62,32 @@ export default class HighScores extends React.Component {
   render() {
 
     let times = this.state.times.map((hunt, index) =>
-      <Text key={hunt.huntName}>{index + 1}. {hunt.huntName}: {hunt.time}</Text>
+      <View>
+        <Text style={{fontSize: hp('5%'), color: hunt.color, textAlign: 'center', fontWeight: 'bold', marginVertical: hp('0.5%')}} key={hunt.huntName}>{hunt.huntName}</Text>
+        <Text style={Styles.times} key={hunt.huntName}>{hunt.time}</Text>
+      </View>
     )
 
     return (
-    <View style={{ flex: 1, backgroundColor: "#B5E1E2" }}>
-      {times}
-      <Text>Note: Only first Time will be recorded</Text>
-    </View>
+      <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
+        <View style={Styles.huntScreen}>
+            {times}
+            <Text style={{textAlign: 'center'}}> ** Only the first time played will be displayed **</Text>
+        </View>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
+                source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}>
+          </Image>
+        </View>
+      </View>
+
      )
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: "Times",
-      headerRight: (<Icon name="home" underlayColor='#B5E1E2' iconStyle={{paddingHorizontal: 5}} onPress={navigation.getParam('Hunt')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' }
+      headerTitle: 'Times',
+      headerStyle: { backgroundColor: '#B5E1E2' },
+      headerTitleStyle: {textAlign: 'center', width: '90%'}
     }
   }
 }

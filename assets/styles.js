@@ -152,6 +152,17 @@ export default StyleSheet.create({
     fontSize: RF(4.25),
     alignSelf: 'flex-start'
   },
+  times:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: hp('0.5%')
+  },
+  huntTimes: {
+    fontSize: hp('5%'),
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginVertical: hp('1%')
+  },
   title: {
     fontSize: hp('5%'),
     textAlign: 'center',
