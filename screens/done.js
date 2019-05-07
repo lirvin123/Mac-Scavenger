@@ -30,7 +30,7 @@ export default class Done extends React.Component {
     <View style={Styles.hunt}>
       <Text style={Styles.done}> Done! </Text>
       <Text style={Styles.endTime}> {'End Time: ' + elapsedTime} </Text>
-      <Button danger block large onPress={() => this.props.navigation.push('Hunt')} style={Styles.button}>
+      <Button danger block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
         <Text style={Styles.buttonText}> Back to Home </Text>
       </Button>
     </View>

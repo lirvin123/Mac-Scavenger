@@ -7,35 +7,35 @@
     "hints": [
       {
         "name": "Don't Break the Rules",
-        "pathName": "c_scale,q_auto:eco,w_354/v1554921434/locker",
+        "pathName": "c_scale,q_auto:good,w_354/v1554921434/locker",
         "hints": 3,
         "riddle": "What is the number of the very bottom locker?",
         "riddleAnswer": "42"
       },
       {
         "name": "Where in the Mac",
-        "pathName": "c_scale,q_auto:eco,w_354/v1555260491/30Mac",
+        "pathName": "c_scale,q_auto:good,w_354/v1555260491/30Mac",
         "hints": 3,
         "riddle": "Face the water fountain. Turn around. What number do you see?",
         "riddleAnswer": "142"
       },
       {
         "name": "Really Cool Art",
-        "pathName": "c_scale,q_auto:eco,w_354/v1554926592/coolart",
+        "pathName": "c_scale,q_auto:good,w_354/v1554926592/coolart",
         "hints": 3,
         "riddle": "Find the water fountain. Turn left. What's the third word on the plaque?",
         "riddleAnswer": "resource"
       },
       {
         "name": "AHHHHHHH",
-        "pathName": "c_scale,q_auto:eco,w_354/v1555097471/scary",
+        "pathName": "c_scale,q_auto:good,w_354/v1555097471/scary",
         "hints": 3,
         "riddle": "What's the name of this creature?",
         "riddleAnswer": "messor cephalotes"
       },
       {
         "name": "Interesting photos...",
-        "pathName": "c_scale,q_auto:eco,w_354/v1555262173/reallyinteresting",
+        "pathName": "c_scale,q_auto:good,w_354/v1555262173/reallyinteresting",
         "hints": 3,
         "riddle": "Fill in the blank: Macalester Under the ____",
         "riddleAnswer": "microscope"
@@ -49,21 +49,21 @@
       },
       {
         "name": "Words Words Words",
-        "pathName": "c_scale,q_auto:eco,w_354/v1555260699/AnnSneed",
+        "pathName": "c_scale,q_auto:good,w_354/v1555260699/AnnSneed",
         "hints": 3,
         "riddle": "What is the word in the most bottom-right corner?",
         "riddleAnswer": "ploeg"
       },
       {
         "name": "Run Run Run",
-        "pathName": "c_scale,q_auto:eco,w_354/v1555260733/LC",
+        "pathName": "c_scale,q_auto:good,w_354/v1555260733/LC",
         "hints": 3,
         "riddle": "What Year is this Time Capsule from?",
         "riddleAnswer": "1924"
       },
       {
         "name": "Dewey Decimal",
-        "pathName": "c_scale,q_auto:eco,w_354/v1554925396/z",
+        "pathName": "c_scale,q_auto:good,w_354/v1554925396/z",
         "hints": 3,
         "riddle": "Enter the last number on the plaque",
         "riddleAnswer": "5"
@@ -71,13 +71,13 @@
   },
   {
     "huntName": "Lily's Hunt",
-    "description": "Just for testing!",
+    "description": "Just for testing! Hope you really enjoy this hunt a lot.",
     "geographicrange": "Builidings open 24-hours",
     "color": "darkblue",
     "hints": [
       {
         "name": "Mural",
-        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "pathName": "c_scale,q_auto:good,w_354/v1553979151/mural",
         "hints": 3,
         "riddle": "What building is this artwork in?",
         "riddleAnswer": "kagin"
@@ -90,7 +90,7 @@
     "hints": [
       {
         "name": "Mural",
-        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "pathName": "c_scale,q_auto:good,w_354/v1553979151/mural",
         "hints": 3,
         "riddle": "What building is this artwork in?",
         "riddleAnswer": "kagin"
