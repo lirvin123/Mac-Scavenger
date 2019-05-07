@@ -31,7 +31,6 @@ export default StyleSheet.create({
     width: wp('90%'),
     height: hp('8%'),
     alignSelf: 'center',
-    marginTop: hp('5%')
   },
   giveUp: {
     flex: 1,
@@ -79,14 +78,14 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#B5E1E2',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   message: {
     color: '#fff',
     textAlign: 'center',
     fontSize: 20,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: 'center',
     position: 'absolute',
     top: '50%'
   },
@@ -95,11 +94,13 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     position: 'absolute',
-    top: "60%"
+    top: "60%",
+    alignSelf: 'center'
   },
   photo: {
     width: wp('90%'),
-    height: hp('60%')
+    height: hp('65%'),
+    alignSelf: 'center'
   },
   riddle: {
     textAlign: 'center',
@@ -109,9 +110,9 @@ export default StyleSheet.create({
     paddingHorizontal: hp('3%')
   },
   riddleScreen: {
-    flex: .55,
+    flex: .58,
     backgroundColor: '#B5E1E2',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingHorizontal: wp('5%')
   },
@@ -125,6 +126,10 @@ export default StyleSheet.create({
     textAlign: "left",
     fontWeight: 'bold'
   },
+  ruleView: {
+    backgroundColor: "#B5E1E2",
+    paddingBottom: hp('1%')
+  },
   startButton: {
     flex: 1,
     maxHeight: hp('8%'),
@@ -137,8 +142,8 @@ export default StyleSheet.create({
   startTime: {
     fontSize: hp('2.75%'),
     textAlign: "center",
-    marginTop: hp('2.5%'),
-    marginBottom: hp('2%'),
+    marginTop: hp('2%'),
+    marginBottom: hp('3%'),
     marginHorizontal: wp('5%')
   },
   textInput: {

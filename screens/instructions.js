@@ -22,10 +22,6 @@ export default class Instructions extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.navigation.setParams({ title: hunt.huntName })
-  }
-
   componentWillUnmount() {
     clearInterval(this.interval)
   }
@@ -45,7 +41,7 @@ export default class Instructions extends React.Component {
           <Text style={Styles.huntDescription}>{hunt.description}</Text>
           <ListItem
             leftIcon={{ name: "image" }}
-            containerStyle={{ backgroundColor: "#B5E1E2" }}
+            containerStyle={Styles.ruleView}
             pad={16}
             marginHorizontal={wp('10%')}
             title={
@@ -55,7 +51,7 @@ export default class Instructions extends React.Component {
             }/>
           <ListItem
             leftIcon={{ name: "room" }}
-            containerStyle={{ backgroundColor: "#B5E1E2" }}
+            containerStyle={Styles.ruleView}
             pad={16}
             marginHorizontal={wp('10%')}
             title={
@@ -65,7 +61,7 @@ export default class Instructions extends React.Component {
             }/>
             <ListItem
               leftIcon={{ name: "schedule" }}
-              containerStyle={{ backgroundColor: "#B5E1E2" }}
+              containerStyle={Styles.ruleView}
               pad={16}
               marginHorizontal={wp('10%')}
               title={
@@ -86,8 +82,9 @@ export default class Instructions extends React.Component {
    }
    static navigationOptions = ({ navigation }) => {
      return {
-       title: 'Instructions',
-       headerStyle: { backgroundColor: '#B5E1E2' }
+       headerTitle: 'Instructions',
+       headerStyle: { backgroundColor: '#B5E1E2' },
+       headerTitleStyle: {textAlign: 'center', width: '75%'}
      }
    }
  }
