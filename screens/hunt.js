@@ -53,6 +53,10 @@ export default class Hunt extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.forceUpdate()
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({ toScores: this.toScores })
   }
@@ -107,7 +111,9 @@ export default class Hunt extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: { backgroundColor: '#B5E1E2' },
-      headerRight: (<Icon name="list" underlayColor='#B5E1E2' iconStyle={{paddingHorizontal: 5}} onPress={navigation.getParam('toScores')}/>),
+      headerRight: (<Icon name="list" iconStyle={{ paddingHorizontal: 15 }} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
+      headerStyle: { backgroundColor: '#B5E1E2' },
+      headerTitleStyle: {textAlign: 'center', width: '105%'}
       }
     }
   }

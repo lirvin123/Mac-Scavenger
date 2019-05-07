@@ -11,6 +11,7 @@ import { hunt } from './hunt'
 import { Icon } from 'react-native-elements'
 import { start, setStart } from './instructions'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import RF from "react-native-responsive-fontsize"
 
 export var elapsedTime
 
@@ -55,7 +56,7 @@ export default class Main extends React.Component {
   }
 
   async componentDidMount() {
-    await Font.loadAsync({ 'RobotoMono-Light': require('../assets/RobotoMono-Light.ttf'), })
+    await Font.loadAsync({ 'robotoMonoLight': require('../assets/RobotoMono-Light.ttf'), })
     this.setState({ fontLoaded: true })
   }
 
@@ -122,14 +123,14 @@ export default class Main extends React.Component {
     var min = parseInt((this.state.seconds)/60)%60
     var hr = parseInt((this.state.seconds)/3600)%60
 
-    timeWithColons = <Text style={{ fontSize: hp('3.5%'), fontFamily: 'RobotoMono-Light' }}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
+    timeWithColons = <Text style={{ fontSize: hp('3%'), fontFamily: 'robotoMonoLight' }}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
     elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime(this.state.seconds / 60) + ':' + this.formatTime(this.state.seconds)
 
     var hints = this.state.hints.map(hint => {
       if (hint.unlocked == false) {
         if (hint.number == 3 && this.state.hints[1].unlocked == false) {
           return (
-            <View style={Styles.main} key={"Locked View " + hint.number}>
+            <View key={"Locked View " + hint.number}>
               <Image
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
                 style={Styles.photo}
@@ -141,7 +142,7 @@ export default class Main extends React.Component {
         }
         else {
           return (
-          <View style={Styles.main} key={"Locked View " + hint.number}>
+          <View key={"Locked View " + hint.number}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
               style={Styles.photo}
@@ -160,7 +161,7 @@ export default class Main extends React.Component {
       }
       else {
         return (
-          <View style={Styles.main} key={"Unlocked View " + hint.number}>
+          <View key={"Unlocked View " + hint.number}>
             <Image
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
               style={Styles.photo}
@@ -181,7 +182,7 @@ export default class Main extends React.Component {
             onAnimateNextPage={(index) => this.changeIndex(index)}
             bullets={true}>
           {hints}
-          <View style={Styles.main}>
+          <View>
           <Image
             source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}
             style={Styles.photo}
@@ -203,8 +204,9 @@ export default class Main extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('title'),
-      headerRight: (<Icon name="home" iconStyle={{paddingHorizontal: 5}} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' }
+      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 15 }} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerStyle: { backgroundColor: '#B5E1E2' },
+      headerTitleStyle: {textAlign: 'center', width: '105%'}
     }
   }
 }
