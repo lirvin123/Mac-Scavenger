@@ -142,12 +142,12 @@ export default class Main extends React.Component {
               <Image
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
                 style={Styles.photo}
-                indicator={Progress.Pie}
+                indicator={Progress.Circle}
                 indicatorProps={{
-                  size: 80,
+                  size: 90,
                   borderWidth: 0,
-                  color: 'rgba(150, 150, 150, 1)',
-                  unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                  color: '#4169e1',
+                  alignSelf: 'center'
                 }}
                 blurRadius={100}
                 key={"Locked Image " + hint.number}/>
@@ -162,12 +162,12 @@ export default class Main extends React.Component {
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
               style={Styles.photo}
               blurRadius={100}
-              indicator={Progress.Pie}
+              indicator={Progress.Circle}
               indicatorProps={{
-                size: 80,
+                size: 90,
                 borderWidth: 0,
-                color: 'rgba(150, 150, 150, 1)',
-                unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                color: '#4169e1',
+                alignSelf: 'center'
               }}
               key={"Locked Image " + hint.number}/>
             <Button block warning style={Styles.unlockButton}
@@ -188,12 +188,12 @@ export default class Main extends React.Component {
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
               style={Styles.photo}
               blurRadius={0}
-              indicator={Progress.Pie}
+              indicator={Progress.Circle}
               indicatorProps={{
-                size: 80,
+                size: 90,
                 borderWidth: 0,
-                color: 'rgba(150, 150, 150, 1)',
-                unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                color: '#4169e1',
+                alignSelf: 'center'
               }}
               key={"Unlocked Image " + hint.number}/>
           </View>
@@ -203,7 +203,8 @@ export default class Main extends React.Component {
 
     let error = (
       <View>
-        <Text>Phone is offline. Connect to view photos.</Text>
+        <Text style={{ fontSize: 30, textAlign: 'center', fontWeight: 'bold'}}>Phone is offline.</Text>
+        <Text style={{ fontSize: 20, textAlign: 'center'}}>Connect to continue.</Text>
       </View>
     )
 

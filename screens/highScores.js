@@ -62,9 +62,9 @@ export default class HighScores extends React.Component {
   render() {
 
     let times = this.state.times.map((hunt, index) =>
-      <View>
-        <Text style={{fontSize: hp('5%'), color: hunt.color, textAlign: 'center', fontWeight: 'bold', marginVertical: hp('0.5%')}} key={hunt.huntName}>{hunt.huntName}</Text>
-        <Text style={Styles.times} key={hunt.huntName}>{hunt.time}</Text>
+      <View key={hunt.huntName + " View"}>
+        <Text style={{fontSize: hp('5%'), color: hunt.color, textAlign: 'center', fontWeight: 'bold', marginVertical: hp('0.5%')}} key={hunt.huntName + " Name"}>{hunt.huntName}</Text>
+        <Text style={Styles.times} key={hunt.huntName + " Time"}>{hunt.time}</Text>
       </View>
     )
 
@@ -86,6 +86,7 @@ export default class HighScores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Times',
+      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 5 }} underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
       headerStyle: { backgroundColor: '#B5E1E2' },
       headerTitleStyle: {textAlign: 'center', width: '90%'}
     }
