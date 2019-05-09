@@ -20,8 +20,9 @@ export default StyleSheet.create({
     alignSelf: 'center'
   },
   done: {
+    marginTop: hp('2%'),
     textAlign: 'center',
-    fontSize: 90,
+    fontSize: 80,
   },
   doneScreen: {
     flex: 5,
@@ -29,6 +30,7 @@ export default StyleSheet.create({
     marginBottom: hp('2%'),
   },
   endTime: {
+    marginTop: hp('5%'),
     textAlign: 'center',
     fontSize: 40
   },

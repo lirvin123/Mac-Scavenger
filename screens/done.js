@@ -31,11 +31,16 @@ export default class Done extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
         <View style={Styles.huntScreen}>
-          <Text style={Styles.endTime}> Hunt Complete! </Text>
+          <Text style={Styles.endTime}> Good job! </Text>
           <Text style={Styles.done}> {elapsedTime} </Text>
-          <Button success block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
-            <Text style={Styles.buttonText}> Back to Home </Text>
-          </Button>
+          <View>
+            <Button success block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
+              <Text style={Styles.buttonText}> Back to Home </Text>
+            </Button>
+            <Button success block large onPress={() => this.props.navigation.navigate('HighScores')} style={Styles.button}>
+              <Text style={Styles.buttonText}> Hunt Times </Text>
+            </Button>
+          </View>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
           <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
