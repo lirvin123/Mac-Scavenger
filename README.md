@@ -11,11 +11,11 @@
       1. You should also log into your account on your phone
 4. In the terminal, navigate to the folder where the project exists
 5. install (`npm install`) the following libraries:
-..* native-base
-..* react-native elements
-..* react-native-responsive-screens
-..* react-native-responsive-fontsize
-..* react-native-looped-carousel
+      * native-base
+      * react-native elements
+      * react-native-responsive-screens
+      * react-native-responsive-fontsize
+      * react-native-looped-carousel
 6. Run `expo start --tunnel` (or `expo start`, or `npm start` and choose tunnel)
 7. Open the phone app, navigate to projects and click the project under Recently in Development
       1. Alternatively, you could select either run on iOS simulator or run on android simulator, if you have a simulator open on your machine
