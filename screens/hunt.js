@@ -98,7 +98,6 @@ export default class Hunt extends React.Component {
     return {
       headerStyle: { backgroundColor: '#B5E1E2' },
       headerRight: (<Icon name="list" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' },
       headerTitleStyle: {textAlign: 'center', width: '105%'}
       }
     }
