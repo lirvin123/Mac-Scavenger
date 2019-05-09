@@ -9,9 +9,9 @@ export default StyleSheet.create({
     backgroundColor: '#B5E1E2'
   },
   button: {
-    padding: 20,
     alignSelf: 'center',
     margin: 10,
+    width: wp('90%')
   },
   buttonText: {
     color: '#fff',
@@ -19,20 +19,25 @@ export default StyleSheet.create({
     fontSize: RF(4.25),
     alignSelf: 'center'
   },
-  done: {
-    marginTop: hp('2%'),
+  endTime: {
     textAlign: 'center',
-    fontSize: 80,
+    alignSelf: 'center',
+    fontSize: hp('9%'),
+  },
+  doneButton: {
+    width: wp('90%'),
+    height: hp('8%'),
+    alignSelf: 'center',
+    marginVertical: hp('1%')
   },
   doneScreen: {
-    flex: 5,
+    flex: 2,
     backgroundColor: '#B5E1E2',
-    marginBottom: hp('2%'),
+    justifyContent: 'space-evenly'
   },
-  endTime: {
-    marginTop: hp('5%'),
+  goodJob: {
     textAlign: 'center',
-    fontSize: 40
+    fontSize: hp('4.25%')
   },
   foundIt: {
     width: wp('90%'),
@@ -177,6 +182,7 @@ export default StyleSheet.create({
     marginVertical: hp('2%')
   },
    unlockButton: {
+     flex: 1,
      padding: 30,
      justifyContent: 'center',
      alignItems: 'center',

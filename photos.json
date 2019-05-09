@@ -70,17 +70,73 @@
       }]
   },
   {
-    "huntName": "Lily's Hunt",
-    "description": "Just for testing! Hope you really enjoy this hunt a lot.",
+    "huntName": "Mac After Dark",
+    "description": "Feeling spooky? Want to scavenge at night? Make sure you have card access!",
     "geographicrange": "Builidings open 24-hours",
     "color": "darkblue",
     "hints": [
       {
-        "name": "Mural",
-        "pathName": "c_scale,q_auto:good,w_354/v1553979151/mural",
+        "name": "Dupre Kitchen",
+        "pathName": "c_scale,q_auto:good,w_354/v1557347731/kitchen",
         "hints": 3,
-        "riddle": "What building is this artwork in?",
-        "riddleAnswer": "kagin"
+        "riddle": "Walk to the sink. Look left. What's the last digit on the outlet?",
+        "riddleAnswer": "1"
+      },
+      {
+        "name": "Wallace Piano",
+        "pathName": "c_scale,q_auto:good,w_354/v1557347866/piano",
+        "hints": 3,
+        "riddle": "Steinway & Sons ____ ",
+        "riddleAnswer": "makers"
+      },
+      {
+        "name": "Doty Computer Lounge",
+        "pathName": "c_scale,q_auto:good,w_354/v1557347942/doty",
+        "hints": 3,
+        "riddle": "Go to the microwave. What is the 3rd setting on the orange circle?",
+        "riddleAnswer": "simmer"
+      },
+      {
+        "name": "Kirk Bike Rack",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348004/kirk",
+        "hints": 3,
+        "riddle": "What is the number on the door to the left of this structure?",
+        "riddleAnswer": "6"
+      },
+      {
+        "name": "French House",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348120/french",
+        "hints": 3,
+        "riddle": "What language is spoken in the house to the right of this one?",
+        "riddleAnswer": "german"
+      },
+      {
+        "name": "Link",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348176/link",
+        "hints": 3,
+        "riddle": "What is the number on the upper right orange locker?",
+        "riddleAnswer": "31"
+      },
+      {
+        "name": "GDD",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348230/gdd",
+        "hints": 3,
+        "riddle": "Walk up to the sink. What is the year on the plaque?",
+        "riddleAnswer": "2025"
+      },
+      {
+        "name": "Radio Station",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348289/radio",
+        "hints": 3,
+        "riddle": "Face the door. Turn right. What is the number on the plaque?",
+        "riddleAnswer": "020"
+      },
+      {
+        "name": "Sounds of Blackness Lounge",
+        "pathName": "c_scale,q_auto:good,w_354/v1557348384/sounds",
+        "hints": 3,
+        "riddle": "Walk to the door. ____ Symphony",
+        "riddleAnswer": "soul"
       }]
   },
   {
