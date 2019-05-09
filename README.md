@@ -17,8 +17,7 @@
         react-native-responsive-fontsize
         react-native-looped-carousel
 6. Run `expo start --tunnel` (or `expo start`, or `npm start` and choose tunnel)
-7. Open the phone app, navigate to projects and click the project under
-        Recently in Development
+7. Open the phone app, navigate to projects and click the project under Recently in Development
         1. Alternatively, you could select either run on iOS simulator or
                 run on android simulator, if you have a simulator open on
                 your machine
