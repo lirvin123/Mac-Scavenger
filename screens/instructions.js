@@ -33,7 +33,7 @@ export default class Instructions extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={Styles.areaView}>
+      <SafeAreaView style={Styles.baseView}>
         <View style={Styles.instructions}>
           <Text style={Styles.title}>{"Welcome to" + "\n"}
             <Text style={{ fontWeight: 'bold', color: hunt.color, marginVertical: hp('1%') }}>{hunt.huntName}</Text>

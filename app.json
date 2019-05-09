@@ -24,6 +24,9 @@
     ],
     "ios": {
       "bundleIdentifier": "Malibary.MacScavenger"
+    },
+    "android": {
+      "package": "Malibary.MacScavenger"
     }
   }
 }

@@ -1,85 +1,85 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import RF from "react-native-responsive-fontsize"
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default StyleSheet.create({
-  areaView: {
+  baseView: {
     flex: 1,
     backgroundColor: '#B5E1E2'
   },
-  button: {
-    alignSelf: 'center',
-    margin: 10,
-    width: wp('90%')
+  bottomImage:{
+    bottom: '0%',
+    height: hp('35%'),
+    position: 'absolute',
+    width: wp('100%')
+  },
+  bottomImageView: {
+    flex: 1,
+    alignItems: 'center'
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: RF(4.25),
-    alignSelf: 'center'
-  },
-  endTime: {
-    textAlign: 'center',
     alignSelf: 'center',
-    fontSize: hp('9%'),
+    fontSize: RF(4.25),
+    color: '#fff',
+    textAlign: 'center'
   },
   doneButton: {
-    width: wp('90%'),
-    height: hp('8%'),
     alignSelf: 'center',
-    marginVertical: hp('1%')
+    height: hp('8%'),
+    marginVertical: hp('1%'),
+    width: wp('90%')
   },
   doneScreen: {
     flex: 2,
     backgroundColor: '#B5E1E2',
     justifyContent: 'space-evenly'
   },
-  goodJob: {
-    textAlign: 'center',
-    fontSize: hp('4.25%')
+  endTime: {
+    alignSelf: 'center',
+    fontSize: hp('9%'),
+    textAlign: 'center'
   },
   foundIt: {
-    width: wp('90%'),
     height: hp('8%'),
     alignSelf: 'center',
+    width: wp('90%')
   },
-  giveUp: {
-    flex: 1,
-    backgroundColor: 'gray',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+  goodJob: {
+    fontSize: hp('4.25%'),
+    textAlign: 'center'
   },
   guess: {
-    width: wp('90%'),
-    height: hp('8%'),
     alignSelf: 'center',
-    paddingHorizontal: hp('3.5%')
-  },
-  hunt: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    height: hp('8%'),
+    paddingHorizontal: hp('3.5%'),
+    width: wp('90%')
   },
   huntButton: {
     flex: 1,
-    margin: wp('5%'),
-    width: wp('90%'),
     alignSelf: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    margin: wp('5%'),
+    width: wp('90%')
   },
   huntDescription: {
     fontSize: hp('2.75%'),
-    textAlign: 'center',
+    marginHorizontal: wp('5%'),
     marginVertical: hp('1%'),
-    marginHorizontal: wp('5%')
+    textAlign: 'center'
   },
   huntScreen: {
     flex: 2,
     backgroundColor: '#B5E1E2',
     justifyContent: 'space-around',
     marginBottom: hp('8%'),
+  },
+  iconStyle : {
+    marginLeft: 20,
+    marginRight: 10
+  },
+  iconPadding: {
+    paddingHorizontal: 5
   },
   instructions: {
     flex: 1,
@@ -88,55 +88,55 @@ export default StyleSheet.create({
   },
   main: {
     flex: 1,
-    backgroundColor: '#B5E1E2',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    backgroundColor: '#B5E1E2',
+    justifyContent: 'space-evenly'
   },
   message: {
+    alignSelf: 'center',
     color: '#fff',
-    textAlign: 'center',
     fontSize: 20,
     justifyContent: 'center',
-    alignSelf: 'center',
     position: 'absolute',
+    textAlign: 'center',
     top: '50%'
   },
   penalty: {
+    alignSelf: 'center',
     color: '#fff',
-    textAlign: 'center',
     fontSize: 20,
     position: 'absolute',
-    top: "60%",
-    alignSelf: 'center'
+    textAlign: 'center',
+    top: '60%'
   },
   photo: {
-    width: wp('90%'),
     height: hp('65%'),
-    alignSelf: 'center'
+    alignSelf: 'center',
+    width: wp('90%')
   },
   riddle: {
-    textAlign: 'center',
-    fontSize: RF(4.25),
     alignSelf: 'center',
+    fontSize: RF(4.25),
     maxHeight: hp('20%'),
-    paddingHorizontal: hp('3%')
+    paddingHorizontal: hp('3%'),
+    textAlign: 'center'
   },
   riddleScreen: {
     flex: .58,
+    alignItems: 'center',
     backgroundColor: '#B5E1E2',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
     paddingHorizontal: wp('5%')
   },
   rules: {
-    textAlign: 'left',
     fontSize: hp('3.75%'),
-    fontWeight: 'normal'
+    fontWeight: 'normal',
+    textAlign: 'left'
   },
   rulesBold: {
     fontSize: hp('3.75%'),
-    textAlign: "left",
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: "left"
   },
   ruleView: {
     backgroundColor: "#B5E1E2",
@@ -144,50 +144,44 @@ export default StyleSheet.create({
   },
   startButton: {
     flex: 1,
+    alignSelf: 'center',
     maxHeight: hp('8%'),
-    minHeight: hp('8%'),
     marginBottom: wp('5%'),
     marginTop: wp('2%'),
-    width: wp('90%'),
-    alignSelf: 'center'
+    minHeight: hp('8%'),
+    width: wp('90%')
   },
   startTime: {
     fontSize: hp('2.75%'),
-    textAlign: "center",
-    marginTop: hp('2%'),
     marginBottom: hp('3%'),
-    marginHorizontal: wp('5%')
+    marginHorizontal: wp('5%'),
+    marginTop: hp('2%'),
+    textAlign: "center"
   },
   textInput: {
     flex: 1,
-    textAlign: 'center',
+    alignSelf: 'flex-start',
     fontSize: RF(4.25),
-    alignSelf: 'flex-start'
+    textAlign: 'center',
   },
   times:{
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: hp('0.5%')
-  },
-  huntTimes: {
-    fontSize: hp('5%'),
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginVertical: hp('1%')
+    marginVertical: hp('0.5%'),
+    textAlign: 'center'
   },
   title: {
     fontSize: hp('5%'),
-    textAlign: 'center',
     fontWeight: 'bold',
-    marginVertical: hp('2%')
+    marginVertical: hp('2%'),
+    textAlign: 'center'
   },
    unlockButton: {
      flex: 1,
-     padding: 30,
-     justifyContent: 'center',
-     alignItems: 'center',
-     position: 'absolute',
      alignSelf: 'center',
-     bottom: '60%'
+     bottom: '60%',
+     justifyContent: 'center',
+     paddingHorizontal: hp('3%'),
+     paddingVertical: hp('5%'),
+     position: 'absolute'
    }
 })

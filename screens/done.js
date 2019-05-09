@@ -23,13 +23,13 @@ export default class Done extends React.Component {
       }
     }
     catch (error) {
-      console.log(error)
+      console.log('??')
     }
   }
 
   render() {
     return (
-      <View style={Styles.areaView}>
+      <View style={Styles.baseView}>
         <SafeAreaView style={Styles.doneScreen}>
             <Text style={Styles.goodJob}> Good job! </Text>
             <Text style={Styles.endTime}> {elapsedTime} </Text>
