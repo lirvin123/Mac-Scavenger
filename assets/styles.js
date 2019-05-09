@@ -21,11 +21,16 @@ export default StyleSheet.create({
   },
   done: {
     textAlign: 'center',
-    fontSize: 50
+    fontSize: 90,
+  },
+  doneScreen: {
+    flex: 5,
+    backgroundColor: '#B5E1E2',
+    marginBottom: hp('2%'),
   },
   endTime: {
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 40
   },
   foundIt: {
     width: wp('90%'),
