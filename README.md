@@ -18,10 +18,6 @@
         react-native-looped-carousel
 6. Run `expo start --tunnel` (or `expo start`, or `npm start` and choose tunnel)
 7. Open the phone app, navigate to projects and click the project under Recently in Development
-        1. Alternatively, you could select either run on iOS simulator or
-                run on android simulator, if you have a simulator open on
-                your machine
-        2. You could also scan the QR code with your phone, assuming you have
-                expo downloaded on your phone
-8. You can open the code itself in any text editor, expo should reload upon
-        the saving of any of the documents
+      1. Alternatively, you could select either run on iOS simulator or run on android simulator, if you have a simulator open on your machine
+      2. You could also scan the QR code with your phone, assuming you have expo downloaded on your phone
+8. You can open the code itself in any text editor, expo should reload upon the saving of any of the documents
