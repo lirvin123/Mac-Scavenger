@@ -1,13 +1,10 @@
 import React from 'react'
-import { AsyncStorage, Text, View, Image, SafeAreaView } from 'react-native'
-import { WebBrowser } from 'expo'
+import { AsyncStorage, Image, SafeAreaView, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
 import { elapsedTime } from './main'
 import { hunt } from './hunt'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
-
 
 export default class Done extends React.Component {
 
@@ -40,8 +37,8 @@ export default class Done extends React.Component {
               <Text style={Styles.buttonText}> Hunt Times </Text>
             </Button>
         </SafeAreaView>
-        <View style={{ flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
+        <View style={Styles.bottomImageView}>
+          <Image style={Styles.bottomImage}
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}>
           </Image>
         </View>

@@ -1,6 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Alert, SafeAreaView } from 'react-native'
-import { WebBrowser } from 'expo'
+import { SafeAreaView, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { ListItem, Icon } from 'react-native-elements'
@@ -14,18 +13,6 @@ export var setStart = (amount) => {start = amount}
 
 export default class Instructions extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      timer: 0,
-      timerOn: false
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
-
   startHunt(){
    this.props.navigation.navigate('Main')
    setStart(new Date().getTime())
@@ -36,13 +23,12 @@ export default class Instructions extends React.Component {
       <SafeAreaView style={Styles.baseView}>
         <View style={Styles.instructions}>
           <Text style={Styles.title}>{"Welcome to" + "\n"}
-            <Text style={{ fontWeight: 'bold', color: hunt.color, marginVertical: hp('1%') }}>{hunt.huntName}</Text>
+            <Text style={{ fontWeight: 'bold', color: hunt.color, marginVertical: hp('1%') }}>{hunt.huntName}</Text> {/* Not in Styles because color is needed through JSON file */}
           </Text>
           <Text style={Styles.huntDescription}>{hunt.description}</Text>
           <ListItem
             leftIcon={{ name: "image" }}
             containerStyle={Styles.ruleView}
-            pad={16}
             marginHorizontal={wp('10%')}
             title={
               <Text style={Styles.rulesBold}>Rounds:
@@ -52,7 +38,6 @@ export default class Instructions extends React.Component {
           <ListItem
             leftIcon={{ name: "room" }}
             containerStyle={Styles.ruleView}
-            pad={16}
             marginHorizontal={wp('10%')}
             title={
               <Text style={Styles.rulesBold}>Range:
@@ -62,7 +47,6 @@ export default class Instructions extends React.Component {
             <ListItem
               leftIcon={{ name: "schedule" }}
               containerStyle={Styles.ruleView}
-              pad={16}
               marginHorizontal={wp('10%')}
               title={
                 <Text style={Styles.rules}>Complete the hunt as
@@ -84,7 +68,7 @@ export default class Instructions extends React.Component {
      return {
        headerTitle: 'Instructions',
        headerStyle: { backgroundColor: '#B5E1E2' },
-       headerTitleStyle: {textAlign: 'center', width: '75%'}
+       headerTitleStyle: Styles.headerWithBackButton
      }
    }
  }

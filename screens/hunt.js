@@ -6,7 +6,6 @@ import Styles from '../assets/styles'
 import Photos from '../photos.json'
 import { Button } from 'native-base'
 import { Icon } from 'react-native-elements'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export var hunt
 
@@ -96,10 +95,9 @@ export default class Hunt extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      headerStyle: { backgroundColor: '#B5E1E2' },
+      headerStyle: Styles.backgroundColor,
       headerRight: (<Icon name="list" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' },
-      headerTitleStyle: {textAlign: 'center', width: '105%'}
+      headerTitleStyle: Styles.header
       }
     }
   }

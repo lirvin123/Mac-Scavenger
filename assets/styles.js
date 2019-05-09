@@ -4,6 +4,9 @@ import RF from "react-native-responsive-fontsize"
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default StyleSheet.create({
+  backgroundColor: {
+    backgroundColor: '#B5E1E2'
+  },
   baseView: {
     flex: 1,
     backgroundColor: '#B5E1E2'
@@ -54,6 +57,18 @@ export default StyleSheet.create({
     height: hp('8%'),
     paddingHorizontal: hp('3.5%'),
     width: wp('90%')
+  },
+  header: {
+    textAlign: 'center',
+    width: '105%'
+  },
+  headerOnRiddle: {
+    textAlign: 'center',
+    width: '90%'
+  },
+  headerWithBackButton: {
+    textAlign: 'center',
+    width: '75%'
   },
   huntButton: {
     flex: 1,
@@ -163,6 +178,17 @@ export default StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: RF(4.25),
     textAlign: 'center',
+  },
+  textInputView: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    maxHeight: hp('6%')
+  },
+  timer: {
+    fontSize: hp('3%'),
+    fontFamily: 'robotoMonoLight'
   },
   times:{
     fontWeight: 'bold',

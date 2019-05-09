@@ -1,12 +1,10 @@
 import React from 'react'
-import { AsyncStorage, Text, View, SafeAreaView, Image } from 'react-native'
-import { WebBrowser } from 'expo'
+import { AsyncStorage, Image, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
-import { Button } from 'native-base'
 import { Icon } from 'react-native-elements'
 import Photos from '../photos.json'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default class HighScores extends React.Component {
 
@@ -22,7 +20,6 @@ export default class HighScores extends React.Component {
     });
 
     this.state = {
-      photos,
       times
     }
   }
@@ -61,7 +58,7 @@ export default class HighScores extends React.Component {
 
   render() {
 
-    let times = this.state.times.map((hunt, index) =>
+    let times = this.state.times.map((hunt, index) => /* Text style not in styles because it uses hunt.color */
       <View key={hunt.huntName + " View"}>
         <Text style={{fontSize: hp('5%'), color: hunt.color, textAlign: 'center', fontWeight: 'bold', marginVertical: hp('0.5%')}} key={hunt.huntName + " Name"}>{hunt.huntName}</Text>
         <Text style={Styles.times} key={hunt.huntName + " Time"}>{hunt.time}</Text>
@@ -69,13 +66,13 @@ export default class HighScores extends React.Component {
     )
 
     return (
-      <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
+      <View style={Styles.baseView}>
         <View style={Styles.huntScreen}>
-            {times}
-            <Text style={{textAlign: 'center'}}> ** Only the first time played will be displayed **</Text>
+          {times}
+          <Text style={{textAlign: 'center'}}> ** Only the first time played will be displayed **</Text>
         </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
+        <View style={Styles.bottomImageView}>
+          <Image style={Styles.bottomImage}
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}>
           </Image>
         </View>
@@ -86,9 +83,9 @@ export default class HighScores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Times',
-      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 5 }} underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' },
-      headerTitleStyle: {textAlign: 'center', width: '90%'}
+      headerRight: (<Icon name="home" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
+      headerStyle: Styles.backgroundColor,
+      headerTitleStyle: Styles.header
     }
   }
 }
