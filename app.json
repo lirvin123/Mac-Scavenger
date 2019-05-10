@@ -27,7 +27,7 @@
     },
     "android": {
       "package": "Malibary.MacScavenger",
-      "icon": {
+      "adaptiveIcon": {
         "backgroundColor": "#B5E1E2",
         "foregroundImage": "./assets/icon.png"
       }
