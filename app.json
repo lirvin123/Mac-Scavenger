@@ -10,7 +10,6 @@
     ],
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -23,10 +22,15 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "Malibary.MacScavenger"
+      "bundleIdentifier": "Malibary.MacScavenger",
+      "icon": "./assets/icon.png"
     },
     "android": {
-      "package": "Malibary.MacScavenger"
+      "package": "Malibary.MacScavenger",
+      "adaptiveIcon": {
+        "backgroundColor": "#B5E1E2",
+        "foregroundImage": "./assets/icon.png"
+      }
     }
   }
 }
