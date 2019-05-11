@@ -4,7 +4,7 @@ import AppNavigator from '../navigator/appNavigator'
 import { BlurView, Font } from 'expo'
 import Styles from '../assets/styles'
 import Hunts from '../hunts.json'
-import { photoIndex, setPhotoIndex } from './riddle'
+import { currentRound, setcurrentRound } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { Button } from 'native-base'
 import { hunt } from './home'
@@ -58,12 +58,12 @@ export default class Main extends React.Component {
   }
 
   componentWillMount() {
-    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
+    this.props.navigation.setParams({ title: "Round " + (currentRound + 1), backToHome: this.backToHome })
     this.startTimer()
   }
 
   componentWillUnmount() {
-    setPhotoIndex(0)
+    setcurrentRound(0)
     clearInterval(this.interval) /* Clears timer */
     NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectionChange)
   }
@@ -103,15 +103,15 @@ export default class Main extends React.Component {
   }
 
   giveUp = () => {
-    if (photoIndex + 1 == hunt.hints.length) {
-      setPhotoIndex(0)
+    if (currentRound + 1 == hunt.hints.length) {
+      setcurrentRound(0)
       this.props.navigation.navigate('Done')
       elapsedTime = this.formatTime(
         this.state.seconds / 3600) + ':' + this.formatTime((this.state.seconds + 1200) / 60) + ':' + this.formatTime(this.state.seconds
       ) /* Makes sure final 20 minutes gets added */
     }
     else {
-      setPhotoIndex(photoIndex + 1)
+      setcurrentRound(currentRound + 1)
       setStart(start - 1200000)
       this.props.navigation.push('Round')
     }
@@ -139,7 +139,7 @@ export default class Main extends React.Component {
           return (
             <View key={"Locked View " + hint.number}>
               <Image
-                source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+                source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[currentRound].pathName + hint.number }}
                 style={Styles.photo}
                 indicator={Progress.Circle}
                 indicatorProps={{
@@ -158,7 +158,7 @@ export default class Main extends React.Component {
           return (
           <View key={"Locked View " + hint.number}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[currentRound].pathName + hint.number }}
               style={Styles.photo}
               blurRadius={100}
               indicator={Progress.Circle}
@@ -183,7 +183,7 @@ export default class Main extends React.Component {
         return (
           <View key={"Unlocked View " + hint.number}>
             <Image
-              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[photoIndex].pathName + hint.number }}
+              source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/' + hunt.hints[currentRound].pathName + hint.number }}
               style={Styles.photo}
               blurRadius={0}
               indicator={Progress.Circle}

@@ -12,11 +12,11 @@ export default class Done extends React.Component {
     this.storeItem(hunt.huntName, elapsedTime)
   }
 
-  async storeItem(key, item) {
+  async storeItem(huntName, time) {
     try {
-      const score = await AsyncStorage.getItem(key)
-      if (score == null) {
-        var storedItem = await AsyncStorage.setItem(key, item.toString())
+      const time = await AsyncStorage.getItem(huntName)
+      if (time == null) {
+        var storedTime = await AsyncStorage.setItem(huntName, time.toString())
       }
     }
     catch (error) {

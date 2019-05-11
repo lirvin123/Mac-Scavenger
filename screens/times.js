@@ -10,7 +10,6 @@ export default class HighScores extends React.Component {
 
   constructor() {
     super()
-
     let hunts = require('../hunts.json')
     let times = hunts.map((hunt) => {
       this.retrieveItem(hunt.huntName).then((value) => {
@@ -34,14 +33,14 @@ export default class HighScores extends React.Component {
     this.setState({ times: newTimes })
   }
 
-  async retrieveItem(key) {
+  async retrieveItem(huntName) {
     try {
-      const retrievedItem = await AsyncStorage.getItem(key)
-      if (retrievedItem == null) {
+      const retrievedTime = await AsyncStorage.getItem(huntName)
+      if (retrievedTime == null) {
         return "PLAY TO FIND OUT!"
       }
-      const item = retrievedItem.toString()
-      return item
+      const time = retrievedTime.toString()
+      return time
     }
     catch (error) {
       return "??"

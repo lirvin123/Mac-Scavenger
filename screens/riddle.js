@@ -6,9 +6,9 @@ import { Button } from 'native-base'
 import { hunt } from './home'
 import { Icon } from 'react-native-elements'
 
-export var photoIndex = 0
+export var currentRound = 0
 
-export var setPhotoIndex = (index) => {photoIndex = index}
+export var setcurrentRound = (round) => {currentRound = round}
 
 export default class Riddle extends React.Component {
 
@@ -24,8 +24,8 @@ export default class Riddle extends React.Component {
   }
 
   checkGuess() {
-    if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 == hunt.hints.length) { /* Prevents array out of bounds error */
+    if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[currentRound].riddleAnswer) {
+      if (currentRound + 1 == hunt.hints.length) { /* Prevents array out of bounds error */
         this.setState({ riddle: '', message: "Finish", nextRound: true, icon: 'check' })
       }
       else {
@@ -56,13 +56,13 @@ export default class Riddle extends React.Component {
   press = () => {
     this.setState({ answered: true })
     if (this.state.nextRound) {
-      if (photoIndex + 1 == hunt.hints.length){
-        setPhotoIndex(0)
+      if (currentRound + 1 == hunt.hints.length){
+        setcurrentRound(0)
         this.props.navigation.navigate('Done')
       }
       else {
         this.props.navigation.push("Round")
-        setPhotoIndex(photoIndex + 1)
+        setcurrentRound(currentRound + 1)
       }
     }
     else {
@@ -75,7 +75,7 @@ export default class Riddle extends React.Component {
     return (
       <View style={Styles.baseView}>
         <ScrollView contentContainerStyle={Styles.riddleScreen} keyboardShouldPersistTaps={'handled'} keyboardDismissMode={'on-drag'}>
-          <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
+          <Text style={Styles.riddle}> {hunt.hints[currentRound].riddle} </Text>
           <View style={Styles.textInputView} >
             <TextInput
               autoCorrect={false}

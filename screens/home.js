@@ -22,7 +22,7 @@ export default class Hunt extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ toScores: this.toTimes })
+    this.props.navigation.setParams({ toTimes: this.toTimes })
   }
 
   async getCompletedState(huntName) {
@@ -96,7 +96,7 @@ export default class Hunt extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: Styles.backgroundColor,
-      headerRight: (<Icon name="list" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('toScores')}/>),
+      headerRight: (<Icon name="list" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('toTimes')}/>),
       headerTitleStyle: Styles.header
       }
     }
