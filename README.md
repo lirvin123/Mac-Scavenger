@@ -1,5 +1,9 @@
 # Malibary
 
+A photo-based scavenger hunt app for people at Macalester College!
+
+This app is cross-platform, written in JavaScript and React-Native, and powered by Expo. 
+
 ## Running the project:
 
 This project uses node, so make sure you have that installed first!
@@ -13,9 +17,10 @@ This project uses node, so make sure you have that installed first!
       1. You should also log into your account on your phone
 4. In the terminal, navigate to the folder where the project exists
 5. install (`npm install`) the following libraries:
+      * react-navigation
       * native-base
       * react-native elements
-      * react-native-responsive-screens
+      * react-native-responsive-screen
       * react-native-responsive-fontsize
       * react-native-looped-carousel
       * react-native-progress
