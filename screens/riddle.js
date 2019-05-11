@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Text, TextInput, View } from 'react-native'
+import { Alert, ScrollView, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
@@ -74,7 +74,7 @@ export default class Riddle extends React.Component {
 
     return (
       <View style={Styles.baseView}>
-        <View style={Styles.riddleScreen}>
+        <ScrollView contentContainerStyle={Styles.riddleScreen} keyboardShouldPersistTaps={'handled'} keyboardDismissMode={'on-drag'}>
           <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
           <View style={Styles.textInputView} >
             <TextInput
@@ -84,6 +84,7 @@ export default class Riddle extends React.Component {
               maxLength={30}
               onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
               onSelectionChange={() => this.setState({ answered: false })}
+              onSubmitEditing={this.press}
               placeholder={'Type answer here'}
               ref={input => { this.textInput = input }}
               style={Styles.textInput}>
@@ -93,7 +94,7 @@ export default class Riddle extends React.Component {
           <Button block large success style={Styles.guess} onPress={this.press}>
             <Text style={Styles.buttonText}> {this.state.message} </Text>
           </Button>
-        </View>
+        </ScrollView>
       </View>
     )
   }
