@@ -37,8 +37,8 @@ This app is cross-platform, written in JavaScript and React-Native, and powered 
 * Because a monospace font is not used for the riddle screen, sometimes a long answer can run slightly off of the text input box (although there is a character limit)
 * When the user submits a correct answer on the riddle screen, the answer moves slightly left (due to the check-mark icon)
 * For android phones, there is no backup icon that will look correct if the phone does not support Android Adaptive Icons (i.e. there will be a white box or circle surrounding the icon)
-* This rarely happens, but occasionally images will just not load. We have a progress bar if an image is in the process of loading, but occasionally an image will just show up as blank. We believe this has something to do with how Cloudinary is storing our images, and for the most part it doesn’t happen, but definitely something to note!
-* Due to time constraints, we did not use Redux (a library that allows state sharing across screens in React-Native), so all state sharing occurs through global variables. In the future, we would like to switch this over to either Redux or through some form in React-Navigation.
+* Occasionally images will just not load. We have a progress bar if an image is in the process of loading, but sometimes an image will just show up as blank. We believe this has something to do with how Cloudinary (our image CDN) is storing our images, and for the most part this doesn’t happen, but definitely something to note!
+* If you double tap on a button very quickly, the app will push two of the same screens onto the navigation stack (currently an issue with react-navigation, not this app specifically)
 
 ## Code Sources
 * [Binding Function](https://stackoverflow.com/questions/43039719/undefined-is-not-a-object-in-this-state-reactnative)
