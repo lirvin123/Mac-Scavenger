@@ -44,5 +44,5 @@ This app is cross-platform, written in JavaScript and React-Native, and powered 
 * [Binding Function](https://stackoverflow.com/questions/43039719/undefined-is-not-a-object-in-this-state-reactnative)
 * [Back Button](https://stackoverflow.com/questions/42831685/disable-back-button-in-react-navigation)
 * [Fixing Modal Swipe Gestures](https://stackoverflow.com/questions/49284669/how-do-you-disable-swipe-down-to-close-on-the-modal-component-in-react-native)
-* [Asynchronous Storage of Times] (https://stackoverflow.com/questions/50880092/react-native-unable-to-properly-set-best-score)
-* [Airplane Mode Compatibility] (https://stackoverflow.com/questions/43198978/how-to-check-net-info-in-react-native-ios)
+* [Asynchronous Storage of Times](https://stackoverflow.com/questions/50880092/react-native-unable-to-properly-set-best-score)
+* [Airplane Mode Compatibility](https://stackoverflow.com/questions/43198978/how-to-check-net-info-in-react-native-ios)
