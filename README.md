@@ -38,9 +38,11 @@ This app is cross-platform, written in JavaScript and React-Native, and powered 
 * When the user submits a correct answer on the riddle screen, the answer moves slightly left (due to the check-mark icon)
 * For android phones, there is no backup icon that will look correct if the phone does not support Android Adaptive Icons (i.e. there will be a white box or circle surrounding the icon)
 * This rarely happens, but occasionally images will just not load. We have a progress bar if an image is in the process of loading, but occasionally an image will just show up as blank. We believe this has something to do with how Cloudinary is storing our images, and for the most part it doesn’t happen, but definitely something to note!
+* Due to time constraints, we did not use Redux (a library that allows state sharing across screens in React-Native), so all state sharing occurs through global variables. In the future, we would like to switch this over to either Redux or through some form in React-Navigation.
 
 ## Code Sources
 * [Binding Function](https://stackoverflow.com/questions/43039719/undefined-is-not-a-object-in-this-state-reactnative)
-* [componentDidMount code](https://stackoverflow.com/questions/45837208/react-navigation-re-render-previous-page-when-going-back)
 * [Back Button](https://stackoverflow.com/questions/42831685/disable-back-button-in-react-navigation)
 * [Fixing Modal Swipe Gestures](https://stackoverflow.com/questions/49284669/how-do-you-disable-swipe-down-to-close-on-the-modal-component-in-react-native)
+* [Asynchronous Storage of Times] (https://stackoverflow.com/questions/50880092/react-native-unable-to-properly-set-best-score)
+* [Airplane Mode Compatibility] (https://stackoverflow.com/questions/43198978/how-to-check-net-info-in-react-native-ios)
