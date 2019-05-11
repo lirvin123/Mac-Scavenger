@@ -3,7 +3,7 @@ import { AsyncStorage, Image, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Icon } from 'react-native-elements'
-import Photos from '../photos.json'
+import Hunts from '../hunts.json'
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export default class HighScores extends React.Component {
@@ -11,8 +11,8 @@ export default class HighScores extends React.Component {
   constructor() {
     super()
 
-    let photos = require('../photos.json')
-    let times = photos.map((hunt) => {
+    let hunts = require('../hunts.json')
+    let times = hunts.map((hunt) => {
       this.retrieveItem(hunt.huntName).then((value) => {
         this.updateTime(hunt.huntName, value)
       })
@@ -49,11 +49,11 @@ export default class HighScores extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ Hunt: this.backToHome })
+    this.props.navigation.setParams({ backToHome: this.backToHome })
   }
 
   backToHome = () => {
-    this.props.navigation.navigate('Hunt')
+    this.props.navigation.navigate('Home')
   }
 
   render() {
@@ -83,7 +83,7 @@ export default class HighScores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Times',
-      headerRight: (<Icon name="home" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('Hunt')}/>),
+      headerRight: (<Icon name="home" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
       headerStyle: Styles.backgroundColor,
       headerTitleStyle: Styles.header
     }

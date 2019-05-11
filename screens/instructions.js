@@ -4,8 +4,7 @@ import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { ListItem, Icon } from 'react-native-elements'
 import { Button } from 'native-base'
-import { hunt } from './hunt'
-import Photos from '../photos.json'
+import { hunt } from './home'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export var start
@@ -14,7 +13,7 @@ export var setStart = (amount) => {start = amount}
 export default class Instructions extends React.Component {
 
   startHunt(){
-   this.props.navigation.navigate('Main')
+   this.props.navigation.navigate('Round')
    setStart(new Date().getTime())
   }
 

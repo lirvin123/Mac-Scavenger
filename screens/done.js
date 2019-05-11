@@ -3,8 +3,8 @@ import { AsyncStorage, Image, SafeAreaView, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
-import { elapsedTime } from './main'
-import { hunt } from './hunt'
+import { elapsedTime } from './round'
+import { hunt } from './home'
 
 export default class Done extends React.Component {
 
@@ -30,10 +30,10 @@ export default class Done extends React.Component {
         <SafeAreaView style={Styles.doneScreen}>
             <Text style={Styles.goodJob}> Good job! </Text>
             <Text style={Styles.endTime}> {elapsedTime} </Text>
-            <Button success block onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.doneButton}>
+            <Button success block onPress={() => this.props.navigation.navigate('Home')} style={Styles.doneButton}>
               <Text style={Styles.buttonText}> Back to Home </Text>
             </Button>
-            <Button success block onPress={() => this.props.navigation.navigate('HighScores')} style={Styles.doneButton}>
+            <Button success block onPress={() => this.props.navigation.navigate('Times')} style={Styles.doneButton}>
               <Text style={Styles.buttonText}> Hunt Times </Text>
             </Button>
         </SafeAreaView>

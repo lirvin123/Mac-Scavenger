@@ -1,14 +1,14 @@
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import Main from '../screens/main'
+import Round from '../screens/round'
 import Riddle from '../screens/riddle'
-import Hunt from '../screens/hunt'
+import Home from '../screens/home'
 import Done from '../screens/done'
 import Instructions from '../screens/instructions'
-import HighScores from '../screens/highScores'
+import Times from '../screens/times'
 
-const MainStack = createStackNavigator({
-    Main: { screen: Main, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
+const RoundStack = createStackNavigator({
+    Round: { screen: Round, navigationOptions: { gesturesEnabled: false, headerLeft: null, headerBackTitle: "Back" }},
     Riddle: { screen: Riddle},
     Done: { screen: Done, navigationOptions: { header: null, gesturesEnabled: false }}
   },
@@ -19,20 +19,20 @@ const MainStack = createStackNavigator({
   }
 )
 
-const Home = createStackNavigator({
-    Hunt: { screen: Hunt, navigationOptions: { title: "Select a Hunt:", headerBackTitle: "Back" }},
+const HomeStack = createStackNavigator({
+    Home: { screen: Home, navigationOptions: { title: "Select a Hunt:", headerBackTitle: "Back" }},
     Instructions : { screen: Instructions, navigationOptions: { headerBackTitle: "Back"} }
 })
 
-const Scores = createStackNavigator({
-    HighScores: { screen: HighScores }
+const TimesStack = createStackNavigator({
+    Times: { screen: Times }
 })
 
 const AppNavigator = createStackNavigator(
   {
-    Hunt: { screen: Home },
-    HighScores: { screen: Scores },
-    Main: { screen: MainStack }
+    Home: { screen: HomeStack },
+    Times: { screen: TimesStack },
+    Round: { screen: RoundStack }
   },
   {
     mode: 'modal',

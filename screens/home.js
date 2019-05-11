@@ -3,7 +3,7 @@ import { AsyncStorage, Image, Text, View } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
-import Photos from '../photos.json'
+import Hunts from '../hunts.json'
 import { Button } from 'native-base'
 import { Icon } from 'react-native-elements'
 
@@ -16,13 +16,13 @@ export default class Hunt extends React.Component {
   constructor() {
     super()
     this.state = {
-      photos: require('../photos.json'),
+      hunts: require('../hunts.json'),
       huntList: []
     }
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ toScores: this.toScores })
+    this.props.navigation.setParams({ toScores: this.toTimes })
   }
 
   async getCompletedState(huntName) {
@@ -36,7 +36,7 @@ export default class Hunt extends React.Component {
   }
 
   loadHunts() {
-    let huntList = this.state.photos.map((hunt) => {
+    let huntList = this.state.hunts.map((hunt) => {
       this.getCompletedState(hunt.huntName).then((completed) => {
         this.updateCompletedState(hunt.huntName, completed)
       })
@@ -46,7 +46,7 @@ export default class Hunt extends React.Component {
   }
 
   selectHunt(huntName) {
-    for (var hunt of this.state.photos) {
+    for (var hunt of this.state.hunts) {
       if (hunt.huntName === huntName) {
         setHunt(hunt)
       }
@@ -64,8 +64,8 @@ export default class Hunt extends React.Component {
     this.setState({ huntList })
   }
 
-  toScores = () => {
-    this.props.navigation.navigate('HighScores')
+  toTimes = () => {
+    this.props.navigation.navigate('Times')
   }
 
   render() {

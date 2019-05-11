@@ -3,7 +3,7 @@ import { Alert, ScrollView, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
-import { hunt } from './hunt'
+import { hunt } from './home'
 import { Icon } from 'react-native-elements'
 
 export var photoIndex = 0
@@ -48,7 +48,7 @@ export default class Riddle extends React.Component {
       "Your game will be lost",
       [
         { text: 'Cancel' },
-        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Home')} }
       ]
     )
   }
@@ -61,7 +61,7 @@ export default class Riddle extends React.Component {
         this.props.navigation.navigate('Done')
       }
       else {
-        this.props.navigation.push("Main")
+        this.props.navigation.push("Round")
         setPhotoIndex(photoIndex + 1)
       }
     }

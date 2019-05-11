@@ -3,11 +3,11 @@ import { Alert, NetInfo, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import { BlurView, Font } from 'expo'
 import Styles from '../assets/styles'
-import Photos from '../photos.json'
+import Hunts from '../hunts.json'
 import { photoIndex, setPhotoIndex } from './riddle'
 import Carousel from 'react-native-looped-carousel'
 import { Button } from 'native-base'
-import { hunt } from './hunt'
+import { hunt } from './home'
 import { Icon } from 'react-native-elements'
 import { start, setStart } from './instructions'
 import Image from 'react-native-image-progress'
@@ -41,7 +41,7 @@ export default class Main extends React.Component {
         }
       ],
       seconds: (new Date().getTime() - start) / 1000,
-      photos: require('../photos.json'),
+      hunts: require('../hunts.json'),
       timerOn: false,
     }
   }
@@ -93,7 +93,7 @@ export default class Main extends React.Component {
       "Your game will be lost",
       [
         { text: 'Cancel' },
-        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Home')} }
       ]
     )
   }
@@ -113,7 +113,7 @@ export default class Main extends React.Component {
     else {
       setPhotoIndex(photoIndex + 1)
       setStart(start - 1200000)
-      this.props.navigation.push('Main')
+      this.props.navigation.push('Round')
     }
   }
 
