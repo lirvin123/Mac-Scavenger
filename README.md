@@ -5,17 +5,15 @@ A photo-based scavenger hunt app for people at Macalester College!
 This app is cross-platform, written in JavaScript and React-Native, and powered by Expo.
 
 ## Running the project:
-
-This project uses node, so make sure you have that installed first!
-
 1. Clone the git repo
-2. Download Expo CLI (`npm install expo-cli --global` in terminal/command line)
+2. Ensure that you have node installed, otherwise you can do that [here](https://nodejs.org/en/download/)
+3. Download Expo CLI (`npm install expo-cli --global` in terminal/command line)
       1. At this point it may make you get an account, but if it doesn't
           you should make one anyway and make sure that you are logged in
-3. Download Expo Client on your phone, or get a iOS or android device simulator
+4. Download Expo Client on your phone, or get a iOS or android device simulator
       1. You should also log into your account on your phone
-4. In the terminal, navigate to the folder where the project exists
-5. Install (`npm install`) the following libraries:
+5. In the terminal, navigate to the folder where the project exists
+6. Install (`npm install`) the following libraries:
       * react-navigation
       * native-base
       * react-native elements
@@ -24,12 +22,12 @@ This project uses node, so make sure you have that installed first!
       * react-native-looped-carousel
       * react-native-image-progress
       * react-progress
-6. Run `expo start --tunnel` (or `expo start`, or `npm start` and choose tunnel)
-7. Open the phone app, navigate to projects and click the project under Recently in Development
+7. Run `expo start --tunnel` (or `expo start`, or `npm start` and choose tunnel)
+8. Open the phone app, navigate to projects and click the project under Recently in Development
       1. Alternatively, you could select either run on iOS simulator or run on android simulator, if you have a simulator open on your machine
       2. You could also scan the QR code with your phone, assuming you have expo downloaded on your phone
-8. You can open the code itself in any text editor, expo should reload upon the saving of any of the documents
-9. When you are ready to build to a phone [follow these instructions](https://docs.expo.io/versions/latest/distribution/building-standalone-apps/#3-start-the-build). *Note: To do an iOS build with Expo, you must have a paid Apple developer account*
+9. You can open the code itself in any text editor, expo should reload upon the saving of any of the documents
+10. When you are ready to build to a phone [follow these instructions](https://docs.expo.io/versions/latest/distribution/building-standalone-apps/#3-start-the-build). *Note: To do an iOS build with Expo, you must have a paid Apple developer account*
 
 ## Known Bugs
 * When the user gets a riddle correct and clicks “Next Round”, they can see the riddle change during the transition animation
