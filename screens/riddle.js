@@ -1,12 +1,10 @@
 import React from 'react'
-import { Alert, Text, TextInput, View } from 'react-native'
+import { Alert, ScrollView, Text, TextInput, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
-import Photos from '../photos.json'
 import { Button } from 'native-base'
 import { hunt } from './hunt'
 import { Icon } from 'react-native-elements'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export var photoIndex = 0
 
@@ -18,7 +16,6 @@ export default class Riddle extends React.Component {
     super()
     this.state = {
       answered: false,
-      photos: require('../photos.json'),
       riddleGuess: '',
       message: "Guess",
       nextRound: false,
@@ -26,37 +23,9 @@ export default class Riddle extends React.Component {
     }
   }
 
-  backToHome = () => {
-    Alert.alert(
-      "Are you Sure?",
-      "Your game will be lost",
-      [
-        { text: 'Cancel' },
-        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
-      ]
-    )
-  }
-
-  press = () => {
-    this.setState({ answered: true })
-    if (this.state.nextRound == true) {
-      if (photoIndex + 1 == hunt.hints.length){
-        setPhotoIndex(0)
-        return this.props.navigation.navigate('Done')
-      }
-      else {
-        setPhotoIndex(photoIndex + 1)
-        return this.props.navigation.push("Main")
-      }
-    }
-    else {
-      this.checkGuess()
-    }
-  }
-
   checkGuess() {
     if ((this.state.riddleGuess.toLowerCase()).trim() == hunt.hints[photoIndex].riddleAnswer) {
-      if (photoIndex + 1 == hunt.hints.length) {
+      if (photoIndex + 1 == hunt.hints.length) { /* Prevents array out of bounds error */
         this.setState({ riddle: '', message: "Finish", nextRound: true, icon: 'check' })
       }
       else {
@@ -73,13 +42,41 @@ export default class Riddle extends React.Component {
     this.props.navigation.setParams({ backToHome: this.backToHome })
   }
 
+  backToHome = () => {
+    Alert.alert(
+      "Are you Sure?",
+      "Your game will be lost",
+      [
+        { text: 'Cancel' },
+        { text: 'End Game', onPress: () => {this.props.navigation.navigate('Hunt')} }
+      ]
+    )
+  }
+
+  press = () => {
+    this.setState({ answered: true })
+    if (this.state.nextRound) {
+      if (photoIndex + 1 == hunt.hints.length){
+        setPhotoIndex(0)
+        this.props.navigation.navigate('Done')
+      }
+      else {
+        this.props.navigation.push("Main")
+        setPhotoIndex(photoIndex + 1)
+      }
+    }
+    else {
+      this.checkGuess()
+    }
+  }
+
   render() {
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#B5E1E2' }}>
-        <View style={Styles.riddleScreen}>
+      <View style={Styles.baseView}>
+        <ScrollView contentContainerStyle={Styles.riddleScreen} keyboardShouldPersistTaps={'handled'} keyboardDismissMode={'on-drag'}>
           <Text style={Styles.riddle}> {hunt.hints[photoIndex].riddle} </Text>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', maxHeight: hp('6%')}} >
+          <View style={Styles.textInputView} >
             <TextInput
               autoCorrect={false}
               autoFocus={true}
@@ -87,6 +84,7 @@ export default class Riddle extends React.Component {
               maxLength={30}
               onChangeText={(text) => { this.setState({ riddleGuess: text }) }}
               onSelectionChange={() => this.setState({ answered: false })}
+              onSubmitEditing={this.press}
               placeholder={'Type answer here'}
               ref={input => { this.textInput = input }}
               style={Styles.textInput}>
@@ -96,16 +94,16 @@ export default class Riddle extends React.Component {
           <Button block large success style={Styles.guess} onPress={this.press}>
             <Text style={Styles.buttonText}> {this.state.message} </Text>
           </Button>
-        </View>
+        </ScrollView>
       </View>
     )
   }
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Solve the Puzzle:",
-      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 5 }}underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' },
-      headerTitleStyle: {textAlign: 'center', width: '90%'}
+      headerRight: (<Icon name="home" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerStyle: Styles.backgroundColor,
+      headerTitleStyle: Styles.headerOnRiddle
     }
   }
 }

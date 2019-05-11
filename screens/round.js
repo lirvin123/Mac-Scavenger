@@ -10,8 +10,6 @@ import { Button } from 'native-base'
 import { hunt } from './hunt'
 import { Icon } from 'react-native-elements'
 import { start, setStart } from './instructions'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
-import RF from "react-native-responsive-fontsize"
 import Image from 'react-native-image-progress'
 import * as Progress from 'react-native-progress'
 
@@ -25,7 +23,6 @@ export default class Main extends React.Component {
       connected: true,
       currentIndex: 0,
       fontLoaded: false,
-      gaveUp: false,
       hints: [
         {
           number: 1,
@@ -53,26 +50,22 @@ export default class Main extends React.Component {
     this.setState({ currentIndex: index })
   }
 
-  componentWillMount() {
-    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
-    this.startTimer()
-  }
-
   async componentDidMount() {
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange)
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange) /* For detecting airplane mode/no network */
     NetInfo.isConnected.fetch().done((isConnected) => { this.setState({ connected: isConnected })})
     await Font.loadAsync({ 'robotoMonoLight': require('../assets/RobotoMono-Light.ttf'), })
     this.setState({ fontLoaded: true })
   }
 
-  componentWillUnmount() {
-    setPhotoIndex(0)
-    clearInterval(this.interval)
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectionChange)
+  componentWillMount() {
+    this.props.navigation.setParams({ title: "Round " + (photoIndex + 1), backToHome: this.backToHome })
+    this.startTimer()
   }
 
-  handleConnectionChange = (isConnected) => {
-    this.setState({ connected: isConnected })
+  componentWillUnmount() {
+    setPhotoIndex(0)
+    clearInterval(this.interval) /* Clears timer */
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectionChange)
   }
 
   formatTime(time) {
@@ -105,11 +98,17 @@ export default class Main extends React.Component {
     )
   }
 
+  handleConnectionChange = (isConnected) => {
+    this.setState({ connected: isConnected })
+  }
+
   giveUp = () => {
     if (photoIndex + 1 == hunt.hints.length) {
       setPhotoIndex(0)
       this.props.navigation.navigate('Done')
-      elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime((this.state.seconds + 1200) / 60) + ':' + this.formatTime(this.state.seconds)
+      elapsedTime = this.formatTime(
+        this.state.seconds / 3600) + ':' + this.formatTime((this.state.seconds + 1200) / 60) + ':' + this.formatTime(this.state.seconds
+      ) /* Makes sure final 20 minutes gets added */
     }
     else {
       setPhotoIndex(photoIndex + 1)
@@ -119,7 +118,7 @@ export default class Main extends React.Component {
   }
 
   handleError = () => {
-    this.setState({ error: true})
+    this.setState({ error: true}) /* This is a function because you can't update state in render() */
   }
 
   unlock = () => {
@@ -131,11 +130,11 @@ export default class Main extends React.Component {
 
   render() {
 
-    let timeWithColons = <Text style={{ fontSize: hp('3%'), fontFamily: 'robotoMonoLight' }}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
+    let timeWithColons = <Text style={Styles.timer}> {this.formatTime(this.state.seconds / 3600)} : {this.formatTime(this.state.seconds / 60)} : {this.formatTime(this.state.seconds)} </Text>
     elapsedTime = this.formatTime(this.state.seconds / 3600) + ':' + this.formatTime(this.state.seconds / 60) + ':' + this.formatTime(this.state.seconds)
 
     let hints = this.state.hints.map(hint => {
-      if (hint.unlocked == false) {
+      if (!hint.unlocked) {
         if (hint.number == 3 && this.state.hints[1].unlocked == false) {
           return (
             <View key={"Locked View " + hint.number}>
@@ -170,8 +169,7 @@ export default class Main extends React.Component {
                 alignSelf: 'center'
               }}
               key={"Locked Image " + hint.number}/>
-            <Button block warning style={Styles.unlockButton}
-                    onPress={this.unlock} key={"Unlock Button " + hint.number}>
+            <Button block warning style={Styles.unlockButton} onPress={this.unlock} key={"Unlock Button " + hint.number}>
               <Text style={Styles.buttonText} key={hint.number}>Unlock</Text>
             </Button>
             <Text style={Styles.penalty} key={"Penalty " + hint.number}>
@@ -201,7 +199,7 @@ export default class Main extends React.Component {
       }
     })
 
-    let error = (
+    let error = ( /* When phone is not connected to network */
       <View>
         <Text style={{ fontSize: 30, textAlign: 'center', fontWeight: 'bold'}}>Phone is offline.</Text>
         <Text style={{ fontSize: 20, textAlign: 'center'}}>Connect to continue.</Text>
@@ -223,15 +221,13 @@ export default class Main extends React.Component {
               source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}
               style={Styles.photo}
               blurRadius={100}/>
-            <Button block danger style={Styles.unlockButton}
-                    onPress={this.giveUp}>
+            <Button block danger style={Styles.unlockButton} onPress={this.giveUp}>
               <Text style={Styles.buttonText}>Give Up</Text>
             </Button>
             <Text style={Styles.penalty}>+20 minute penalty</Text>
           </View>
         </Carousel>
-        <Button block large success style={Styles.foundIt}
-                onPress={ () => this.props.navigation.push('Riddle')}>
+        <Button block large success style={Styles.foundIt} onPress={ () => this.props.navigation.push('Riddle')}>
           <Text style={Styles.buttonText}>Found it!</Text>
         </Button>
         </View>
@@ -246,9 +242,9 @@ export default class Main extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('title'),
-      headerRight: (<Icon name="home" iconStyle={{ paddingHorizontal: 5 }} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
-      headerStyle: { backgroundColor: '#B5E1E2' },
-      headerTitleStyle: {textAlign: 'center', width: '105%'}
+      headerRight: (<Icon name="home" iconStyle={Styles.iconPadding} underlayColor='#B5E1E2' onPress={navigation.getParam('backToHome')}/>),
+      headerStyle: Styles.backgroundColor,
+      headerTitleStyle: Styles.header
     }
   }
 }

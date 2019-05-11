@@ -1,13 +1,10 @@
 import React from 'react'
-import { AsyncStorage, Text, View, Image } from 'react-native'
-import { WebBrowser } from 'expo'
+import { AsyncStorage, Image, SafeAreaView, Text, View } from 'react-native'
 import AppNavigator from '../navigator/appNavigator'
 import Styles from '../assets/styles'
 import { Button } from 'native-base'
 import { elapsedTime } from './main'
 import { hunt } from './hunt'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
-
 
 export default class Done extends React.Component {
 
@@ -23,27 +20,25 @@ export default class Done extends React.Component {
       }
     }
     catch (error) {
-      console.log(error)
+      console.log('??')
     }
   }
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#B5E1E2'}}>
-        <View style={Styles.huntScreen}>
-          <Text style={Styles.endTime}> Good job! </Text>
-          <Text style={Styles.done}> {elapsedTime} </Text>
-          <View>
-            <Button success block large onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.button}>
+      <View style={Styles.baseView}>
+        <SafeAreaView style={Styles.doneScreen}>
+            <Text style={Styles.goodJob}> Good job! </Text>
+            <Text style={Styles.endTime}> {elapsedTime} </Text>
+            <Button success block onPress={() => this.props.navigation.navigate('Hunt')} style={Styles.doneButton}>
               <Text style={Styles.buttonText}> Back to Home </Text>
             </Button>
-            <Button success block large onPress={() => this.props.navigation.navigate('HighScores')} style={Styles.button}>
+            <Button success block onPress={() => this.props.navigation.navigate('HighScores')} style={Styles.doneButton}>
               <Text style={Styles.buttonText}> Hunt Times </Text>
             </Button>
-          </View>
-        </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={{position: 'absolute', bottom: '0%', width: wp('100%'), height: hp('35%')}}
+        </SafeAreaView>
+        <View style={Styles.bottomImageView}>
+          <Image style={Styles.bottomImage}
                 source={{ uri: 'https://res.cloudinary.com/lirvin/image/upload/v1556311054/college.jpg'}}>
           </Image>
         </View>

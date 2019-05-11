@@ -2,7 +2,13 @@
 
 A scavenger hunt app geared toward students at Macalester College. The app is built using React Native and Expo.
 
+A photo-based scavenger hunt app for people at Macalester College!
+
+This app is cross-platform, written in JavaScript and React-Native, and powered by Expo.
+
 ## Running the project:
+
+This project uses node, so make sure you have that installed first!
 
 1. Clone the git repo
 2. Download Expo CLI (`npm install expo-cli --global` in terminal/command line)
@@ -14,7 +20,7 @@ A scavenger hunt app geared toward students at Macalester College. The app is bu
 5. Install (`npm install`) the following libraries:
       * native-base
       * react-native elements
-      * react-native-responsive-screens
+      * react-native-responsive-screen
       * react-native-responsive-fontsize
       * react-native-looped-carousel
       * react-native-image-progress
@@ -26,6 +32,7 @@ A scavenger hunt app geared toward students at Macalester College. The app is bu
 8. You can open the code itself in any text editor, expo should reload upon the saving of any of the documents
 9. When you are ready to build to a phone:
       * [Follow these instructions](https://docs.expo.io/versions/latest/distribution/building-standalone-apps/#3-start-the-build)
+      * Note: To do an iOS build with Expo, you must have a paid Apple developer account
 
 ## Known Bugs
       * When the user gets a riddle correct and clicks “Next Round”, they can see the riddle change during the transition animation
