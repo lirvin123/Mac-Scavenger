@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Malibary",
-    "slug": "Malibary",
+    "name": "Mac Scavenger",
+    "slug": "Mac-Scavenger",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -13,7 +13,7 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#B5E1E2"
     },
     "updates": {
@@ -24,6 +24,13 @@
     ],
     "ios": {
       "bundleIdentifier": "Malibary.MacScavenger"
+    },
+    "android": {
+      "package": "Malibary.MacScavenger",
+      "adaptiveIcon": {
+        "backgroundColor": "#B5E1E2",
+        "foregroundImage": "./assets/icon.png"
+      }
     }
   }
 }
