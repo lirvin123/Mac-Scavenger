@@ -162,16 +162,31 @@
     ]
   },
   {
-    "huntName": "Maddie's Hunt",
-    "description": "Just for testing!",
+    "huntName": "DEMO DAY!",
+    "description": "Find some weird things in this classroom!",
     "color": "mediumseagreen",
     "hints": [
       {
-        "name": "Mural",
-        "pathName": "c_scale,q_auto:eco,w_354/v1553979151/mural",
+        "name": "Box thing",
+        "pathName": "c_scale,q_auto:eco,w_354/v1557538114/Image",
         "hints": 3,
-        "riddle": "What building is this artwork in?",
-        "riddleAnswer": "kagin"
-      }]
+        "riddle": "What is written nearby in red?",
+        "riddleAnswer": "good job"
+      },
+      {
+        "name": "Smiley",
+        "pathName": "c_scale,q_auto:eco,w_354/v1557538293/smiley",
+        "hints": 3,
+        "riddle": "What's on the inside of the paper on the ground?",
+        "riddleAnswer": "walk"
+      },
+      {
+        "name": "Dangly thing",
+        "pathName": "c_scale,q_auto:eco,w_354/v1557538457/img",
+        "hints": 3,
+        "riddle": "It says, children could accidentally ___ in window...",
+        "riddleAnswer": "strangle"
+      },
+    ]
   }
 ]
