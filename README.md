@@ -29,9 +29,7 @@ This project uses node, so make sure you have that installed first!
       1. Alternatively, you could select either run on iOS simulator or run on android simulator, if you have a simulator open on your machine
       2. You could also scan the QR code with your phone, assuming you have expo downloaded on your phone
 8. You can open the code itself in any text editor, expo should reload upon the saving of any of the documents
-9. When you are ready to build to a phone:
-      * [Follow these instructions](https://docs.expo.io/versions/latest/distribution/building-standalone-apps/#3-start-the-build)
-      * Note: To do an iOS build with Expo, you must have a paid Apple developer account
+9. When you are ready to build to a phone [follow these instructions](https://docs.expo.io/versions/latest/distribution/building-standalone-apps/#3-start-the-build) *Note: To do an iOS build with Expo, you must have a paid Apple developer account*
 
 ## Known Bugs
 * When the user gets a riddle correct and clicks “Next Round”, they can see the riddle change during the transition animation
