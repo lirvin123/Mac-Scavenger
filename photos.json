@@ -220,6 +220,7 @@
   {
     "huntName": "DEMO DAY!",
     "description": "Find some weird things in this classroom!",
+    "geographicrange": "OLRI 245 only!",
     "color": "mediumseagreen",
     "hints": [
       {
